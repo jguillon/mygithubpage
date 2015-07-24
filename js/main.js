@@ -1,13 +1,22 @@
 // MAIN
 // standard global variables
 var container, scene, camera, renderer, controls, stats, projector;
-var mouse = { x: 0, y: 0 }, selectedNode;
+var mouse = { x: 0, y: 0 }, oldMouse = { x: 0, y: 0 }, selectedNode;
 var nodes = [];
 var clock = new THREE.Clock();
 var nodeRadius = 100;
 
 init();
 animate();
+
+$(document).ready(function() {
+   	$('#network').click(function(e) {
+   		console.log("click network");
+   	});
+   	$('#container').click(function(e) {
+   		console.log("click container");
+   	});
+});
 
 // FUNCTIONS 		
 function init() 
@@ -21,11 +30,11 @@ function init()
 	var SCREEN_HEIGHT = container.offsetHeight;
 	var VIEW_ANGLE = 45;
 	var ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT;
-	var NEAR = 0.1;
+	var NEAR = 1000;
 	var FAR = 20000;
 	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 	scene.add(camera);
-	camera.position.set(0,1000,0);
+	camera.position.set(0,3000,0);
 	camera.lookAt(scene.position);	
 
 	// RENDERER
@@ -36,6 +45,8 @@ function init()
 	// CONTROLS
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
 	controls.addEventListener( 'change', render );
+	controls.minDistance = NEAR*2;
+	controls.maxDistance = FAR/2;
 
 	// NETWORK
 	var nodesToCheck = [$('#root-node')];
@@ -55,12 +66,21 @@ function init()
 	// MOUSE 
 	// projector = new THREE.Projector();
 	document.addEventListener( 'mousemove', onMouseMove, false );
+	window.addEventListener( 'resize', onWindowResize , false );
 	
 }
 
 function onMouseMove(event) {
-	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	oldMouse = mouse;
+	mouse.x = ( (event.clientX - $(container).position().left) / $(container).width() ) * 2 - 1;
+	mouse.y = - ( event.clientY / $(container).height() ) * 2 + 1;
+}
+
+function onWindowResize(){
+	container = document.getElementById( 'network' );
+	camera.aspect = container.offsetWidth / container.offsetHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize( container.offsetWidth, container.offsetHeight );
 }
 
 function addLink(scene,node1,node2) {
@@ -103,11 +123,11 @@ function update()
 	}
 
 	// VIEW
-	// console.log(0.1*Math.sin(clock.getElapsedTime()));
-	// controls.rotateUp(0.01*Math.sin(clock.getElapsedTime()));
-	// camera.position.x = 1000*Math.cos(2*Math.PI * Math.sin(clock.getElapsedTime()));
-	// camera.position.y = 1000*Math.sin(2*Math.PI * Math.sin(clock.getElapsedTime()));
 	controls.update();
+
+	// CAMERA AUTO-ROTATION ANIMATION
+	controls.rotateLeft(mouse.x/1000);
+	controls.rotateUp(mouse.y/1000);
 
 	// NODES GLOW MATERIAL
 	nodes.forEach(function(node, i) {

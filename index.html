@@ -1,40 +1,97 @@
 <html>
+
 	<head>
 		<title>Jeremy Guillon</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="http://localhost:8888/network-website/css/bootstrap-social.css">
 		<style>
-			body { margin: 0; }
 			div#network { 
-				position: absolute;
-				top: 0;
+				position: fixed;
 				right: 0;
-				width: 65%;
+				top: 0;
+				width: 50%;
 				height: 100%;
 				z-index: 1;
 			}
-			div#container {
+			div#background {
 				position: fixed;
+				pointer-events: none;
 				top: 0;
 				left: 0;
-				width: 60%;
 				height: 100%;
+				width: 80%;
 				background-image: url(http://localhost:8888/network-website/img/bg.png);
-				background-size: cover;
+				background-size: 100% 100%;
 				background-repeat: no-repeat;
 				background-position: center center;
-				z-index: 99;
+				z-index: 2;
+			}
+
+			header {
+				position: fixed;
+				z-index: 3;
+				top: 0;
+				left: 0;
+			}
+			div#content {
+				position: relative;
+				z-index: 3;
+				width: 45vw;
+				height: 50vh;
+				margin-top: 30vh;
+				margin-left: 3vw;
+				overflow: scroll;
+				text-align: justify;
+			}
+			footer {
+				position: fixed;
+				z-index: 3;
+				bottom: 3vh;
+				left: 46.5vw;
+				display: inline-block;
+			}
+
+			.nopadding {
+			   padding: 0 !important;
+			   margin: 0 !important;
 			}
 		</style>
 	</head>
+
 	<body id="body">
-		<div id="container">
+		
+		<header>
+			<h1 id="title">Jeremy GUILLON</h1>
+		</header>
+
+		<div id="content">
 			<div class="node" id="root-node">
 				Node root
 				<div class="node" id="cv">
 					Node cv
 					<div class="node" id="professional">
-						Node professional
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet, augue ut eleifend sodales, odio nisl iaculis magna, congue finibus ante lorem non diam. Nullam pharetra massa vitae tincidunt malesuada. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam auctor eget arcu sit amet laoreet. Morbi efficitur, urna sit amet pellentesque egestas, metus elit porttitor dui, vitae ornare mauris justo at nisl. Nam quis condimentum nulla. Suspendisse dapibus sapien at purus scelerisque, eget imperdiet nisi varius. Phasellus sed elit et lectus aliquet pharetra vitae non metus. Ut condimentum est vel sem porta, eget pharetra arcu ullamcorper. Aenean sed sapien ac nisi dictum ultrices sed eget felis. Quisque sit amet massa vitae velit congue aliquam sed quis augue. In tempus quis nibh vitae vestibulum. Proin tristique ipsum eget felis mattis fermentum. Donec pretium lacus est, ac sagittis metus sodales quis. Fusce porta, magna in elementum laoreet, turpis nibh auctor sapien, vel vehicula diam augue sed quam.
+
+Donec aliquam tellus lacus, dignissim placerat neque tincidunt et. Fusce scelerisque magna quis neque tincidunt commodo. Nunc et est lacinia, ullamcorper enim in, ornare enim. Praesent feugiat aliquam semper. Curabitur imperdiet velit ex, at imperdiet purus auctor porta. Suspendisse malesuada leo ac libero tempor fringilla. Maecenas maximus, ligula vel lobortis finibus, sem odio rhoncus tortor, id tempus purus diam vel orci. Nunc metus felis, eleifend a tristique vitae, dictum ac felis. Morbi fringilla, felis ac elementum iaculis, augue diam ultrices lorem, ut tristique arcu mi nec ante. Vivamus faucibus lacinia ex quis aliquet. Nulla vulputate egestas mauris non lobortis. Duis nec porta sapien. Proin accumsan lectus leo, nec pulvinar ligula malesuada ut. Proin at elementum nisl. Nunc et sodales diam. Vestibulum id volutpat eros.
+
+Etiam convallis sit amet nunc eu consequat. Donec et leo gravida, rutrum lectus sit amet, aliquet justo. Nulla a volutpat augue. Vestibulum mollis id tellus sit amet placerat. Phasellus nisl lacus, blandit a ipsum id, eleifend volutpat ligula. In a felis pretium nisl egestas gravida. Morbi convallis mauris egestas scelerisque cursus.
+
+Donec ut convallis sem, eget ornare neque. Nullam rutrum imperdiet elementum. Morbi pharetra lectus non augue venenatis, id ornare mi ultrices. Fusce dui neque, venenatis in est sit amet, tempor aliquet ante. Integer faucibus efficitur vehicula. Sed interdum congue iaculis. Nam vitae varius mauris. Aliquam ullamcorper magna fermentum tristique congue. Donec eget quam id lectus tristique cursus id vitae ipsum.
+
+Proin aliquet luctus ex a elementum. Mauris tristique ante velit, in venenatis nisi egestas vitae. Vivamus ut urna ut velit eleifend efficitur. Maecenas tincidunt euismod porta. Aliquam quam felis, tempus a gravida a, elementum sed turpis. Curabitur eleifend vulputate eros a iaculis. Maecenas quis massa metus. Quisque ac iaculis sapien. Duis eu accumsan diam. Integer mollis neque sapien, sagittis consectetur massa congue non. Nulla fringilla libero quis placerat facilisis. Vestibulum hendrerit justo ac velit gravida laoreet. Praesent nec elit vitae sem gravida condimentum. Aliquam erat volutpat. Cras maximus lobortis commodo.
+
+Donec varius iaculis purus sed posuere. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum mauris odio, molestie elementum sodales nec, convallis et ante. Curabitur ut vestibulum mauris. Ut rhoncus pulvinar nulla, a faucibus ipsum pretium sit amet. Morbi et posuere enim. Quisque aliquet commodo finibus. Praesent maximus laoreet nisi vitae euismod. Duis vitae metus sapien. Etiam consequat magna a vestibulum dignissim. Phasellus cursus scelerisque vulputate. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In mollis erat pretium orci ornare fermentum.
+
+Fusce euismod ligula dolor, eget viverra neque sagittis nec. Vivamus et nisi ante. Sed ut nisl luctus, egestas nunc a, blandit augue. Nullam suscipit justo vel odio auctor lobortis. Praesent quis sem consequat, imperdiet magna sit amet, pellentesque ante. Pellentesque tincidunt vehicula velit, ac imperdiet ligula. Praesent non consectetur est. Duis velit nulla, aliquet accumsan leo ut, pretium porttitor velit. Morbi placerat lorem neque, a egestas nulla gravida ac. Duis at libero nec leo dictum aliquam. Suspendisse suscipit lorem a lectus condimentum blandit. Aliquam erat volutpat. Fusce nibh arcu, maximus iaculis ligula sed, blandit elementum mi.
+
+Etiam sagittis enim libero, nec dictum diam porttitor eu. Aliquam ut hendrerit dolor. Mauris sit amet risus luctus libero vulputate maximus vel mattis enim. Nunc ac lobortis elit. Sed nec risus diam. Phasellus sed magna non orci consectetur porta id sed nisi. Sed justo nisi, faucibus at pellentesque sed, ornare vitae orci. Nullam vestibulum feugiat ligula non accumsan.
+
+Quisque gravida sit amet lacus et lacinia. Nullam lacinia eros in nunc euismod iaculis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent imperdiet auctor elementum. Integer eu luctus augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla facilisi. Morbi eu tincidunt neque. Curabitur bibendum convallis ex in blandit. Morbi at lectus felis. Fusce vestibulum vulputate neque. Fusce ac mattis ligula, eget porta nisi. Donec non odio quis diam placerat efficitur ac id metus. Curabitur lacinia massa a mi convallis venenatis. Donec id laoreet sem, sit amet porta lacus. Donec urna justo, convallis in elit nec, dictum sagittis enim.
+
+Phasellus elementum elit a lobortis suscipit. Aenean iaculis felis vitae odio aliquam ultrices. Suspendisse sit amet nisi augue. Praesent et molestie felis, et suscipit mi. Quisque in hendrerit ante. Nullam ultricies dui auctor, commodo nisl nec, molestie sapien. Phasellus purus velit, maximus in fermentum eget, consequat in augue. Suspendisse hendrerit tortor magna, ullamcorper imperdiet urna aliquet quis. Aenean eget semper elit. Donec sit amet ex vitae purus aliquam varius. Nulla vel dolor sit amet diam imperdiet venenatis. Curabitur felis purus, pellentesque et pellentesque quis, efficitur non lectus.
 					</div>
 					<div class="node" id="academic">
 						Node academic
@@ -48,8 +105,23 @@
 				</div>
 			</div>
 		</div>
-		<div id="network">
-		</div>
+
+		<div id="background" draggable="true"></div>
+		
+		<div id="network"></div>
+
+		<!-- --------------------------------------------------------------------------------------
+			 --	FOOTER  																		 --
+			 -------------------------------------------------------------------------------------- -->
+		<footer>
+			<a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+			<a class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
+			<a class="btn btn-social-icon btn-google"><i class="fa fa-google-plus"></i></a>
+		</footer>
+
+		<!-- --------------------------------------------------------------------------------------
+			 --	SCRIPTS 																		 --
+			 -------------------------------------------------------------------------------------- -->
 		<script id="vertexShader" type="x-shader/x-vertex">
 			uniform vec3 viewVector;
 			uniform float c;
@@ -78,5 +150,7 @@
 		<script src="js/three.orbitcontrols.js" type="text/javascript"></script>
 		<script src="js/jg.js" type="text/javascript"></script>
 		<script src="js/main.js" type="text/javascript"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	</body>
+
 </html>

@@ -53,20 +53,15 @@ JG.Node = function(jqueryObject) {
 	this.selected = false;
 	this.animationDelay = 5*Math.random();
 	this.jqueryObject = jqueryObject;
-	console.log(this.jqueryObject);
 
 	// Methods ______________________________________________________
 	this.select = function() {
+		console.log("HOVER");
 		this.selected = true;
 		this.material.uniforms.color.value.setHex(this.highlightColor);
-		console.log(this.jqueryObject);
-		this.jqueryObject.parents().show();
-		this.jqueryObject.show();
-		// document.getElementById( 'container' ).appendChild(this.jqueryObject.innerHtml);
 	};
 	this.unselect = function() {
 		this.selected = false;
-		this.jqueryObject.hide();
 		this.material.uniforms.color.value.setHex(this.defaultColor);
 		this.scale.setX(1.0);
 		this.scale.setY(1.0);
