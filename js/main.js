@@ -58,7 +58,7 @@ function init()
 
 	// NETWORK
 	graph = new JG.Graph();
-	var nodesToCheck = [$('#root-node')];
+	var nodesToCheck = [$('#root-node.html')];
 	var iParentNode = 0;
 	graph.addNode(scene,nodesToCheck[0]);
 	do {
