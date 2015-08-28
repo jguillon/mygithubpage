@@ -1,22 +1,30 @@
 // MAIN
 // standard global variables
-var container, scene, camera, renderer, controls, stats, projector;
+var container, scene, camera, renderer, controls, stats, projector, graph;
 var mouse = { x: 0, y: 0 }, oldMouse = { x: 0, y: 0 }, selectedNode;
-var nodes = [];
 var clock = new THREE.Clock();
 var nodeRadius = 100;
 
 init();
 animate();
 
-$(document).ready(function() {
-   	$('#network').click(function(e) {
-   		console.log("click network");
-   	});
-   	$('#container').click(function(e) {
-   		console.log("click container");
-   	});
+// window.onpopstate = function(){
+// 	selectNode();
+// };
+
+History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
+	selectNode();
 });
+
+function selectNode()
+{
+	urlElems = window.location.pathname.split('/');
+	if(selectedNode)
+		selectedNode.unselect();
+	selectedNode = graph.getNode(urlElems[urlElems.length-1]);
+	if(selectedNode)
+		selectedNode.select();	
+}
 
 // FUNCTIONS 		
 function init() 
@@ -49,22 +57,45 @@ function init()
 	controls.maxDistance = FAR/2;
 
 	// NETWORK
+	graph = new JG.Graph();
 	var nodesToCheck = [$('#root-node')];
 	var iParentNode = 0;
-	addNode(scene,nodesToCheck[0]);
+	graph.addNode(scene,nodesToCheck[0]);
 	do {
 		parentNode = nodesToCheck[iParentNode];
 		childrenNodes = parentNode.children('.node');
 		for(i=0; i<childrenNodes.length; i++) {
 			nodesToCheck.push($(childrenNodes[i]));
-			addNode(scene,$(childrenNodes[i]));
-			addLink(scene,nodes[iParentNode],nodes[nodes.length-1]);
+			graph.addNode(scene,$(childrenNodes[i]));
+			graph.addEdge(scene,graph.nodes[iParentNode],graph.nodes[graph.nodes.length-1]);
 		}
 		iParentNode++;
 	} while(iParentNode < nodesToCheck.length);
 
+	graph.layout.init();
+
+	selectNode();
+
+	// SKYDOME
+	var urlPrefix = "http://localhost:8888/network-website/img/skybox_";
+	var urls = [ urlPrefix + "right1.png", urlPrefix + "left2.png",
+		urlPrefix + "top3.png", urlPrefix + "bottom4.png",
+		urlPrefix + "front5.png", urlPrefix + "back6.png" ];
+	var textureCube = THREE.ImageUtils.loadTextureCube( urls );
+	var shader = THREE.ShaderLib["cube"];
+	shader.uniforms['tCube'].value = textureCube;   // textureCube has been init before
+	var material = new THREE.ShaderMaterial({
+		fragmentShader: shader.fragmentShader,
+		vertexShader: shader.vertexShader,
+		uniforms: shader.uniforms,
+		depthwrite : false,
+		side: THREE.BackSide
+	});
+	skybox = new THREE.Mesh( new THREE.BoxGeometry( 10000, 10000, 10000), material );
+	scene.add(skybox);
+
 	// MOUSE 
-	// projector = new THREE.Projector();
+	document.addEventListener( 'click', onMouseClick, false );
 	document.addEventListener( 'mousemove', onMouseMove, false );
 	window.addEventListener( 'resize', onWindowResize , false );
 	
@@ -74,6 +105,50 @@ function onMouseMove(event) {
 	oldMouse = mouse;
 	mouse.x = ( (event.clientX - $(container).position().left) / $(container).width() ) * 2 - 1;
 	mouse.y = - ( event.clientY / $(container).height() ) * 2 + 1;
+	// MOUSE HOVERING
+	// var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+	// vector.unproject(camera);
+	// var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+	// var intersects = ray.intersectObjects( scene.children );
+	// if(intersects.length>0) {
+	// 	if(intersects[0].object!=selectedNode && intersects[0].object instanceof JG.Node) {
+	// 		if(selectedNode)
+	// 			selectedNode.unselect();
+	// 		selectedNode = intersects[ 0 ].object;
+	// 		// selectedNode.select();
+	// 	}
+	// } else {	
+	// 	if(selectedNode) {
+	// 		// selectedNode.unselect();
+	// 	}
+	// 	selectedNode = null;
+	// }
+}
+
+function onMouseClick(event) {
+	mouse.x = ( (event.clientX - $(container).position().left) / $(container).width() ) * 2 - 1;
+	mouse.y = - ( event.clientY / $(container).height() ) * 2 + 1;
+	// MOUSE
+	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+	vector.unproject(camera);
+	var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+	var intersects = ray.intersectObjects( scene.children );
+	if(intersects.length>0) {
+		for(i=0; i<intersects.length; i++) {
+			if(intersects[i].object!=selectedNode && intersects[0].object instanceof JG.Node) {
+				if(selectedNode)
+					selectedNode.unselect();
+				selectedNode = intersects[i].object;
+				selectedNode.select();
+				return;
+			}
+		}
+	} else {	
+		if(selectedNode) {
+			selectedNode.unselect();
+		}
+		selectedNode = null;
+	}
 }
 
 function onWindowResize(){
@@ -83,44 +158,15 @@ function onWindowResize(){
 	renderer.setSize( container.offsetWidth, container.offsetHeight );
 }
 
-function addLink(scene,node1,node2) {
-	var link = new JG.Link(node1,node2);
-	scene.add(link);
-}
-
-function addNode(scene,jqueryObject) {
-	var node = new JG.Node(jqueryObject);
-	scene.add(node);
-	nodes.push(node);
-}
-
 function animate() 
 {
-    requestAnimationFrame( animate );
+	requestAnimationFrame( animate );
 	render();		
 	update();
 }
 
 function update()
 {
-	// MOUSE
-	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-	vector.unproject(camera);
-	var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-	var intersects = ray.intersectObjects( scene.children );
-	if(intersects.length>0) {
-		if(intersects[0].object!=selectedNode && intersects[0].object instanceof JG.Node) {
-			if(selectedNode)
-				selectedNode.unselect();
-			selectedNode = intersects[ 0 ].object;
-			selectedNode.select();
-		}
-	} else {	
-		if(selectedNode) {
-			selectedNode.unselect();
-		}
-		selectedNode = null;
-	}
 
 	// VIEW
 	controls.update();
@@ -129,10 +175,7 @@ function update()
 	controls.rotateLeft(mouse.x/1000);
 	controls.rotateUp(mouse.y/1000);
 
-	// NODES GLOW MATERIAL
-	nodes.forEach(function(node, i) {
-		node.update();
-	});
+	graph.update();
 }
 
 function render() 
