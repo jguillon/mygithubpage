@@ -77,7 +77,7 @@ function init()
 	selectNode();
 
 	// SKYDOME
-	var urlPrefix = "http://localhost:8888/network-website/img/skybox_";
+	var urlPrefix = "/img/skybox_";
 	var urls = [ urlPrefix + "right1.png", urlPrefix + "left2.png",
 		urlPrefix + "top3.png", urlPrefix + "bottom4.png",
 		urlPrefix + "front5.png", urlPrefix + "back6.png" ];
