@@ -58,10 +58,11 @@ function init()
 
 	// NETWORK
 	graph = new JG.Graph();
-	var nodesToCheck = [$('#root-node.html')];
+	var nodesToCheck = [$('#root-node\\.html')];
 	var iParentNode = 0;
 	graph.addNode(scene,nodesToCheck[0]);
 	do {
+		console.log(nodesToCheck);
 		parentNode = nodesToCheck[iParentNode];
 		childrenNodes = parentNode.children('.node');
 		for(i=0; i<childrenNodes.length; i++) {
