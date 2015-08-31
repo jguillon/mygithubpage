@@ -12,18 +12,23 @@ animate();
 // 	selectNode();
 // };
 
-History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
+// History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
+// 	console.log("BEEEH");
+// 	selectNode();
+// });
+window.onpopstate = function() {
 	selectNode();
-});
+};
 
 function selectNode()
 {
-	urlElems = window.location.pathname.split('/');
-	if(selectedNode)
-		selectedNode.unselect();
-	selectedNode = graph.getNode(urlElems[urlElems.length-1]);
-	if(selectedNode)
+	oldSelectedNode = selectedNode;
+	selectedNode = graph.getNode(window.location.hash.substring(1));
+	if(selectedNode != null && selectedNode !== oldSelectedNode) {
+		if(oldSelectedNode)
+			oldSelectedNode.unselect();
 		selectedNode.select();	
+	}
 }
 
 // FUNCTIONS 		
@@ -58,11 +63,10 @@ function init()
 
 	// NETWORK
 	graph = new JG.Graph();
-	var nodesToCheck = [$('#root-node\\.html')];
+	var nodesToCheck = [$('#root-node')];
 	var iParentNode = 0;
 	graph.addNode(scene,nodesToCheck[0]);
 	do {
-		console.log(nodesToCheck);
 		parentNode = nodesToCheck[iParentNode];
 		childrenNodes = parentNode.children('.node');
 		for(i=0; i<childrenNodes.length; i++) {
@@ -136,11 +140,12 @@ function onMouseClick(event) {
 	var intersects = ray.intersectObjects( scene.children );
 	if(intersects.length>0) {
 		for(i=0; i<intersects.length; i++) {
-			if(intersects[i].object!=selectedNode && intersects[0].object instanceof JG.Node) {
+			if(intersects[i].object!=selectedNode && intersects[i].object instanceof JG.Node) {
 				if(selectedNode)
 					selectedNode.unselect();
 				selectedNode = intersects[i].object;
 				selectedNode.select();
+				History.pushState({},selectedNode.htmlId,'#'+selectedNode.htmlId);
 				return;
 			}
 		}

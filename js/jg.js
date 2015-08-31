@@ -95,7 +95,6 @@ var JG = {
 		this.selected = true;
 		this.material.uniforms.color.value.setHex(JG.SELECTION_COLOR);
 		this.jqueryObject.show();
-		History.pushState({},'',this.htmlId);
 	};
 	this.unselect = function() {
 		this.selected = false;
