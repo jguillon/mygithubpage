@@ -8,7 +8,7 @@ var JG = {
 };
 
 /********************************************************************
- * Graph Class													*
+ * Graph Class														*
  ********************************************************************/
 
  JG.Graph = function() {
@@ -61,8 +61,8 @@ var JG = {
  JG.Node = function(jqueryObject) {
 
 	// Constructor __________________________________________________
-	var radius = 100;
-	var geometry = new THREE.SphereGeometry( radius, 64, 64 );
+	var radius = 10;
+	var geometry = new THREE.SphereGeometry( radius, 32, 32 );
 	var material = new THREE.ShaderMaterial({
 		uniforms: { 
 			"c":   { type: "f", value: 0.3 },
@@ -77,10 +77,16 @@ var JG = {
 		transparent: true
 	});
 	THREE.Mesh.call(this,geometry,material);
-	var x = (2*Math.random()-1)*500;
-	var y = (2*Math.random()-1)*500;
-	var z = (2*Math.random()-1)*500;
+	var x = Math.random();
+	var y = Math.random();
+	var z = Math.random();
 	this.position.set(x,y,z);
+	var map = THREE.ImageUtils.loadTexture( "img/education.png" );
+	var spriteMaterial = new THREE.SpriteMaterial( { map: map, color: 0x3D5857, fog: true } );
+	var sprite = new THREE.Sprite( spriteMaterial ); 
+	sprite.scale.set(10,10,10);
+	sprite.visible = false;
+	scene.add(sprite);
 
 	// Attributes ___________________________________________________
 	this.htmlId = jqueryObject.attr('id');
@@ -89,6 +95,8 @@ var JG = {
 	this.jqueryObject = jqueryObject;
 	this.material = material;
 	this.geometry = geometry;
+	this.icon = sprite;
+	this.hovered = false;
 
 	// Methods ______________________________________________________
 	this.select = function() {
@@ -104,10 +112,21 @@ var JG = {
 		this.scale.setZ(1.0);
 		this.jqueryObject.hide();
 	};
+	this.hover = function() {
+		this.hovered = true;
+		this.icon.visible = true;
+		this.geometry = new THREE.SphereGeometry( radius*2, 32, 32 );
+	}
+	this.unhover = function() {
+		this.hovered = false;
+		this.icon.visible = false;
+		this.geometry = new THREE.SphereGeometry( radius, 32, 32 );	
+	}
 	this.update = function() {
+		this.icon.position.set(this.position.x,this.position.y,this.position.z);
 		this.material.uniforms.viewVector.value = new THREE.Vector3().subVectors( camera.position, this.position );
-		this.material.uniforms["c"].value = 0.3 + 0.1*Math.sin(this.animationDelay + clock.getElapsedTime());
-		this.material.needsUpdate = true;
+		// this.material.uniforms["c"].value = 0.3 + 0.1*Math.sin(this.animationDelay + clock.getElapsedTime());
+		// this.material.needsUpdate = true;
 	};
 
 };
@@ -122,7 +141,7 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 
 	// Constructor __________________________________________________
 	var geometry = new THREE.Geometry();
-	var nLines = 5;
+	var nLines = 4;
 	for (var i = 0; i<nLines; i++) {
 		geometry.vertices.push(new THREE.Vector3());
 		geometry.vertices.push(new THREE.Vector3());
@@ -145,7 +164,7 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 		blending:       THREE.AdditiveBlending,
 		depthTest:      false,
 		transparent:    true,
-		linewidth: 		0.5
+		linewidth: 		2
 	});
 	THREE.Line.call(this,geometry,material,THREE.LineStrip);
 
@@ -157,7 +176,7 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 
 	// Methods ______________________________________________________
 	this.update = function() {
-		this.material.uniforms.amplitude.value = 50 * Math.sin( 0.5 * clock.getElapsedTime() );
+		this.material.uniforms.amplitude.value = 5 * Math.sin( 0.5 * clock.getElapsedTime() );
 		this.material.needsUpdate = true;
 		for( var i = 0; i < this.geometry.vertices.length; i ++ ) {
 			if(i%2 == 0) {
@@ -188,7 +207,7 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 
 	// Constructor __________________________________________________
 	var options = options || {};
-	var EPSILON = 0.01;
+	var EPSILON = 0.0000001;
 	var attraction_constant;
 	var repulsion_constant;
 	var forceConstant;
@@ -200,10 +219,10 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 	// Attributes ___________________________________________________
 	this.attraction_multiplier = options.attraction || 5;
 	this.repulsion_multiplier = options.repulsion || 0.75;
-	this.max_iterations = options.iterations || 200;
+	this.max_iterations = options.iterations || 200000;
 	this.graph = graph;
-	this.width = options.width || 500;
-	this.height = options.height || 500;
+	this.width = options.width || 50;
+	this.height = options.height || 50;
 	this.finished = false;
 
 

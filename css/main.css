@@ -2,12 +2,15 @@ div#network {
 	position: fixed;
 	right: 0;
 	top: 0;
-	width: 50%;
-	height: 100%;
-	z-index: 1;
+	width: 100%;
+	height: 50%;
+	z-index: 2;
+}
+div.dg.ac {
+	z-index: 2;
 }
 
-div#background {
+/*div#background {
 	position: fixed;
 	pointer-events: none;
 	top: 0;
@@ -19,7 +22,7 @@ div#background {
 	background-repeat: no-repeat;
 	background-position: center center;
 	z-index: 2;
-}
+}*/
 
 div#wait {
 	position: absolute;
@@ -37,15 +40,30 @@ header {
 	top: 0;
 	left: 0;
 }
+h1, h2, h3{
+	text-align: center;
+    color: #9B7269;	
+    font-family: monospace;
+}
 div#content {
-	position: relative;
+    font-family: serif;
+	position: fixed;
 	z-index: 3;
-	width: 45vw;
-	height: 71vh;
-	margin-top: 4vh;
-	margin-left: 3vw;
+	/*width: 45vw;*/
+	width: 100%;
+	/*height: 71vh;*/
+	height: 70%;
+	/*margin-top: 4vh;*/
+	top: 30%;
+	padding: 2vh 10vw;
 	overflow: scroll;
 	text-align: justify;
+	box-shadow: 0px 3vh 2vh -2vh black inset;
+	background-image: linear-gradient(#EEEEEE 0%, white 10%, white 80%, #DDDDDD 100%);
+	-moz-transition: top 1s;
+	-webkit-transition: top 1s;
+	-o-transition: top 1s;
+	transition: top 1s;
 }
 footer {
 	position: fixed;
@@ -61,8 +79,7 @@ footer {
 }
 img#logo {
 	height: 15vw;
-	background-color: white;
-	margin: 3vh 3vw 3vh 50vw;
+	margin: 3vh 3vw 3vh 3vw;
 	vertical-align: top;
 	display: inline-block;
 	position: absolute;

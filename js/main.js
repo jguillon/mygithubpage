@@ -1,17 +1,13 @@
 // MAIN
 // standard global variables
 var container, scene, camera, renderer, controls, stats, projector, graph;
-var mouse = { x: 0, y: 0 }, oldMouse = { x: 0, y: 0 }, selectedNode;
+var mouse = { x: 0, y: 0 }, oldMouse = { x: 0, y: 0 }, selectedNode, hoveredNode;
 var clock = new THREE.Clock();
 var nodeRadius = 100;
+var lens = 20, minLens = 20, maxLens = 50;
 
 init();
 animate();
-
-// window.onpopstate = function(){
-// 	selectNode();
-// };
-
 // History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
 // 	console.log("BEEEH");
 // 	selectNode();
@@ -43,12 +39,13 @@ function init()
 	var SCREEN_HEIGHT = container.offsetHeight;
 	var VIEW_ANGLE = 45;
 	var ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT;
-	var NEAR = 1000;
-	var FAR = 20000;
+	var NEAR = 1;
+	var FAR = 3000;
 	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 	scene.add(camera);
-	camera.position.set(0,3000,0);
+	camera.position.set(0,200,0);
 	camera.lookAt(scene.position);	
+	camera.setLens(lens);
 
 	// RENDERER
 	renderer = new THREE.WebGLRenderer( {antialias:true} );
@@ -58,8 +55,9 @@ function init()
 	// CONTROLS
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
 	controls.addEventListener( 'change', render );
-	controls.minDistance = NEAR*2;
-	controls.maxDistance = FAR/2;
+	controls.userZoom = false;
+	renderer.domElement.addEventListener( 'mousewheel', onMouseWheel, false );
+	renderer.domElement.addEventListener( 'DOMMouseScroll', onMouseWheel, false );
 
 	// NETWORK
 	graph = new JG.Graph();
@@ -81,6 +79,7 @@ function init()
 
 	selectNode();
 
+	// renderer.setClearColor( 0x063947, 1);
 	// SKYDOME
 	var urlPrefix = "/img/skybox_";
 	var urls = [ urlPrefix + "right1.png", urlPrefix + "left2.png",
@@ -96,7 +95,7 @@ function init()
 		depthwrite : false,
 		side: THREE.BackSide
 	});
-	skybox = new THREE.Mesh( new THREE.BoxGeometry( 10000, 10000, 10000), material );
+	skybox = new THREE.Mesh( new THREE.BoxGeometry( 1000, 1000, 1000), material );
 	scene.add(skybox);
 
 	// MOUSE 
@@ -104,30 +103,37 @@ function init()
 	document.addEventListener( 'mousemove', onMouseMove, false );
 	window.addEventListener( 'resize', onWindowResize , false );
 	
+	$('div#network').hover(function(){$('div#content').css('top','50%');},function(){$('div#content').css('top','30%');});
 }
 
 function onMouseMove(event) {
 	oldMouse = mouse;
 	mouse.x = ( (event.clientX - $(container).position().left) / $(container).width() ) * 2 - 1;
 	mouse.y = - ( event.clientY / $(container).height() ) * 2 + 1;
+	hoverNode();
+}
+
+function hoverNode() {
 	// MOUSE HOVERING
-	// var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-	// vector.unproject(camera);
-	// var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-	// var intersects = ray.intersectObjects( scene.children );
-	// if(intersects.length>0) {
-	// 	if(intersects[0].object!=selectedNode && intersects[0].object instanceof JG.Node) {
-	// 		if(selectedNode)
-	// 			selectedNode.unselect();
-	// 		selectedNode = intersects[ 0 ].object;
-	// 		// selectedNode.select();
-	// 	}
-	// } else {	
-	// 	if(selectedNode) {
-	// 		// selectedNode.unselect();
-	// 	}
-	// 	selectedNode = null;
-	// }
+	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+	vector.unproject(camera);
+	var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+	var intersects = ray.intersectObjects( scene.children );
+	if(intersects.length>0) {
+		for(i=0; i<intersects.length; i++) {
+			if(intersects[i].object instanceof JG.Node) {
+				if(hoveredNode)
+					hoveredNode.unhover();
+				hoveredNode = intersects[ i ].object;
+				hoveredNode.hover();
+				return;
+			}	
+		}
+		if(hoveredNode) {
+			hoveredNode.unhover();
+		}
+		hoveredNode = null;
+	} 	
 }
 
 function onMouseClick(event) {
@@ -164,6 +170,19 @@ function onWindowResize(){
 	renderer.setSize( container.offsetWidth, container.offsetHeight );
 }
 
+function onMouseWheel( event ) {
+	var delta = 0;
+	if(event.wheelDelta ) { // WebKit / Opera / Explorer 9
+		delta = event.wheelDelta;
+	} else if ( event.detail ) { // Firefox
+		delta = - event.detail;
+	}
+	lens += delta/10;
+	if(lens<minLens) lens = minLens;
+	if(lens>maxLens) lens = maxLens;
+	camera.setLens(lens);
+}
+
 function animate() 
 {
 	requestAnimationFrame( animate );
@@ -180,6 +199,8 @@ function update()
 	// CAMERA AUTO-ROTATION ANIMATION
 	controls.rotateLeft(mouse.x/1000);
 	controls.rotateUp(mouse.y/1000);
+
+	hoverNode();
 
 	graph.update();
 }
