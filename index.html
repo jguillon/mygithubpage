@@ -97,10 +97,46 @@ redirect_from:
 							Node INSA
 						</div>
 						<div class="node" id="academic2">
-							Node Université de Rouen
+							Node INSA
+							<div class="node" id="academic2">
+								Node INSA
+							</div>
+							<div class="node" id="academic2">
+								Node INSA
+							</div>
+							<div class="node" id="academic2">
+								Node INSA
+							</div>
 						</div>
 						<div class="node" id="academic3">
+							Node INSA
+							<div class="node" id="academic31">
+								Node INSA
+							</div>
+							<div class="node" id="academic32">
+								Node INSA
+							</div>
+							<div class="node" id="academic33">
+								Node INSA
+							</div>
+							<div class="node" id="academic34">
+								Node INSA
+							</div>
+						</div>
+						<div class="node" id="academic4">
+							Node Université de Rouen
+						</div>
+						<div class="node" id="academic5">
 							Node UdeM
+							<div class="node" id="academic5">
+								Node UdeM
+							</div>
+							<div class="node" id="academic5">
+								Node UdeM
+							</div>
+							<div class="node" id="academic5">
+								Node UdeM
+							</div>
 						</div>
 					</div>
 				</div>
@@ -117,13 +153,15 @@ redirect_from:
 		
 		<div id="network"></div>
 
+		<div id="node-title-box"><h1 id="node-title" class="blurry">Title</h1></div>
+
 		<!-- --------------------------------------------------------------------------------------
 			 --	FOOTER  																		 --
 			 -------------------------------------------------------------------------------------- -->
 		<footer>
-			<a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
-			<a class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
-			<a class="btn btn-social-icon btn-google"><i class="fa fa-google-plus"></i></a>
+			<a class="btn btn-social-icon"><i class="fa fa-twitter"></i></a>
+			<a class="btn btn-social-icon"><i class="fa fa-linkedin"></i></a>
+			<a class="btn btn-social-icon"><i class="fa fa-google-plus"></i></a>
 		</footer>
 
 		<!-- --------------------------------------------------------------------------------------
@@ -149,7 +187,7 @@ redirect_from:
 			void main() 
 			{
 				vec3 glow = color * intensity;
-			    gl_FragColor = vec4( glow, 1.0 );
+			    gl_FragColor = vec4( glow, intensity );
 			}
 		</script>
 		<script type="x-shader/x-vertex" id="vertexshader2">

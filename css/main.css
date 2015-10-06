@@ -1,28 +1,23 @@
+body, html {
+	width:100%;
+	height:100%;
+}
 div#network { 
 	position: fixed;
 	right: 0;
 	top: 0;
 	width: 100%;
-	height: 50%;
+	height: 100%;
 	z-index: 2;
+	background-image: -webkit-radial-gradient(rgb(72, 64, 55), rgba(0, 0, 0, 0.93));
+	background-image: -moz-radial-gradient(rgb(72, 64, 55), rgba(0, 0, 0, 0.93));
+	background-image: -ms-radial-gradient(rgb(72, 64, 55), rgba(0, 0, 0, 0.93));
+	background-image: -o-radial-gradient(rgb(72, 64, 55), rgba(0, 0, 0, 0.93));
+	background-image: radial-gradient(rgb(72, 64, 55), rgba(0, 0, 0, 0.93));
 }
 div.dg.ac {
 	z-index: 2;
 }
-
-/*div#background {
-	position: fixed;
-	pointer-events: none;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 80%;
-	background-image: url(/img/bg.png);
-	background-size: 100% 100%;
-	background-repeat: no-repeat;
-	background-position: center center;
-	z-index: 2;
-}*/
 
 div#wait {
 	position: absolute;
@@ -36,53 +31,132 @@ div#wait {
 
 header {
 	position: relative;
+	display: block;
 	z-index: 3;
 	top: 0;
 	left: 0;
 }
+img#logo {
+	transform: rotate(0.001deg); /* Firefox bad png rendering hack */
+	margin: 5vmin;
+	height: 10vmin;
+}
 h1, h2, h3{
 	text-align: center;
-    color: #9B7269;	
-    font-family: monospace;
+	color: #9B7269;	
+	font-family: monospace;
 }
 div#content {
-    font-family: serif;
+	font-family: sans-serif;
+	font-size: larger;
 	position: fixed;
 	z-index: 3;
-	/*width: 45vw;*/
 	width: 100%;
-	/*height: 71vh;*/
 	height: 70%;
-	/*margin-top: 4vh;*/
-	top: 30%;
+	top: 100%;
 	padding: 2vh 10vw;
 	overflow: scroll;
 	text-align: justify;
-	box-shadow: 0px 3vh 2vh -2vh black inset;
-	background-image: linear-gradient(#EEEEEE 0%, white 10%, white 80%, #DDDDDD 100%);
-	-moz-transition: top 1s;
-	-webkit-transition: top 1s;
-	-o-transition: top 1s;
+	background-color: #000D0D;
 	transition: top 1s;
 }
-footer {
+
+div#node-title-box {
+	pointer-events: none;
 	position: fixed;
+	display: block;
+	text-align: center;
+	height: 20vmin;
+	width: 100%;
+	top: 70vmin;
 	z-index: 3;
-	bottom: 3vh;
-	left: 46.5vw;
-	display: inline-block;
 }
 
+
+/******************************
+.cl-effect-2 a {
+	line-height: 44px;
+	-webkit-perspective: 1000px;
+	-moz-perspective: 1000px;
+	perspective: 1000px;
+}
+
+.cl-effect-2 a span {
+	position: relative;
+	display: inline-block;
+	padding: 0 14px;
+	background: #2195de;
+	-webkit-transition: -webkit-transform 0.3s;
+	-moz-transition: -moz-transform 0.3s;
+	transition: transform 0.3s;
+	-webkit-transform-origin: 50% 0;
+	-moz-transform-origin: 50% 0;
+	transform-origin: 50% 0;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.csstransforms3d .cl-effect-2 a span::before {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #0965a0;
+	content: attr(data-hover);
+	-webkit-transition: background 0.3s;
+	-moz-transition: background 0.3s;
+	transition: background 0.3s;
+	-webkit-transform: rotateX(-90deg);
+	-moz-transform: rotateX(-90deg);
+	transform: rotateX(-90deg);
+	-webkit-transform-origin: 50% 0;
+	-moz-transform-origin: 50% 0;
+	transform-origin: 50% 0;
+}
+
+.cl-effect-2 a:hover span,
+.cl-effect-2 a:focus span {
+	-webkit-transform: rotateX(90deg) translateY(-22px);
+	-moz-transform: rotateX(90deg) translateY(-22px);
+	transform: rotateX(90deg) translateY(-22px);
+}
+
+.csstransforms3d .cl-effect-2 a:hover span::before,
+.csstransforms3d .cl-effect-2 a:focus span::before {
+	background: #28a2ee;	
+}
+******************************/
+
+/* Source: http://simurai.com/lab/2010/06/10/i-love-blur/ */
+h1.blurry {
+	color: hsla(0,0%,0%,0);
+	text-shadow: #222 0 0 60px;
+	transition: text-shadow 2s cubic-bezier(0, 1, 0, 1);
+}
+@-moz-document url-prefix() { .txt { text-shadow: #222 0 0 20px; } } /* FF fix */
+
+/*#node-title-box:hover h1.blurry {
+	text-shadow: #fff 0 0 2px;
+	transition: text-shadow 1s cubic-bezier(0, 0.75, 0, 1);
+}*/
+/***********************************************************/
+
+footer {
+	display: inline-block;
+	position: fixed;
+	width: 100%;
+	text-align: center;
+	z-index: 3;
+	bottom: 5vmin;
+}
+a.btn-social-icon {
+	color: #fff;
+}
 .nopadding {
 	padding: 0 !important;
 	margin: 0 !important;
-}
-img#logo {
-	height: 15vw;
-	margin: 3vh 3vw 3vh 3vw;
-	vertical-align: top;
-	display: inline-block;
-	position: absolute;
 }
 h1#title {
 	display: inline-block;

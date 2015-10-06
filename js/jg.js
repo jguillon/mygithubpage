@@ -4,7 +4,9 @@ var JG = {
 	REVISION: "2",
 	DEFAULT_COLOR: 0x55777f,
 	HOVER_COLOR: 0x3e8291,
-	SELECTION_COLOR: 0xFFAE75
+	SELECTION_COLOR: 0xFFAE75,
+	HOVER_SELECTION_COLOR: 0xFF7C1D,
+	HOVERED_TITLE: $("div#node-title-box h1")
 };
 
 /********************************************************************
@@ -65,7 +67,7 @@ var JG = {
 	var geometry = new THREE.SphereGeometry( radius, 32, 32 );
 	var material = new THREE.ShaderMaterial({
 		uniforms: { 
-			"c":   { type: "f", value: 0.3 },
+			"c":   { type: "f", value: 0.25 },
 			"p":   { type: "f", value: 6.0 },
 			color: { type: "c", value: new THREE.Color(JG.DEFAULT_COLOR) },
 			viewVector: { type: "v3", value: camera.position }
@@ -84,7 +86,7 @@ var JG = {
 	var map = THREE.ImageUtils.loadTexture( "img/education.png" );
 	var spriteMaterial = new THREE.SpriteMaterial( { map: map, color: 0x3D5857, fog: true } );
 	var sprite = new THREE.Sprite( spriteMaterial ); 
-	sprite.scale.set(10,10,10);
+	sprite.scale.set(5,5,5);
 	sprite.visible = false;
 	scene.add(sprite);
 
@@ -115,18 +117,25 @@ var JG = {
 	this.hover = function() {
 		this.hovered = true;
 		this.icon.visible = true;
-		this.geometry = new THREE.SphereGeometry( radius*2, 32, 32 );
+		JG.HOVERED_TITLE.html(this.jqueryObject.html());
+		JG.HOVERED_TITLE.css("text-shadow","#222 0 0 2px");
+		if(this.selected)
+			this.material.uniforms.color.value.setHex(JG.HOVER_SELECTION_COLOR);
+		else
+			this.material.uniforms.color.value.setHex(JG.HOVER_COLOR);
 	}
 	this.unhover = function() {
 		this.hovered = false;
 		this.icon.visible = false;
-		this.geometry = new THREE.SphereGeometry( radius, 32, 32 );	
+		JG.HOVERED_TITLE.css("text-shadow","#222 0 0 60px");
+		if(this.selected)
+			this.material.uniforms.color.value.setHex(JG.SELECTION_COLOR);
+		else
+			this.material.uniforms.color.value.setHex(JG.DEFAULT_COLOR);
 	}
 	this.update = function() {
 		this.icon.position.set(this.position.x,this.position.y,this.position.z);
 		this.material.uniforms.viewVector.value = new THREE.Vector3().subVectors( camera.position, this.position );
-		// this.material.uniforms["c"].value = 0.3 + 0.1*Math.sin(this.animationDelay + clock.getElapsedTime());
-		// this.material.needsUpdate = true;
 	};
 
 };

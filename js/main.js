@@ -4,7 +4,7 @@ var container, scene, camera, renderer, controls, stats, projector, graph;
 var mouse = { x: 0, y: 0 }, oldMouse = { x: 0, y: 0 }, selectedNode, hoveredNode;
 var clock = new THREE.Clock();
 var nodeRadius = 100;
-var lens = 20, minLens = 20, maxLens = 50;
+var lens = 20, minLens = 10, maxLens = 50;
 
 init();
 animate();
@@ -48,8 +48,9 @@ function init()
 	camera.setLens(lens);
 
 	// RENDERER
-	renderer = new THREE.WebGLRenderer( {antialias:true} );
+	renderer = new THREE.WebGLRenderer( {antialias:true, alpha:true} );
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	renderer.setClearColor( 0x001D0D, 0);
 	container.appendChild( renderer.domElement );
 
 	// CONTROLS
@@ -79,31 +80,30 @@ function init()
 
 	selectNode();
 
-	// renderer.setClearColor( 0x063947, 1);
 	// SKYDOME
-	var urlPrefix = "/img/skybox_";
-	var urls = [ urlPrefix + "right1.png", urlPrefix + "left2.png",
-		urlPrefix + "top3.png", urlPrefix + "bottom4.png",
-		urlPrefix + "front5.png", urlPrefix + "back6.png" ];
-	var textureCube = THREE.ImageUtils.loadTextureCube( urls );
-	var shader = THREE.ShaderLib["cube"];
-	shader.uniforms['tCube'].value = textureCube;   // textureCube has been init before
-	var material = new THREE.ShaderMaterial({
-		fragmentShader: shader.fragmentShader,
-		vertexShader: shader.vertexShader,
-		uniforms: shader.uniforms,
-		depthwrite : false,
-		side: THREE.BackSide
-	});
-	skybox = new THREE.Mesh( new THREE.BoxGeometry( 1000, 1000, 1000), material );
-	scene.add(skybox);
+	// var urlPrefix = "/img/skybox_";
+	// var urls = [ urlPrefix + "right1.png", urlPrefix + "left2.png",
+	// 	urlPrefix + "top3.png", urlPrefix + "bottom4.png",
+	// 	urlPrefix + "front5.png", urlPrefix + "back6.png" ];
+	// var textureCube = THREE.ImageUtils.loadTextureCube( urls );
+	// var shader = THREE.ShaderLib["cube"];
+	// shader.uniforms['tCube'].value = textureCube;   // textureCube has been init before
+	// var material = new THREE.ShaderMaterial({
+	// 	fragmentShader: shader.fragmentShader,
+	// 	vertexShader: shader.vertexShader,
+	// 	uniforms: shader.uniforms,
+	// 	depthwrite : false,
+	// 	side: THREE.BackSide
+	// });
+	// skybox = new THREE.Mesh( new THREE.BoxGeometry( 1000, 1000, 1000), material );
+	// scene.add(skybox);
 
 	// MOUSE 
 	document.addEventListener( 'click', onMouseClick, false );
 	document.addEventListener( 'mousemove', onMouseMove, false );
 	window.addEventListener( 'resize', onWindowResize , false );
 	
-	$('div#network').hover(function(){$('div#content').css('top','50%');},function(){$('div#content').css('top','30%');});
+	// $('div#network').hover(function(){$('div#content').css('top','100%');},function(){$('div#content').css('top','100%');});
 }
 
 function onMouseMove(event) {
@@ -129,11 +129,11 @@ function hoverNode() {
 				return;
 			}	
 		}
-		if(hoveredNode) {
-			hoveredNode.unhover();
-		}
-		hoveredNode = null;
-	} 	
+	}
+	if(hoveredNode) {
+		hoveredNode.unhover();
+	}
+	hoveredNode = null;	
 }
 
 function onMouseClick(event) {
@@ -155,11 +155,6 @@ function onMouseClick(event) {
 				return;
 			}
 		}
-	} else {	
-		if(selectedNode) {
-			selectedNode.unselect();
-		}
-		selectedNode = null;
 	}
 }
 
@@ -207,5 +202,6 @@ function update()
 
 function render() 
 {
+	renderer.clear();
 	renderer.render( scene, camera );
 }
