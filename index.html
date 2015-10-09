@@ -32,32 +32,39 @@ redirect_from:
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/css/bootstrap-social.css">
 		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/sprite-loading.css">
 	</head>
 
 
 	<body id="body">
-		<div id="wait-box">
-			<span class="helper"></span><img id="loading-gif" alt="Loading..."/>
+		<div id="loading-box">
+			<span class="helper"></span><img id="loading-head" src="/img/transparent.png" class="frame frame-62" alt="Loading..."/>
 		</div> 
 		<script>
-			var DHTML = (document.getElementById || document.all || document.layers);
-			function getWaitBox(name) { 
-				if (document.getElementById) { 
-					return document.getElementById(name).style; 
-				} else if (document.all) { 
-					return document.all[name].style;
-				} else if (document.layers) { 
-					return document.layers[name]; 
-				} 
+			var currentFrame = 62, loadingPercent = 0, paused = true;
+			function loadHead() {
+				var endFrame = 62 - Math.round(loadingPercent/100*62);
+				if(paused) { // If the previous step is reached
+					paused = false;
+					loadFrame(endFrame);
+				} else { // Else wait to reach the previous step, check again in 50ms
+					setTimeout(loadHead,50);
+				}
 			}
-			function showWaitMessage(div,flag) { 
-				if (!DHTML) return; 
-				var x = getWaitBox(div); 
-				x.visibility = (flag) ? 'visible':'hidden';
-				return true; 
-			} 
-			document.getElementById("loading-gif").src = "/img/loading.gif";
-			showWaitMessage('wait-box', 1); 
+			function loadFrame(endFrame) {
+				if(currentFrame>endFrame) { // If we're not up-to-date
+					setTimeout(function() {
+						// One step forward...
+						document.getElementById("loading-head").className = 'frame frame-' + currentFrame--;
+						// ...and check again in 50ms
+						loadFrame(endFrame);
+					},50);
+				} else if(currentFrame==0) { // If we're up-to-date and at the end, hide the loading page
+					document.getElementById("loading-box").style['display'] = 'none';
+				} else { // If we're just up-to-date, get ready for another target percentage
+					paused = true;
+				}
+			}
 		</script>
 
 		<!-- --------------------------------------------------------------------------------------
@@ -66,6 +73,8 @@ redirect_from:
 		<header>
 			<img id="logo" src="/img/logo.png" />
 		</header>
+
+		<script type="text/javascript">loadingPercent = 10; loadHead();</script>
 
 		<!-- --------------------------------------------------------------------------------------
 			 --	CONTENT  																		 --
@@ -104,47 +113,8 @@ redirect_from:
 						<div class="node" id="academic1">
 							Node INSA
 						</div>
-						<div class="node" id="academic2">
-							Node INSA
-							<div class="node" id="academic2">
-								Node INSA
-							</div>
-							<div class="node" id="academic2">
-								Node INSA
-							</div>
-							<div class="node" id="academic2">
-								Node INSA
-							</div>
-						</div>
-						<div class="node" id="academic3">
-							Node INSA
-							<div class="node" id="academic31">
-								Node INSA
-							</div>
-							<div class="node" id="academic32">
-								Node INSA
-							</div>
-							<div class="node" id="academic33">
-								Node INSA
-							</div>
-							<div class="node" id="academic34">
-								Node INSA
-							</div>
-						</div>
 						<div class="node" id="academic4">
 							Node Université de Rouen
-						</div>
-						<div class="node" id="academic5">
-							Node UdeM
-							<div class="node" id="academic5">
-								Node UdeM
-							</div>
-							<div class="node" id="academic5">
-								Node UdeM
-							</div>
-							<div class="node" id="academic5">
-								Node UdeM
-							</div>
 						</div>
 					</div>
 				</div>
@@ -157,9 +127,15 @@ redirect_from:
 			</div>
 		</div>
 		
+		<script type="text/javascript">loadingPercent = 30; loadHead();</script>
+
 		<div id="network"></div>
 
+		<script type="text/javascript">loadingPercent = 50; loadHead();</script>
+
 		<div id="node-title-box"><h1 id="node-title" class="blurry">Title</h1></div>
+
+		<script type="text/javascript">loadingPercent = 70; loadHead();</script>
 
 		<!-- --------------------------------------------------------------------------------------
 			 --	FOOTER  																		 --
@@ -169,6 +145,8 @@ redirect_from:
 			<a class="btn btn-social-icon"><i class="fa fa-linkedin"></i></a>
 			<a class="btn btn-social-icon"><i class="fa fa-google-plus"></i></a>
 		</footer>
+
+		<script type="text/javascript">loadingPercent = 80; loadHead();</script>
 
 		<!-- --------------------------------------------------------------------------------------
 			 --	SCRIPTS 																		 --
@@ -226,11 +204,8 @@ redirect_from:
 		<script src="js/jg.js" type="text/javascript"></script>
 		<script src="js/main.js" type="text/javascript"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<script type="text/javascript">
-			setTimeout(function (){
-				showWaitMessage('wait-box', 0);
-			}, 1000);
-		</script>
+
+		<script type="text/javascript">loadingPercent = 100; loadHead();</script>
 	</body>
 
 </html>

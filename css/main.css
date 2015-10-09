@@ -19,7 +19,7 @@ div.dg.ac {
 	z-index: 2;
 }
 
-div#wait-box {
+div#loading-box {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -35,7 +35,7 @@ div#wait-box {
     height: 100%;
     vertical-align: middle;
 }
-div#wait-box img {
+div#loading-box img {
 	display:  inline-block;
 	vertical-align: middle;
 }
