@@ -8,10 +8,7 @@ var lens = 20, minLens = 10, maxLens = 50;
 
 init();
 animate();
-// History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
-// 	console.log("BEEEH");
-// 	selectNode();
-// });
+
 window.onpopstate = function() {
 	selectNode();
 };
@@ -23,7 +20,7 @@ function selectNode()
 	if(selectedNode != null && selectedNode !== oldSelectedNode) {
 		if(oldSelectedNode)
 			oldSelectedNode.unselect();
-		selectedNode.select();	
+		selectedNode.select();
 	}
 }
 
@@ -35,6 +32,9 @@ function init()
 
 	// CAMERA
 	container = document.getElementById( 'network' );
+	new ResizeSensor(container, function(el){
+		onWindowResize();
+	});
 	var SCREEN_WIDTH = container.offsetWidth;
 	var SCREEN_HEIGHT = container.offsetHeight;
 	var VIEW_ANGLE = 45;
@@ -102,14 +102,12 @@ function init()
 	document.addEventListener( 'click', onMouseClick, false );
 	document.addEventListener( 'mousemove', onMouseMove, false );
 	window.addEventListener( 'resize', onWindowResize , false );
-	
-	// $('div#network').hover(function(){$('div#content').css('top','100%');},function(){$('div#content').css('top','100%');});
 }
 
 function onMouseMove(event) {
 	oldMouse = mouse;
 	mouse.x = ( (event.clientX - $(container).position().left) / $(container).width() ) * 2 - 1;
-	mouse.y = - ( event.clientY / $(container).height() ) * 2 + 1;
+	mouse.y = -( ( event.clientY - $(container).position().top) / $(container).height() ) * 2 + 1;
 	hoverNode();
 }
 
@@ -138,7 +136,7 @@ function hoverNode() {
 
 function onMouseClick(event) {
 	mouse.x = ( (event.clientX - $(container).position().left) / $(container).width() ) * 2 - 1;
-	mouse.y = - ( event.clientY / $(container).height() ) * 2 + 1;
+	mouse.y = -( ( event.clientY - $(container).position().top) / $(container).height() ) * 2 + 1;
 	// MOUSE
 	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 	vector.unproject(camera);
@@ -159,7 +157,6 @@ function onMouseClick(event) {
 }
 
 function onWindowResize(){
-	container = document.getElementById( 'network' );
 	camera.aspect = container.offsetWidth / container.offsetHeight;
 	camera.updateProjectionMatrix();
 	renderer.setSize( container.offsetWidth, container.offsetHeight );

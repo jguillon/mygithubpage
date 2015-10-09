@@ -1,4 +1,4 @@
-// scene, camera and clock have to be global variables;
+// scene, camera, container and clock have to be global variables;
 
 var JG = {
 	REVISION: "2",
@@ -105,6 +105,8 @@ var JG = {
 		this.selected = true;
 		this.material.uniforms.color.value.setHex(JG.SELECTION_COLOR);
 		this.jqueryObject.show();
+		container.className = "sided";
+		$("#content").css("display","block");
 	};
 	this.unselect = function() {
 		this.selected = false;

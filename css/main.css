@@ -9,16 +9,20 @@ body, html {
 }
 div#network { 
 	position: fixed;
-	right: 0;
+	left: 0;
 	top: 0;
 	width: 100%;
 	height: 100%;
 	z-index: 4;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
 }
-div.dg.ac {
-	z-index: 2;
+div#network.sided {
+	top: 25%;
+	width: 50%;
+	height: 50%;
 }
-
 div#loading-box {
 	position: absolute;
 	left: 0;
@@ -76,16 +80,16 @@ div#content {
 div#node-title-box {
 	perspective: 10em;
 	pointer-events: none;
-	position: fixed;
+	position: absolute;
 	display: block;
 	text-align: center;
 	height: 20vmin;
 	width: 100%;
-	top: 70vmin;
+	top: 70%;
 	z-index: 3;
 }
 div#node-title-box h1 {
-	font-size: 70px;
+	font-size: 50px;
 	transform: rotateX(45deg);
 }
 
