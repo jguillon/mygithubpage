@@ -33,6 +33,7 @@ redirect_from:
 		<link rel="stylesheet" href="/css/bootstrap-social.css">
 		<link rel="stylesheet" href="/css/main.css">
 		<link rel="stylesheet" href="/css/sprite-loading.css">
+		<script src="js/snap.svg-min.js" type="text/javascript"></script>
 	</head>
 
 
@@ -71,7 +72,19 @@ redirect_from:
 			 --	HEADER  																		 --
 			 -------------------------------------------------------------------------------------- -->
 		<header>
-			<img id="logo" src="/img/logo.png" />
+			<img id="logo" src="/img/logoText_invert.png" />
+			<div id="menu-button">
+				<span class="si-icon si-icon-hamburger-cross" data-icon-name="hamburgerCross"></span>
+			</div>
+			<div id="menu" class="closed" style="right: -50vw;">
+				<nav>
+					<ul>
+						<li><a>A</a></li>
+						<li><a>B</a></li>
+						<li><a>C</a></li>
+					</ul>
+				</nav>
+			</div>
 		</header>
 
 		<script type="text/javascript">loadingPercent = 10; loadHead();</script>
@@ -140,9 +153,11 @@ redirect_from:
 			 --	FOOTER  																		 --
 			 -------------------------------------------------------------------------------------- -->
 		<footer>
+			<img id="logo_footer" src="/img/logo_invert.png" /><br/>
 			<a class="btn btn-social-icon"><i class="fa fa-twitter"></i></a>
 			<a class="btn btn-social-icon"><i class="fa fa-linkedin"></i></a>
-			<a class="btn btn-social-icon"><i class="fa fa-google-plus"></i></a>
+			<a class="btn btn-social-icon"><i class="fa fa-google-plus"></i></a><br/>
+			&copy; 2015 GUILLON Jeremy. All rights reserved.
 		</footer>
 
 		<script type="text/javascript">loadingPercent = 60; loadHead();</script>
@@ -194,6 +209,7 @@ redirect_from:
 		</script>
 		<script src="js/jquery.min.js" type="text/javascript"></script>
 		<script src="js/jquery.history.js" type="text/javascript"></script>
+		<script src="js/jquery.easing.js" type="text/javascript"></script>
 		<script src="js/three.min.js" type="text/javascript"></script>
 		<script src="js/three.orbitcontrols.js" type="text/javascript"></script>
 
@@ -204,7 +220,19 @@ redirect_from:
 		<script src="js/main.js" type="text/javascript"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-		<script type="text/javascript">loadingPercent = 100; loadHead();</script>
+		<script src="js/svgicons-config.js" type="text/javascript"></script>
+		<script src="js/svgicons.js" type="text/javascript"></script>
+
+		<script type="text/javascript">
+			loadingPercent = 100; 
+			loadHead();
+			var svgicon = new svgIcon( document.querySelector( '.si-icon-hamburger-cross' ), svgIconConfig, 
+					{ easing : mina.elastic, 
+					  speed: 600, 
+					  size : { w : 45, h : 45 },
+					  onToggle : toggleMenu } 
+				);
+		</script>
 	</body>
 
 </html>

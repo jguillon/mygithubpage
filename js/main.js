@@ -13,6 +13,15 @@ window.onpopstate = function() {
 	selectNode();
 };
 
+function toggleMenu() {
+	var div = $('#menu');
+	div.toggleClass('closed');
+	if(div.hasClass('closed'))
+		div.animate({ right: '-50vw' }, 600, 'easeOutElastic');
+	else
+		div.animate({ right: '-20vw' }, 600, 'easeOutElastic');
+}
+
 function selectNode()
 {
 	oldSelectedNode = selectedNode;
@@ -79,24 +88,6 @@ function init()
 	graph.layout.init();
 
 	selectNode();
-
-	// SKYDOME
-	// var urlPrefix = "/img/skybox_";
-	// var urls = [ urlPrefix + "right1.png", urlPrefix + "left2.png",
-	// 	urlPrefix + "top3.png", urlPrefix + "bottom4.png",
-	// 	urlPrefix + "front5.png", urlPrefix + "back6.png" ];
-	// var textureCube = THREE.ImageUtils.loadTextureCube( urls );
-	// var shader = THREE.ShaderLib["cube"];
-	// shader.uniforms['tCube'].value = textureCube;   // textureCube has been init before
-	// var material = new THREE.ShaderMaterial({
-	// 	fragmentShader: shader.fragmentShader,
-	// 	vertexShader: shader.vertexShader,
-	// 	uniforms: shader.uniforms,
-	// 	depthwrite : false,
-	// 	side: THREE.BackSide
-	// });
-	// skybox = new THREE.Mesh( new THREE.BoxGeometry( 1000, 1000, 1000), material );
-	// scene.add(skybox);
 
 	// MOUSE 
 	document.addEventListener( 'click', onMouseClick, false );

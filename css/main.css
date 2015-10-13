@@ -7,6 +7,16 @@ body, html {
 	background-image: -o-radial-gradient(#2B928E, #076965);
 	background-image: radial-gradient(#2B928E, #076965);
 }
+
+div#menu {
+	background-color: white;
+    position: absolute;
+    width: 50vw;
+    height: 100vh;
+    right: 0;
+    top: 0;
+}
+
 div#network { 
 	position: fixed;
 	left: 0;
@@ -47,14 +57,18 @@ div#loading-box img {
 header {
 	position: relative;
 	display: block;
-	z-index: 3;
+	z-index: 5;
 	top: 0;
 	left: 0;
+}
+img#logo_footer {
+    height: 5vh;
+    display: inline-block;
 }
 img#logo {
 	transform: rotate(0.001deg); /* Firefox bad png rendering hack */
 	margin: 5vmin;
-	height: 10vmin;
+	height: 5vmin;
 }
 h1, h2, h3{
 	text-align: center;
@@ -149,6 +163,19 @@ div#node-title-box h1 {
 	background: #28a2ee;	
 }
 ******************************/
+div#menu-button {
+	position: absolute;
+	margin: 5vmin;
+	top: 0;
+	right: 0;
+	z-index: 10;
+}
+div#menu-button span {
+	display: block;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
 
 /* Source: http://simurai.com/lab/2010/06/10/i-love-blur/ */
 h1.blurry {
