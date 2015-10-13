@@ -33,13 +33,12 @@ redirect_from:
 		<link rel="stylesheet" href="/css/bootstrap-social.css">
 		<link rel="stylesheet" href="/css/main.css">
 		<link rel="stylesheet" href="/css/sprite-loading.css">
-		<script src="js/snap.svg-min.js" type="text/javascript"></script>
 	</head>
 
 
 	<body id="body">
 		<div id="loading-box">
-			<span class="helper"></span><img id="loading-head" src="/img/transparent.png" class="frame frame-62" alt="Loading..."/>
+			<span class="helper"></span><img id="loading-head" src="/img/transparent.png" class="no-frame" alt="Loading..."/>
 		</div> 
 		<script>
 			var currentFrame = 62, loadingPercent = 0, paused = true;
@@ -61,7 +60,7 @@ redirect_from:
 						loadFrame(endFrame);
 					},50);
 				} else if(currentFrame==0) { // If we're up-to-date and at the end, hide the loading page
-					document.getElementById("loading-box").style['display'] = 'none';
+					$('#loading-box').fadeOut();
 				} else { // If we're just up-to-date, get ready for another target percentage
 					paused = true;
 				}
@@ -153,11 +152,15 @@ redirect_from:
 			 --	FOOTER  																		 --
 			 -------------------------------------------------------------------------------------- -->
 		<footer>
-			<img id="logo_footer" src="/img/logo_invert.png" /><br/>
-			<a class="btn btn-social-icon"><i class="fa fa-twitter"></i></a>
-			<a class="btn btn-social-icon"><i class="fa fa-linkedin"></i></a>
-			<a class="btn btn-social-icon"><i class="fa fa-google-plus"></i></a><br/>
-			&copy; 2015 GUILLON Jeremy. All rights reserved.
+			<img id="logo-footer" src="/img/logo_invert.png" /><br/>
+			<p id="social-buttons">
+				<a class="btn btn-social-icon"><i class="fa fa-twitter"></i></a>
+				<a class="btn btn-social-icon"><i class="fa fa-linkedin"></i></a>
+				<a class="btn btn-social-icon"><i class="fa fa-google-plus"></i></a><br/>
+			</p>
+			<p id="rights">
+				All rights reserved &copy; 2015 GUILLON Jeremy - Designed from scratch with &hearts;
+			</p>
 		</footer>
 
 		<script type="text/javascript">loadingPercent = 60; loadHead();</script>
@@ -165,7 +168,7 @@ redirect_from:
 		<!-- --------------------------------------------------------------------------------------
 			 --	SCRIPTS 																		 --
 			 -------------------------------------------------------------------------------------- -->
-		<script id="vertexShader" type="x-shader/x-vertex">
+		<script id="vertexShaderNode" type="x-shader/x-vertex">
 			uniform vec3 viewVector;
 			uniform float c;
 			uniform float p;
@@ -179,7 +182,7 @@ redirect_from:
 			    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 			}
 		</script>
-		<script id="fragmentShader" type="x-shader/x-vertex"> 
+		<script id="fragmentShaderNode" type="x-shader/x-vertex"> 
 			uniform vec3 color;
 			varying float intensity;
 			void main() 
@@ -188,7 +191,7 @@ redirect_from:
 			    gl_FragColor = vec4( glow, intensity );
 			}
 		</script>
-		<script type="x-shader/x-vertex" id="vertexshader2">
+		<script id="vertexShaderEdge" type="x-shader/x-vertex">
 			uniform float amplitude;
 			attribute vec3 displacement;
 			attribute vec3 customColor;
@@ -199,7 +202,7 @@ redirect_from:
 				gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
 			}
 		</script>
-		<script type="x-shader/x-fragment" id="fragmentshader2">
+		<script id="fragmentShaderEdge" type="x-shader/x-fragment">
 			uniform vec3 color;
 			uniform float opacity;
 			varying vec3 vColor;
@@ -207,6 +210,7 @@ redirect_from:
 				gl_FragColor = vec4( vColor * color, opacity );
 			}
 		</script>
+
 		<script src="js/jquery.min.js" type="text/javascript"></script>
 		<script src="js/jquery.history.js" type="text/javascript"></script>
 		<script src="js/jquery.easing.js" type="text/javascript"></script>
@@ -220,6 +224,7 @@ redirect_from:
 		<script src="js/main.js" type="text/javascript"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+		<script src="js/snap.svg-min.js" type="text/javascript"></script>
 		<script src="js/svgicons-config.js" type="text/javascript"></script>
 		<script src="js/svgicons.js" type="text/javascript"></script>
 

@@ -1,11 +1,13 @@
 body, html {
 	width:100%;
 	height:100%;
-	background-image: -webkit-radial-gradient(#2B928E, #076965);
-	background-image: -moz-radial-gradient(#2B928E, #076965);
-	background-image: -ms-radial-gradient(#2B928E, #076965);
-	background-image: -o-radial-gradient(#2B928E, #076965);
-	background-image: radial-gradient(#2B928E, #076965);
+	background: -webkit-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7)), url('/img/stars.jpg');
+	background: -moz-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7)), url('/img/stars.jpg');
+	background: -ms-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7)), url('/img/stars.jpg');
+	background: -o-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7)), url('/img/stars.jpg');
+	background: radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7)), url('/img/stars.jpg');
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
 div#menu {
@@ -49,9 +51,10 @@ div#loading-box {
     height: 100%;
     vertical-align: middle;
 }
-div#loading-box img {
+div#loading-box img.no-frame {
 	display:  inline-block;
 	vertical-align: middle;
+	opacity: 0;
 }
 
 header {
@@ -60,10 +63,6 @@ header {
 	z-index: 5;
 	top: 0;
 	left: 0;
-}
-img#logo_footer {
-    height: 5vh;
-    display: inline-block;
 }
 img#logo {
 	transform: rotate(0.001deg); /* Firefox bad png rendering hack */
@@ -186,28 +185,37 @@ h1.blurry {
 @-moz-document url-prefix() { .txt { text-shadow: #222 0 0 20px; } } /* FF fix */
 
 /*#node-title-box:hover h1.blurry {
-	text-shadow: #fff 0 0 2px;
-	transition: text-shadow 1s cubic-bezier(0, 0.75, 0, 1);
-	}*/
-	/***********************************************************/
+text-shadow: #fff 0 0 2px;
+transition: text-shadow 1s cubic-bezier(0, 0.75, 0, 1);
+}*/
+/***********************************************************/
 
-	footer {
-		display: inline-block;
-		position: fixed;
-		width: 100%;
-		text-align: center;
-		z-index: 5;
-		bottom: 5vmin;
-	}
-	a.btn-social-icon {
-		color: #fff;
-	}
-	.nopadding {
-		padding: 0 !important;
-		margin: 0 !important;
-	}
-	h1#title {
-		display: inline-block;
-		font-size: 3vh;
-		margin-top: 4vh;
-	}
+footer {
+	display: inline-block;
+	position: fixed;
+	width: 100%;
+	text-align: center;
+	z-index: 5;
+	bottom: 1vmin;
+}
+img#logo-footer {
+    height: 5vh;
+    display: inline-block;
+}
+a.btn-social-icon {
+	color: #fff;
+}
+.nopadding {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+h1#title {
+	display: inline-block;
+	font-size: 3vh;
+	margin-top: 4vh;
+}
+
+footer p#rights {
+	color: #2E7179;
+    font-size: 1.5vmin;	
+}

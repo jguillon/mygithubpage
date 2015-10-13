@@ -72,8 +72,8 @@ var JG = {
 			color: { type: "c", value: new THREE.Color(JG.DEFAULT_COLOR) },
 			viewVector: { type: "v3", value: camera.position }
 		},
-		vertexShader:   document.getElementById( 'vertexShader'   ).textContent,
-		fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
+		vertexShader:   document.getElementById( 'vertexShaderNode'   ).textContent,
+		fragmentShader: document.getElementById( 'fragmentShaderNode' ).textContent,
 		side: THREE.BackSide,
 		blending: THREE.AdditiveBlending,
 		transparent: true
@@ -170,8 +170,8 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 	var material = new THREE.ShaderMaterial( {
 		uniforms:       uniforms,
 		attributes:     attributes,
-		vertexShader:   document.getElementById( 'vertexshader2' ).textContent,
-		fragmentShader: document.getElementById( 'fragmentshader2' ).textContent,
+		vertexShader:   document.getElementById( 'vertexShaderEdge' ).textContent,
+		fragmentShader: document.getElementById( 'fragmentShaderEdge' ).textContent,
 		blending:       THREE.AdditiveBlending,
 		depthTest:      false,
 		transparent:    true,
