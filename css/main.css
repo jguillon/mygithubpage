@@ -8,6 +8,7 @@ body, html {
 	background: radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7)), url('/img/stars.jpg');
 	background-size: 100% 100%;
     background-repeat: no-repeat;
+    overflow: hidden;
 }
 
 div#menu {

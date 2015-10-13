@@ -52,7 +52,7 @@ function init()
 	var FAR = 3000;
 	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 	scene.add(camera);
-	camera.position.set(0,200,0);
+	camera.position.set(0,0,500);
 	camera.lookAt(scene.position);	
 	camera.setLens(lens);
 
@@ -64,10 +64,12 @@ function init()
 
 	// CONTROLS
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
-	controls.addEventListener( 'change', render );
-	controls.userZoom = false;
-	renderer.domElement.addEventListener( 'mousewheel', onMouseWheel, false );
-	renderer.domElement.addEventListener( 'DOMMouseScroll', onMouseWheel, false );
+	controls.enableDamping = true;
+	controls.enableZoom = true;
+	controls.minPolarAngle = - Infinity;
+	controls.maxPolarAngle = Infinity;
+	controls.minDistance = 100;
+	controls.maxDistance = 500;
 
 	// NETWORK
 	graph = new JG.Graph();
@@ -169,8 +171,8 @@ function onMouseWheel( event ) {
 function animate() 
 {
 	requestAnimationFrame( animate );
-	render();		
 	update();
+	render();		
 }
 
 function update()
@@ -180,8 +182,8 @@ function update()
 	controls.update();
 
 	// CAMERA AUTO-ROTATION ANIMATION
-	controls.rotateLeft(mouse.x/1000);
-	controls.rotateUp(mouse.y/1000);
+	// controls.rotateLeft(mouse.x/1000);
+	// controls.rotateUp(mouse.y/1000);
 
 	hoverNode();
 
@@ -190,6 +192,5 @@ function update()
 
 function render() 
 {
-	renderer.clear();
 	renderer.render( scene, camera );
 }
