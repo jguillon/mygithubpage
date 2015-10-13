@@ -68,6 +68,8 @@ img#logo {
 	transform: rotate(0.001deg); /* Firefox bad png rendering hack */
 	margin: 5vmin;
 	height: 5vmin;
+	min-height: 35px;
+	padding: 5px 0;
 }
 h1, h2, h3{
 	text-align: center;
