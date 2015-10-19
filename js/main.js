@@ -4,7 +4,7 @@ var container, scene, camera, renderer, controls, stats, projector, graph;
 var mouse = { x: 0, y: 0 }, oldMouse = { x: 0, y: 0 }, selectedNode, hoveredNode;
 var clock = new THREE.Clock();
 var nodeRadius = 100;
-var lens = 20, minLens = 10, maxLens = 50;
+var lens = 40, minLens = 10, maxLens = 50;
 
 init();
 animate();
@@ -41,9 +41,7 @@ function init()
 
 	// CAMERA
 	container = document.getElementById( 'network' );
-	new ResizeSensor(container, function(el){
-		onWindowResize();
-	});
+	new ResizeSensor(container, onWindowResize);
 	var SCREEN_WIDTH = container.offsetWidth;
 	var SCREEN_HEIGHT = container.offsetHeight;
 	var VIEW_ANGLE = 45;
@@ -65,7 +63,7 @@ function init()
 	// CONTROLS
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
 	controls.enableDamping = true;
-	controls.enableZoom = true;
+	controls.enableZoom = false;
 	controls.minPolarAngle = - Infinity;
 	controls.maxPolarAngle = Infinity;
 	controls.minDistance = 100;
@@ -100,7 +98,7 @@ function init()
 function onMouseMove(event) {
 	oldMouse = mouse;
 	mouse.x = ( (event.clientX - $(container).position().left) / $(container).width() ) * 2 - 1;
-	mouse.y = -( ( event.clientY - $(container).position().top) / $(container).height() ) * 2 + 1;
+	mouse.y = -( ( event.clientY - ($(container).offset().top - $(window).scrollTop())) / $(container).height() ) * 2 + 1;
 	hoverNode();
 }
 
@@ -129,7 +127,7 @@ function hoverNode() {
 
 function onMouseClick(event) {
 	mouse.x = ( (event.clientX - $(container).position().left) / $(container).width() ) * 2 - 1;
-	mouse.y = -( ( event.clientY - $(container).position().top) / $(container).height() ) * 2 + 1;
+	mouse.y = -( ( event.clientY - ($(container).offset().top - $(window).scrollTop())) / $(container).height() ) * 2 + 1;
 	// MOUSE
 	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 	vector.unproject(camera);
@@ -155,19 +153,6 @@ function onWindowResize(){
 	renderer.setSize( container.offsetWidth, container.offsetHeight );
 }
 
-function onMouseWheel( event ) {
-	var delta = 0;
-	if(event.wheelDelta ) { // WebKit / Opera / Explorer 9
-		delta = event.wheelDelta;
-	} else if ( event.detail ) { // Firefox
-		delta = - event.detail;
-	}
-	lens += delta/10;
-	if(lens<minLens) lens = minLens;
-	if(lens>maxLens) lens = maxLens;
-	camera.setLens(lens);
-}
-
 function animate() 
 {
 	requestAnimationFrame( animate );
@@ -182,8 +167,8 @@ function update()
 	controls.update();
 
 	// CAMERA AUTO-ROTATION ANIMATION
-	// controls.rotateLeft(mouse.x/1000);
-	// controls.rotateUp(mouse.y/1000);
+	controls.constraint.rotateLeft(mouse.x/1000);
+	controls.constraint.rotateUp(mouse.y/1000);
 
 	hoverNode();
 

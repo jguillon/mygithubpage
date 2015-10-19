@@ -1,43 +1,48 @@
 body, html {
-	width:100%;
-	height:100%;
-	background: -webkit-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7)), url('/img/stars.jpg');
-	background: -moz-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7)), url('/img/stars.jpg');
-	background: -ms-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7)), url('/img/stars.jpg');
-	background: -o-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7)), url('/img/stars.jpg');
-	background: radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7)), url('/img/stars.jpg');
-	background-size: 100% 100%;
-    background-repeat: no-repeat;
-    overflow: hidden;
+    background-color: rgb(12,36,22);
 }
 
 div#menu {
 	background-color: white;
-    position: absolute;
+    position: fixed;
     width: 50vw;
     height: 100vh;
     right: 0;
     top: 0;
 }
 
-div#network { 
-	position: fixed;
-	left: 0;
-	top: 0;
+div#network {
+/*	background: -webkit-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7));
+	background: -moz-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7));
+	background: -ms-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7)); 
+	background: -o-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7));
+	background: radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7));*/
 	width: 100%;
 	height: 100%;
-	z-index: 4;
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	transition: all 0.3s;
+	-webkit-transition:  height 0.6s;
+	-moz-transition: height 0.6s;
+	transition: height 0.6s;
+	position: fixed;
 }
-div#network.sided {
-	top: 25%;
-	width: 50%;
-	height: 50%;
+div#network.large {
+	height: 100%;
+}
+div#network.small {
+	height: 15%;
+}
+header.large {
+	height: 100%;
+	position: relative;
+}
+header.small ~ div#content {
+	margin-top: 100vh;
+}
+header.small {
+	height: 15%;
+	position: fixed;
 }
 div#loading-box {
-	position: absolute;
+	position: fixed;
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -59,19 +64,27 @@ div#loading-box img.no-frame {
 }
 
 header {
-	position: relative;
 	display: block;
-	z-index: 5;
+	z-index: 3;
 	top: 0;
 	left: 0;
+	width:100%;
+	height:100%;
+	background: url('/img/stars.jpg') center 0 no-repeat fixed;
+	background-size: 100% 100%;
 }
 img#logo {
+	position: fixed;
+	top: 0;
+	left: 0;
 	transform: rotate(0.001deg); /* Firefox bad png rendering hack */
 	margin: 5vmin;
 	height: 5vmin;
 	min-height: 35px;
 	padding: 5px 0;
+	z-index: 99; /* Always on top */
 }
+
 h1, h2, h3{
 	text-align: center;
 	color: #9B7269;	
@@ -79,18 +92,13 @@ h1, h2, h3{
 	font-family: 'Poiret One', cursive;
 }
 div#content {
+	display: block;
 	font-family: 'Poiret One', cursive;
-	font-size: larger;
-	color: white;
-	position: fixed;
-	z-index: 5;
-	width: 40vw;
-	height: 70%;
-	top: 10vh;
-	padding: 1vh 2vw;
-	overflow: scroll;
-	text-align: center;
-	left: 50vw;
+    font-size: larger;
+    color: gray;
+    background-color: white;
+    padding: 1vh 2vw;
+    text-align: center;
 }
 
 div#node-title-box {
@@ -166,11 +174,11 @@ div#node-title-box h1 {
 }
 ******************************/
 div#menu-button {
-	position: absolute;
+	position: fixed;
 	margin: 5vmin;
 	top: 0;
 	right: 0;
-	z-index: 10;
+	z-index: 99; /* Always on top */
 }
 div#menu-button span {
 	display: block;
@@ -178,28 +186,11 @@ div#menu-button span {
 	background-repeat: no-repeat;
 	background-position: center center;
 }
-
-/* Source: http://simurai.com/lab/2010/06/10/i-love-blur/ */
-h1.blurry {
-	color: hsla(0,0%,0%,0);
-	text-shadow: #222 0 0 60px;
-	transition: text-shadow 2s cubic-bezier(0, 1, 0, 1);
-}
-@-moz-document url-prefix() { .txt { text-shadow: #222 0 0 20px; } } /* FF fix */
-
-/*#node-title-box:hover h1.blurry {
-text-shadow: #fff 0 0 2px;
-transition: text-shadow 1s cubic-bezier(0, 0.75, 0, 1);
-}*/
-/***********************************************************/
-
 footer {
-	display: inline-block;
-	position: fixed;
-	width: 100%;
+	display: block;
 	text-align: center;
 	z-index: 5;
-	bottom: 1vmin;
+	margin: 3vmin;
 }
 img#logo-footer {
     height: 5vh;

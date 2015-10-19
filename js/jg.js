@@ -105,7 +105,6 @@ var JG = {
 		this.selected = true;
 		this.material.uniforms.color.value.setHex(JG.SELECTION_COLOR);
 		this.jqueryObject.show();
-		container.className = "sided";
 		$("#content").css("display","block");
 	};
 	this.unselect = function() {
@@ -119,13 +118,12 @@ var JG = {
 	this.hover = function() {
 		this.hovered = true;
 		this.icon.visible = true;
-		JG.HOVERED_TITLE.html(this.jqueryObject.html());
-		JG.HOVERED_TITLE.css("text-shadow","#fff 0 0 2px");
+		JG.HOVERED_TITLE.html(this.jqueryObject.attr("title"));
 		if(this.selected)
 			this.material.uniforms.color.value.setHex(JG.HOVER_SELECTION_COLOR);
 		else
 			this.material.uniforms.color.value.setHex(JG.HOVER_COLOR);
-	}
+	};
 	this.unhover = function() {
 		this.hovered = false;
 		this.icon.visible = false;
@@ -134,7 +132,7 @@ var JG = {
 			this.material.uniforms.color.value.setHex(JG.SELECTION_COLOR);
 		else
 			this.material.uniforms.color.value.setHex(JG.DEFAULT_COLOR);
-	}
+	};
 	this.update = function() {
 		this.icon.position.set(this.position.x,this.position.y,this.position.z);
 		this.material.uniforms.viewVector.value = new THREE.Vector3().subVectors( camera.position, this.position );
@@ -230,11 +228,12 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 	// Attributes ___________________________________________________
 	this.attraction_multiplier = options.attraction || 5;
 	this.repulsion_multiplier = options.repulsion || 0.75;
-	this.max_iterations = options.iterations || 200000;
+	this.max_iterations = options.iterations || 2000;
 	this.graph = graph;
 	this.width = options.width || 50;
 	this.height = options.height || 50;
 	this.finished = false;
+	this.pause = true;
 
 
 	// Methods ______________________________________________________
@@ -248,7 +247,7 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 		repulsion_constant = this.repulsion_multiplier * forceConstant;
 	};
 	this.update = function() {
-		if(it < this.max_iterations && temperature > 0.000001) {
+		if(it < this.max_iterations && temperature > 0.000001 && !this.pause) {
 			// calculate repulsion
 			for(var i=0; i < nodes_length; i++) {
 				var node_v = graph.nodes[i];
@@ -340,14 +339,20 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 			}
 			temperature *= (1 - (it / this.max_iterations));
 			it++;
-		} else {
+		} else if(it >= this.max_iterations && temperature <= 0.000001) {
 			this.finished = true;
 			return false;
 		}
 		return true;
 	};
+	this.play = function() {
+		this.pause = false;
+	};
+	this.pause = function() {
+		this.pause = true;
+	};
 	this.stop = function() {
 		it = this.max_iterations;
-	}
+	};
 
 };
