@@ -30,6 +30,7 @@ redirect_from:
 		<link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 		<link rel="stylesheet" href="/css/bootstrap-social.css">
 		<link rel="stylesheet" href="/css/main.css">
 		<link rel="stylesheet" href="/css/sprite-loading.css">
@@ -79,13 +80,9 @@ redirect_from:
 			<div id="menu-button">
 				<span class="si-icon si-icon-hamburger-cross" data-icon-name="hamburgerCross"></span>
 			</div>
-			<div id="menu" class="closed" style="right: -50vw;">
-				<nav>
-					<ul>
-						<li><a>A</a></li>
-						<li><a>B</a></li>
-						<li><a>C</a></li>
-					</ul>
+			<div id="menu" class="closed" style="right: -70vmin;">
+				<nav class="cl-effect-10">
+					<ul id="root-node-menu"></ul>
 				</nav>
 			</div>
 		</header>
@@ -96,12 +93,12 @@ redirect_from:
 			 --	CONTENT  																		 --
 			 -------------------------------------------------------------------------------------- -->
 		<div id="content" class="waypoint">
-			<div class="node" id="root-node">
+			<div class="node" id="root-node" title="GUILLON Jeremy">
 				<h1>Who am I ?</h1>
 				I am Jeremy GUILLON, a PhD student at the <a href="http://icm-institute.org/en/">Brain and Spine Institute (ICM)</a>
-				<div class="node" id="cv">
+				<div class="node" id="cv" title="Curriculum Vitae">
 					Node cv
-					<div class="node" id="professional" title="professional">
+					<div class="node" id="professional" title="Professional Experiences">
 						<h1>Tutorial fdhjfjks</h1>
 						<h2>First part</h2>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet, augue ut eleifend sodales, odio nisl iaculis magna, congue finibus ante lorem non diam. Nullam pharetra massa vitae tincidunt malesuada. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam auctor eget arcu sit amet laoreet. Morbi efficitur, urna sit amet pellentesque egestas, metus elit porttitor dui, vitae ornare mauris justo at nisl. Nam quis condimentum nulla. Suspendisse dapibus sapien at purus scelerisque, eget imperdiet nisi varius. Phasellus sed elit et lectus aliquet pharetra vitae non metus. Ut condimentum est vel sem porta, eget pharetra arcu ullamcorper. Aenean sed sapien ac nisi dictum ultrices sed eget felis. Quisque sit amet massa vitae velit congue aliquam sed quis augue. In tempus quis nibh vitae vestibulum. Proin tristique ipsum eget felis mattis fermentum. Donec pretium lacus est, ac sagittis metus sodales quis. Fusce porta, magna in elementum laoreet, turpis nibh auctor sapien, vel vehicula diam augue sed quam.</p>
@@ -125,12 +122,12 @@ redirect_from:
 
 						<p>Phasellus elementum elit a lobortis suscipit. Aenean iaculis felis vitae odio aliquam ultrices. Suspendisse sit amet nisi augue. Praesent et molestie felis, et suscipit mi. Quisque in hendrerit ante. Nullam ultricies dui auctor, commodo nisl nec, molestie sapien. Phasellus purus velit, maximus in fermentum eget, consequat in augue. Suspendisse hendrerit tortor magna, ullamcorper imperdiet urna aliquet quis. Aenean eget semper elit. Donec sit amet ex vitae purus aliquam varius. Nulla vel dolor sit amet diam imperdiet venenatis. Curabitur felis purus, pellentesque et pellentesque quis, efficitur non lectus.</p>
 					</div>
-					<div class="node" id="academic" title="academic">
+					<div class="node" id="academic" title="Academic Experiences">
 						Node academic
-						<div class="node" id="academic1" title="academic1">
+						<div class="node" id="academic1" title="National Institute of Applied Sciences">
 							Node INSA
 						</div>
-						<div class="node" id="academic4" title="academic4">
+						<div class="node" id="academic4" title="University of Rouen">
 							Node Université de Rouen
 						</div>
 					</div>
@@ -217,6 +214,8 @@ redirect_from:
 		<script src="js/jquery.waypoint.js" type="text/javascript"></script>
 		<script src="js/three.min.js" type="text/javascript"></script>
 		<script src="js/three.orbitcontrols.js" type="text/javascript"></script>
+
+		<script src="js/modernizr.custom.js"></script>
 
 		<script src="js/ResizeSensor.js"></script>
 		<script src="js/ElementQueries.js"></script>

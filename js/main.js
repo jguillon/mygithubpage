@@ -17,9 +17,9 @@ function toggleMenu() {
 	var div = $('#menu');
 	div.toggleClass('closed');
 	if(div.hasClass('closed'))
-		div.animate({ right: '-50vw' }, 600, 'easeOutElastic');
+		div.animate({ right: '-70vmin' }, 600, 'easeOutElastic');
 	else
-		div.animate({ right: '-20vw' }, 600, 'easeOutElastic');
+		div.animate({ right: '-20vmin' }, 600, 'easeOutElastic');
 }
 
 function selectNode()
@@ -79,6 +79,7 @@ function init()
 		childrenNodes = parentNode.children('.node');
 		for(i=0; i<childrenNodes.length; i++) {
 			nodesToCheck.push($(childrenNodes[i]));
+			addMenuEntry(parentNode,$(childrenNodes[i]));
 			graph.addNode(scene,$(childrenNodes[i]));
 			graph.addEdge(scene,graph.nodes[iParentNode],graph.nodes[graph.nodes.length-1]);
 		}
@@ -93,6 +94,13 @@ function init()
 	document.addEventListener( 'click', onMouseClick, false );
 	document.addEventListener( 'mousemove', onMouseMove, false );
 	window.addEventListener( 'resize', onWindowResize , false );
+}
+
+function addMenuEntry(parent,child) {
+	if($('#'+parent.attr('id')+'-menu').length == 0) {
+		$('#'+parent.attr('id')+'-menu-entry').append('<ul id="'+parent.attr('id')+'-menu"></ul>');
+	}
+	$('#'+parent.attr('id')+'-menu').append('<li id="'+child.attr('id')+'-menu-entry'+'"><a href="#'+child.attr('id')+'" data-hover="'+child.attr('title')+'"><span>'+child.attr('title')+'</span></a></li>');
 }
 
 function onMouseMove(event) {
