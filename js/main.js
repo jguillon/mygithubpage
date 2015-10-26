@@ -16,10 +16,15 @@ window.onpopstate = function() {
 function toggleMenu() {
 	var div = $('#menu');
 	div.toggleClass('closed');
-	if(div.hasClass('closed'))
+	if(div.hasClass('closed')) { // Closing menu
+		if(svgicon.toggled)
+			svgicon.toggle(true)
 		div.animate({ right: '-70vmin' }, 600, 'easeOutElastic');
-	else
+	} else { // Opened menu
+		if(!svgicon.toggled)
+			svgicon.toggle(true)
 		div.animate({ right: '-20vmin' }, 600, 'easeOutElastic');
+	}
 }
 
 function selectNode()

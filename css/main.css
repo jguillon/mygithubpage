@@ -1,5 +1,5 @@
 body, html {
-	background-color: rgb(12,36,22);
+
 }
 
 div#menu {
@@ -301,7 +301,8 @@ footer {
 	display: block;
 	text-align: center;
 	z-index: 5;
-	margin: 3vmin;
+	padding: 3vmin;
+	background-color: black;
 }
 img#logo-footer {
 	height: 5vh;
