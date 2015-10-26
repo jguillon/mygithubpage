@@ -1,16 +1,16 @@
 body, html {
-    background-color: rgb(12,36,22);
+	background-color: rgb(12,36,22);
 }
 
 div#menu {
 	font-family: 'Poiret One', monospace;
 	background-color: white;
-    position: fixed;
-    width: 70vmin;
+	position: fixed;
+	width: 70vmin;
 	/*min-width: 70vmin;*/
-    height: 100vh;
-    right: 0;
-    top: 0;
+	height: 100vh;
+	right: 0;
+	top: 0;
 }
 
 div#menu nav {
@@ -20,7 +20,7 @@ div#menu nav {
 	width: 50vmin;
 }
 div#menu nav ul {
-  	list-style-type: none;
+	list-style-type: none;
 	margin: 0;
 	padding-left: 0;
 }
@@ -72,9 +72,9 @@ div#loading-box {
 	line-height: 100vh;
 }
 .helper {
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
 }
 div#loading-box img.no-frame {
 	display:  inline-block;
@@ -113,37 +113,87 @@ h1, h2, h3{
 div#content {
 	display: block;
 	font-family: 'Poiret One', sans-serif;
-    font-size: larger;
-    color: gray;
-    background-color: white;
-    padding: 5vh 15vw;
-    text-align: center;
+	font-size: larger;
+	color: gray;
+	background-color: white;
+	padding: 5vh 15vw;
+	text-align: center;
 }
 
 div#node-title-box {
-	perspective: 10em;
 	pointer-events: none;
 	position: absolute;
 	display: block;
 	text-align: center;
-	height: 20vmin;
 	width: 100%;
-	top: 70%;
-	z-index: 3;
 }
 div#node-title-box h1 {
-	font-size: 50px;
-	transform: rotateX(45deg);
+	font-size: 30px;
+	margin: 5vmin;
+	display: inline-block;
+	position: relative;
 }
 
+/***********************/
+/* Kukuri, Source: http://tympanus.net/Development/TextStylesHoverEffects/ */
+.kukuri {
+	text-transform: uppercase;
+	/*font-weight: 900;*/
+	overflow: hidden;
+	/*line-height: 0.75;*/
+	color: transparent;
+}
+
+.kukuri-hover {
+	color: transparent;
+}
+
+.kukuri::after {
+	content: '';
+	position: absolute;
+	height: 1vmin;
+	width: 100%;
+	top: 50%;
+	margin-top: -8px;
+	right: 0;
+	background: rgb(186, 255, 255);
+	-webkit-transform: translate3d(-100%,0,0);
+	transform: translate3d(-100%,0,0);
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+.kukuri-hover::after {
+	-webkit-transform: translate3d(100%,0,0);
+	transform: translate3d(100%,0,0);
+}
+
+.kukuri::before {
+	content: attr(data-letters);
+	position: absolute;
+	z-index: 2;
+	overflow: hidden;
+	color: #fff;
+	white-space: nowrap;
+	width: 0%;
+	-webkit-transition: width 0.4s 0.3s;
+	transition: width 0.4s 0.3s;
+}
+
+.kukuri-hover::before {
+	width: 100%;
+}
+/***********************/
 
 /******************************/
 *,
 *:after,
 *::before {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
@@ -236,7 +286,7 @@ nav ul ul ul ul a::before { padding-left: 8vw; }
 
 div#menu-button {
 	position: fixed;
-	margin: 5vmin;
+	margin: 4vmin 5vmin;
 	top: 0;
 	right: 0;
 	z-index: 99; /* Always on top */
@@ -254,8 +304,8 @@ footer {
 	margin: 3vmin;
 }
 img#logo-footer {
-    height: 5vh;
-    display: inline-block;
+	height: 5vh;
+	display: inline-block;
 }
 a.btn-social-icon {
 	color: #fff;
@@ -272,5 +322,5 @@ h1#title {
 
 footer p#rights {
 	color: #2E7179;
-    font-size: 1.5vmin;	
+	font-size: 1.5vmin;	
 }

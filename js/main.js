@@ -64,6 +64,7 @@ function init()
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
 	controls.enableDamping = true;
 	controls.enableZoom = false;
+	controls.enableKeys = false;
 	controls.minPolarAngle = - Infinity;
 	controls.maxPolarAngle = Infinity;
 	controls.minDistance = 100;
@@ -100,7 +101,7 @@ function addMenuEntry(parent,child) {
 	if($('#'+parent.attr('id')+'-menu').length == 0) {
 		$('#'+parent.attr('id')+'-menu-entry').append('<ul id="'+parent.attr('id')+'-menu"></ul>');
 	}
-	$('#'+parent.attr('id')+'-menu').append('<li id="'+child.attr('id')+'-menu-entry'+'"><a href="#'+child.attr('id')+'" data-hover="'+child.attr('title')+'"><span>'+child.attr('title')+'</span></a></li>');
+	$('#'+parent.attr('id')+'-menu').append('<li id="'+child.attr('id')+'-menu-entry'+'"><a onclick="toggleMenu();" href="#'+child.attr('id')+'" data-hover="'+child.attr('title')+'"><span>'+child.attr('title')+'</span></a></li>');
 }
 
 function onMouseMove(event) {
