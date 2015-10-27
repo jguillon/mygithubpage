@@ -239,7 +239,6 @@ redirect_from:
 							$('#network').attr('class','small');
 						else
 							$('#network').attr('class','large');
-						console.log(direction);
 					},
 				offset: '75%'
 			});
@@ -250,7 +249,6 @@ redirect_from:
 							$('header').attr('class','small');
 						else
 							$('header').attr('class','large');
-						console.log(direction);
 					},
 				offset: '15%'
 			});
@@ -260,6 +258,11 @@ redirect_from:
 					  size : { w : 45, h : 45 },
 					  onToggle : toggleMenu } 
 				);
+			$('#menu a').click(function(){
+				toggleMenu();
+				scrollTo($(this).attr('href'));
+				return false;
+			});
 		</script>
 	</body>
 

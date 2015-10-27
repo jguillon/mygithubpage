@@ -13,6 +13,11 @@ window.onpopstate = function() {
 	selectNode();
 };
 
+function scrollTo(href) { 
+	var speed = 600;
+	$('html, body').animate( { scrollTop: $(href).offset().top }, speed ); 
+}
+
 function toggleMenu() {
 	var div = $('#menu');
 	div.toggleClass('closed');
@@ -106,7 +111,7 @@ function addMenuEntry(parent,child) {
 	if($('#'+parent.attr('id')+'-menu').length == 0) {
 		$('#'+parent.attr('id')+'-menu-entry').append('<ul id="'+parent.attr('id')+'-menu"></ul>');
 	}
-	$('#'+parent.attr('id')+'-menu').append('<li id="'+child.attr('id')+'-menu-entry'+'"><a onclick="toggleMenu();" href="#'+child.attr('id')+'" data-hover="'+child.attr('title')+'"><span>'+child.attr('title')+'</span></a></li>');
+	$('#'+parent.attr('id')+'-menu').append('<li id="'+child.attr('id')+'-menu-entry'+'"><a href="#'+child.attr('id')+'" data-hover="'+child.attr('title')+'"><span>'+child.attr('title')+'</span></a></li>');
 }
 
 function onMouseMove(event) {
@@ -155,6 +160,7 @@ function onMouseClick(event) {
 				selectedNode = intersects[i].object;
 				selectedNode.select();
 				History.pushState({},selectedNode.htmlId,'#'+selectedNode.htmlId);
+				scrollTo('#'+selectedNode.htmlId);
 				return;
 			}
 		}

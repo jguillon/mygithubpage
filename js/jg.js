@@ -84,6 +84,7 @@ var JG = {
 	var z = Math.random();
 	this.position.set(x,y,z);
 	var map = THREE.ImageUtils.loadTexture( "img/education.png" );
+	map.minFilter = THREE.LinearFilter;
 	var spriteMaterial = new THREE.SpriteMaterial( { map: map, color: 0x3D5857, fog: true } );
 	var sprite = new THREE.Sprite( spriteMaterial ); 
 	sprite.scale.set(5,5,5);

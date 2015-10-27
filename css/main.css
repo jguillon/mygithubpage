@@ -157,8 +157,8 @@ div#node-title-box h1 {
 	margin-top: -8px;
 	right: 0;
 	background: rgb(186, 255, 255);
-	-webkit-transform: translate3d(-100%,0,0);
-	transform: translate3d(-100%,0,0);
+	-webkit-transform: translate3d(-101%,0,0);
+	transform: translate3d(-101%,0,0);
 	-webkit-transition: -webkit-transform 0.4s;
 	transition: transform 0.4s;
 	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
@@ -166,8 +166,8 @@ div#node-title-box h1 {
 }
 
 .kukuri-hover::after {
-	-webkit-transform: translate3d(100%,0,0);
-	transform: translate3d(100%,0,0);
+	-webkit-transform: translate3d(101%,0,0);
+	transform: translate3d(101%,0,0);
 }
 
 .kukuri::before {
