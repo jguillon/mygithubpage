@@ -260,7 +260,11 @@ redirect_from:
 				);
 			$('#menu a').click(function(){
 				toggleMenu();
-				scrollTo($(this).attr('href'));
+				var href = $(this).attr('href');
+				if(selectedNode)
+					selectedNode.unselect();
+				graph.getNode(href.substring(1,href.length)).select();
+				scrollTo(href);
 				return false;
 			});
 		</script>
