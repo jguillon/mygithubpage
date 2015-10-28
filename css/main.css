@@ -1,65 +1,28 @@
 body, html {
 
 }
-
-div#menu {
-	font-family: 'Poiret One', monospace;
-	background-color: white;
-	position: fixed;
-	width: 70vmin;
-	/*min-width: 70vmin;*/
-	height: 100vh;
-	right: 0;
-	top: 0;
+.helper {
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
 }
-
-div#menu nav {
-	overflow: hidden;
-	margin-top: 15vh;
-	height: 85vh;
-	width: 50vmin;
+.nopadding {
+	padding: 0 !important;
+	margin: 0 !important;
 }
-div#menu nav ul {
-	list-style-type: none;
-	margin: 0;
-	padding-left: 0;
-}
-div#menu nav ul li {
-	width: 100%;
-	/*margin-bottom: -4px;*/
+*,
+*:after,
+*::before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-div#network {
-/*	background: -webkit-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7));
-	background: -moz-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7));
-	background: -ms-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7)); 
-	background: -o-radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7));
-	background: radial-gradient(rgba(43,146,142,0.5), rgba(7,105,101,0.7));*/
-	width: 100%;
-	height: 100%;
-	-webkit-transition:  height 0.6s;
-	-moz-transition: height 0.6s;
-	transition: height 0.6s;
-	position: fixed;
-}
-div#network.large {
-	height: 100%;
-}
-div#network.small {
-	height: 15%;
-}
-header.large {
-	height: 100%;
-	position: relative;
-}
-header.small ~ div#content {
-	margin-top: 100vh;
-}
-header.small {
-	height: 15%;
-	position: fixed;
-	font-size: 100%;
-}
+
+/****************************************************
+ * LOADING PAGE										*
+ ****************************************************/
+
 div#loading-box {
 	position: fixed;
 	left: 0;
@@ -71,16 +34,16 @@ div#loading-box {
 	z-index: 99;
 	line-height: 100vh;
 }
-.helper {
-	display: inline-block;
-	height: 100%;
-	vertical-align: middle;
-}
 div#loading-box img.no-frame {
 	display:  inline-block;
 	vertical-align: middle;
 	opacity: 0;
 }
+
+
+/****************************************************
+ * HEADER											*
+ ****************************************************/
 
 header {
 	display: block;
@@ -94,115 +57,39 @@ header {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
-img#logo {
+header.large {
+	height: 100%;
+	position: relative;
+}
+header.small ~ div#content {
+	margin-top: 100vh;
+}
+header.small {
+	height: 15%;
+	position: fixed;
+	font-size: 100%;
+}
+header img#logo {
 	position: fixed;
 	top: 0;
 	left: 0;
 	transform: rotate(0.001deg); /* Firefox bad png rendering hack */
 	margin: 5vmin;
 	height: 5vmin;
-	min-height: 35px;
+	min-height: 45px;
 	padding: 5px 0;
 	z-index: 99; /* Always on top */
 }
-
-h1, h2, h3{
-	text-align: center;
-	color: #9B7269;	
-	/*font-family: monospace;*/
+header div#menu {
 	font-family: 'Poiret One', monospace;
-}
-div#content {
-	display: block;
-	font-family: 'Poiret One', sans-serif;
-	font-size: larger;
-	color: gray;
 	background-color: white;
-	padding: 5vh 15vw;
-	text-align: center;
-}
-
-div#node-title-box {
-	pointer-events: none;
-	position: absolute;
-	display: block;
-	text-align: center;
-	width: 100%;
-}
-div#node-title-box h1 {
-	font-size: 30px;
-	margin: 5vmin;
-	display: inline-block;
-	position: relative;
-}
-
-/***********************/
-/* Kukuri, Source: http://tympanus.net/Development/TextStylesHoverEffects/ */
-.kukuri {
-	text-transform: uppercase;
-	/*font-weight: 900;*/
-	overflow: hidden;
-	/*line-height: 0.75;*/
-	color: transparent;
-}
-
-.kukuri-hover {
-	color: transparent;
-}
-
-.kukuri::after {
-	content: '';
-	position: absolute;
-	height: 1vmin;
-	width: 100%;
-	top: 50%;
-	margin-top: -8px;
+	position: fixed;
+	width: 70vmin;
+	height: 100vh;
 	right: 0;
-	background: rgb(186, 255, 255);
-	-webkit-transform: translate3d(-101%,0,0);
-	transform: translate3d(-101%,0,0);
-	-webkit-transition: -webkit-transform 0.4s;
-	transition: transform 0.4s;
-	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+	top: 0;
 }
-
-.kukuri-hover::after {
-	-webkit-transform: translate3d(101%,0,0);
-	transform: translate3d(101%,0,0);
-}
-
-.kukuri::before {
-	content: attr(data-letters);
-	position: absolute;
-	z-index: 2;
-	overflow: hidden;
-	color: #fff;
-	white-space: nowrap;
-	width: 0%;
-	-webkit-transition: width 0.4s 0.3s;
-	transition: width 0.4s 0.3s;
-}
-
-.kukuri-hover::before {
-	width: 100%;
-}
-/***********************/
-
-/******************************/
-*,
-*:after,
-*::before {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
-body {
-	font-family: 'Raleway', sans-serif;
-}
-
-nav a {
+header div#menu nav a {
 	position: relative;
 	display: inline-block;
 	width: 100%;
@@ -215,23 +102,19 @@ nav a {
 	text-shadow: 0 0 1px rgba(255,255,255,0.3);
 	font-size: 1.35em;
 }
-
-nav a:hover,
-nav a:focus {
+header div#menu nav a:hover,
+header div#menu nav a:focus {
 	outline: none;
 	color: #fff;
 }
-/* Effect 10: reveal, push out */
-.cl-effect-10  {
+header div#menu nav.cl-effect-10  {
 	position: relative;
 	z-index: 1;
 }
-
-.cl-effect-10 a {
+header div#menu nav.cl-effect-10 a {
 	text-decoration: none;
 }
-
-.cl-effect-10 a span {
+header div#menu nav.cl-effect-10 a span {
 	display: block;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -241,8 +124,7 @@ nav a:focus {
 	-moz-transition: -moz-transform 0.3s;
 	transition: transform 0.3s;
 }
-
-.cl-effect-10 a::before {
+header div#menu nav.cl-effect-10 a::before {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -260,62 +142,148 @@ nav a:focus {
 	transition: transform 0.3s;
 	-webkit-transform: translateX(-25%);
 }
-
-.cl-effect-10 a:hover span,
-.cl-effect-10 a:focus span {
+header div#menu nav.cl-effect-10 a:hover span,
+header div#menu nav.cl-effect-10 a:focus span {
 	-webkit-transform: translateX(100%);
 	-moz-transform: translateX(100%);
 	transform: translateX(100%);
 }
-
-.cl-effect-10 a:hover::before,
-.cl-effect-10 a:focus::before {
+header div#menu nav.cl-effect-10 a:hover::before,
+header div#menu nav.cl-effect-10 a:focus::before {
 	-webkit-transform: translateX(0%);
 	-moz-transform: translateX(0%);
 	transform: translateX(0%);
 }
-
-/******************************/
-
-nav ul span { padding-left: 2vw; }
-nav ul ul span { padding-left: 4vw; }
-nav ul ul ul span { padding-left: 6vw; }
-nav ul ul ul ul span { padding-left: 8vw; }
-nav ul a::before { padding-left: 2vw; }
-nav ul ul a::before { padding-left: 4vw; }
-nav ul ul ul a::before { padding-left: 6vw; }
-nav ul ul ul ul a::before { padding-left: 8vw; }
-
-div#menu-button {
+header div#menu nav ul span { padding-left: 2vw; }
+header div#menu nav ul ul span { padding-left: 4vw; }
+header div#menu nav ul ul ul span { padding-left: 6vw; }
+header div#menu nav ul ul ul ul span { padding-left: 8vw; }
+header div#menu nav ul a::before { padding-left: 2vw; }
+header div#menu nav ul ul a::before { padding-left: 4vw; }
+header div#menu nav ul ul ul a::before { padding-left: 6vw; }
+header div#menu nav ul ul ul ul a::before { padding-left: 8vw; }
+header div#menu nav {
+	overflow: hidden;
+	margin-top: 15vh;
+	height: 85vh;
+	width: 50vmin;
+}
+header div#menu nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding-left: 0;
+}
+header div#menu nav ul li {
+	width: 100%;
+}
+header div#menu-button {
 	position: fixed;
-	margin: 4vmin 5vmin;
+	margin: 5vmin;
 	top: 0;
 	right: 0;
 	z-index: 99; /* Always on top */
 }
-div#menu-button span {
+header div#menu-button span {
 	display: block;
 	cursor: pointer;
 	background-repeat: no-repeat;
 	background-position: center center;
 }
-footer {
+/*div#menu-button svg.si-icon {
+	height: 10vmin;
+    width: 10vmin;
+    min-height: 45px;
+    min-width: 45px;
+}*/
+header div#network {
+	width: 100%;
+	height: 100%;
+	-webkit-transition:  height 0.6s;
+	-moz-transition: height 0.6s;
+	transition: height 0.6s;
+	position: fixed;
+}
+header div#network.large {
+	height: 100%;
+}
+header div#network.small {
+	height: 15%;
+}
+header div#node-title-box {
+	pointer-events: none;
+	position: absolute;
 	display: block;
 	text-align: center;
-	z-index: 5;
-	padding: 3vmin;
-	background-color: black;
+	width: 100%;
 }
-img#logo-footer {
-	height: 5vh;
+header div#node-title-box h1 {
+	font-size: 30px;
+	margin: 5vmin;
 	display: inline-block;
+	position: relative;
 }
-a.btn-social-icon {
+/* Kukuri, Source: http://tympanus.net/Development/TextStylesHoverEffects/ */
+header div#node-title-box .kukuri {
+	text-transform: uppercase;
+	overflow: hidden;
+	color: transparent;
+}
+header div#node-title-box .kukuri-hover {
+	color: transparent;
+}
+header div#node-title-box .kukuri::after {
+	content: '';
+	position: absolute;
+	height: 1vmin;
+	width: 100%;
+	top: 50%;
+	margin-top: -8px;
+	right: 0;
+	background: rgb(186, 255, 255);
+	-webkit-transform: translate3d(-101%,0,0);
+	transform: translate3d(-101%,0,0);
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	-webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+header div#node-title-box .kukuri-hover::after {
+	-webkit-transform: translate3d(101%,0,0);
+	transform: translate3d(101%,0,0);
+}
+header div#node-title-box .kukuri::before {
+	content: attr(data-letters);
+	position: absolute;
+	z-index: 2;
+	overflow: hidden;
 	color: #fff;
+	white-space: nowrap;
+	width: 0%;
+	-webkit-transition: width 0.4s 0.3s;
+	transition: width 0.4s 0.3s;
 }
-.nopadding {
-	padding: 0 !important;
-	margin: 0 !important;
+header div#node-title-box .kukuri-hover::before {
+	width: 100%;
+}
+
+
+/****************************************************
+ * MAIN CONTENT										*
+ ****************************************************/
+
+h1, h2, h3{
+	text-align: center;
+	color: #9B7269;	
+	font-family: 'Poiret One', monospace;
+}
+div#content {
+	display: block;
+	font-family: 'Poiret One', sans-serif;
+	font-size: larger;
+	color: gray;
+	background-color: white;
+	padding: 5vh 15vw;
+	text-align: center;
 }
 h1#title {
 	display: inline-block;
@@ -323,6 +291,25 @@ h1#title {
 	margin-top: 4vh;
 }
 
+
+/****************************************************
+ * FOOTER											*
+ ****************************************************/
+
+footer {
+	display: block;
+	text-align: center;
+	z-index: 5;
+	padding: 3vmin;
+	background-color: black;
+}
+footer img#logo-footer {
+	height: 5vh;
+	display: inline-block;
+}
+footer a.btn-social-icon {
+	color: #fff;
+}
 footer p#rights {
 	color: #2E7179;
 	font-size: 1.5vmin;	
