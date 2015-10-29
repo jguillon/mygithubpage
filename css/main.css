@@ -282,13 +282,10 @@ div#content {
 	font-size: larger;
 	color: gray;
 	background-color: white;
-	padding: 5vh 15vw;
 	text-align: center;
 }
-h1#title {
-	display: inline-block;
-	font-size: 3vh;
-	margin-top: 4vh;
+div#content section.node {
+	padding: 5vh 15vw;
 }
 
 
