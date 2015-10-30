@@ -263,7 +263,9 @@ redirect_from:
 				var href = $(this).attr('href');
 				if(selectedNode)
 					selectedNode.unselect();
-				graph.getNode(href.substring(1,href.length)).select();
+				selectedNode = graph.getNode(href.substring(1,href.length));
+				selectedNode.select();
+				History.pushState({},selectedNode.htmlId,'#'+selectedNode.htmlId);
 				scrollTo(href);
 				return false;
 			});
