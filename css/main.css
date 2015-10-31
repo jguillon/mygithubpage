@@ -1,5 +1,5 @@
 body, html {
-
+	background-color: #081313;
 }
 .helper {
 	display: inline-block;
@@ -59,7 +59,7 @@ header {
 }
 header.large {
 	height: 100%;
-	position: relative;
+	position: absolute;
 }
 header.small ~ div#content {
 	margin-top: 100vh;
@@ -298,7 +298,7 @@ footer {
 	text-align: center;
 	z-index: 5;
 	padding: 3vmin;
-	background-color: black;
+	background-color: #081313;
 }
 footer img#logo-footer {
 	height: 5vh;
