@@ -82,20 +82,10 @@ function init()
 
 	// NETWORK
 	graph = new JG.Graph();
-	var nodesToCheck = [$('#root-node')];
-	var iParentNode = 0;
-	graph.addNode(scene,nodesToCheck[0]);
-	do {
-		parentNode = nodesToCheck[iParentNode];
-		childrenNodes = parentNode.children('.node');
-		for(i=0; i<childrenNodes.length; i++) {
-			nodesToCheck.push($(childrenNodes[i]));
-			addMenuEntry(parentNode,$(childrenNodes[i]));
-			graph.addNode(scene,$(childrenNodes[i]));
-			graph.addEdge(scene,graph.nodes[iParentNode],graph.nodes[graph.nodes.length-1]);
-		}
-		iParentNode++;
-	} while(iParentNode < nodesToCheck.length);
+	addSubTreeFrom(document.getElementById("root-node"));
+
+
+
 
 	graph.layout.init();
 
@@ -107,11 +97,21 @@ function init()
 	window.addEventListener( 'resize', onWindowResize , false );
 }
 
-function addMenuEntry(parent,child) {
-	if($('#'+parent.attr('id')+'-menu').length == 0) {
-		$('#'+parent.attr('id')+'-menu-entry').append('<ul id="'+parent.attr('id')+'-menu"></ul>');
+function addSubTreeFrom(parentNode) {
+	graph.addNode(scene, parentNode);
+	var childrenNodes = $(parentNode).children('.node');
+	for(var i=0; i<childrenNodes.length; i++) {
+		addMenuEntry(parentNode, childrenNodes[i]);
+		addSubTreeFrom(childrenNodes[i]);
+		graph.addEdge(scene, graph.getNode(parentNode.id), graph.getNode(childrenNodes[i].id));
 	}
-	$('#'+parent.attr('id')+'-menu').append('<li id="'+child.attr('id')+'-menu-entry'+'"><a href="#'+child.attr('id')+'" data-hover="'+child.attr('title')+'"><span>'+child.attr('title')+'</span></a></li>');
+}
+
+function addMenuEntry(parent,child) {
+	if($('#'+$(parent).attr('id')+'-menu').length == 0) {
+		$('#'+$(parent).attr('id')+'-menu-entry').append('<ul id="'+$(parent).attr('id')+'-menu"></ul>');
+	}
+	$('#'+$(parent).attr('id')+'-menu').append('<li id="'+$(child).attr('id')+'-menu-entry'+'"><a href="#'+$(child).attr('id')+'" data-hover="'+$(child).attr('title')+'"><span>'+$(child).attr('title')+'</span></a></li>');
 }
 
 function onMouseMove(event) {
@@ -187,8 +187,8 @@ function update()
 	controls.update();
 
 	// CAMERA AUTO-ROTATION ANIMATION
-	controls.constraint.rotateLeft(mouse.x/1000);
-	controls.constraint.rotateUp(mouse.y/1000);
+	// controls.constraint.rotateLeft(mouse.x/1000);
+	// controls.constraint.rotateUp(mouse.y/1000);
 
 	hoverNode();
 

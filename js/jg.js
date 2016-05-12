@@ -9,6 +9,7 @@ var JG = {
 	HOVERED_TITLE: $("div#node-title-box h1")
 };
 
+
 /********************************************************************
  * Graph Class														*
  ********************************************************************/
@@ -23,17 +24,20 @@ var JG = {
 	this.layout = new JG.Layout(this);
 
 	// Methods ______________________________________________________
-	this.addEdge = function(scene,node1,node2) {
-		var edge = new JG.Edge(node1,node2);
+	this.addEdge = function(scene, parent, child) {
+		var edge = new JG.Edge(parent,child);
+		parent.childrenNodes.push(child);
+		child.parentNode = parent;
 		scene.add(edge);
 		this.edges.push(edge);
 	};
-	this.addNode = function(scene,jqueryObject) {
-		var node = new JG.Node(jqueryObject);
+	this.addNode = function(scene, htmlObject) {
+		var node = new JG.Node($(htmlObject));
 		node.jqueryObject.appendTo("#content");
 		node.jqueryObject.hide();
 		scene.add(node);
 		this.nodes.push(node);
+		return node;
 	};
 	this.update = function() {
 		this.layout.update();
@@ -85,11 +89,11 @@ var JG = {
 	this.position.set(x,y,z);
 	var map = THREE.ImageUtils.loadTexture( "img/education.png" );
 	map.minFilter = THREE.LinearFilter;
-	var spriteMaterial = new THREE.SpriteMaterial( { map: map, color: 0x3D5857, fog: true } );
-	var sprite = new THREE.Sprite( spriteMaterial ); 
-	sprite.scale.set(5,5,5);
-	sprite.visible = false;
-	scene.add(sprite);
+	// var spriteMaterial = new THREE.SpriteMaterial( { map: map, color: 0x3D5857, fog: true } );
+	// var sprite = new THREE.Sprite( spriteMaterial ); 
+	// sprite.scale.set(5,5,5);
+	// sprite.visible = false;
+	// scene.add(sprite);
 
 	// Attributes ___________________________________________________
 	this.htmlId = jqueryObject.attr('id');
@@ -98,7 +102,9 @@ var JG = {
 	this.jqueryObject = jqueryObject;
 	this.material = material;
 	this.geometry = geometry;
-	this.icon = sprite;
+	this.childrenNodes = [];
+	this.parentNode = null;
+	// this.icon = sprite;
 	this.hovered = false;
 
 	// Methods ______________________________________________________
@@ -118,7 +124,7 @@ var JG = {
 	};
 	this.hover = function() {
 		this.hovered = true;
-		this.icon.visible = true;
+		// this.icon.visible = true;
 		JG.HOVERED_TITLE.html(this.jqueryObject.attr("title"));
 		JG.HOVERED_TITLE.attr('data-letters',this.jqueryObject.attr("title"));
 		JG.HOVERED_TITLE.addClass('kukuri-hover');
@@ -129,7 +135,7 @@ var JG = {
 	};
 	this.unhover = function() {
 		this.hovered = false;
-		this.icon.visible = false;
+		// this.icon.visible = false;
 		JG.HOVERED_TITLE.removeClass('kukuri-hover');
 		if(this.selected)
 			this.material.uniforms.color.value.setHex(JG.SELECTION_COLOR);
@@ -137,7 +143,7 @@ var JG = {
 			this.material.uniforms.color.value.setHex(JG.DEFAULT_COLOR);
 	};
 	this.update = function() {
-		this.icon.position.set(this.position.x,this.position.y,this.position.z);
+		// this.icon.position.set(this.position.x,this.position.y,this.position.z);
 		this.material.uniforms.viewVector.value = new THREE.Vector3().subVectors( camera.position, this.position );
 	};
 
@@ -153,7 +159,7 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 
 	// Constructor __________________________________________________
 	var geometry = new THREE.Geometry();
-	var nLines = 4;
+	var nLines = 1;
 	for (var i = 0; i<nLines; i++) {
 		geometry.vertices.push(new THREE.Vector3());
 		geometry.vertices.push(new THREE.Vector3());
@@ -198,9 +204,9 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 				this.material.attributes.customColor.value[i] = this.target.material.uniforms.color.value;
 				this.geometry.vertices[i] = this.target.position;
 			}
-			this.material.attributes.displacement.value[i] = new THREE.Vector3(0.5 - Math.random(),
-				0.5 - Math.random(),
-				0.5 - Math.random());
+			// this.material.attributes.displacement.value[i] = new THREE.Vector3(0.5 - Math.random(),
+			// 	0.5 - Math.random(),
+			// 	0.5 - Math.random());
 		}
 		this.geometry.verticesNeedUpdate = true;
 		this.material.attributes.customColor.needsUpdate = true;
@@ -242,6 +248,7 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 	// Methods ______________________________________________________
 	this.init = function() {
 		this.finished = false;
+		it = 0;
 		temperature = this.width / 10.0;
 		nodes_length = this.graph.nodes.length;
 		edges_length = this.graph.edges.length;
@@ -250,7 +257,9 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 		repulsion_constant = this.repulsion_multiplier * forceConstant;
 	};
 	this.update = function() {
-		if(it < this.max_iterations && temperature > 0.000001 && !this.pause) {
+		if(it < this.max_iterations && temperature > 1.0 && !this.pause) {
+			console.log(it);
+			console.log(temperature);
 			// calculate repulsion
 			for(var i=0; i < nodes_length; i++) {
 				var node_v = graph.nodes[i];
@@ -342,11 +351,12 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 			}
 			temperature *= (1 - (it / this.max_iterations));
 			it++;
-		} else if(it >= this.max_iterations && temperature <= 0.000001) {
+			return true;
+		} else if(it >= this.max_iterations || temperature <= 1.0) {
 			this.finished = true;
 			return false;
 		}
-		return true;
+		return false;
 	};
 	this.play = function() {
 		this.pause = false;

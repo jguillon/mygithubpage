@@ -63,8 +63,8 @@ redirect_from:
 						loadFrame(endFrame);
 					},50);
 				} else if(currentFrame==0) { // If we're up-to-date and at the end, hide the loading page
-					// $('#loading-box').fadeOut(); //TODO Remove comments
-					// graph.layout.play();
+					$('#loading-box').fadeOut(); //TODO Remove comments
+					graph.layout.play();
 				} else { // If we're just up-to-date, get ready for another target percentage
 					paused = true;
 				}
