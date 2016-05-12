@@ -89,6 +89,7 @@ header div#menu {
 	right: 0;
 	top: 0;
 }
+
 header div#menu nav a {
 	position: relative;
 	display: inline-block;
@@ -274,7 +275,7 @@ header div#node-title-box .kukuri-hover::before {
 
 h1, h2, h3{
 	text-align: center;
-	color: #9B7269;	
+	color: #9B7269;
 	font-family: 'Poiret One', monospace;
 }
 div#content {
@@ -285,7 +286,8 @@ div#content {
 	background-color: white;
 	text-align: center;
 }
-div#content section.node {
+div#content section.node,
+div#content div.node {
 	padding: 5vh 15vw;
 }
 
@@ -307,8 +309,31 @@ footer img#logo-footer {
 }
 footer a.btn-social-icon {
 	color: #fff;
+	position: relative;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 34px;
+	width: 34px;
+	padding: 0px;
 }
+footer a.btn-social-icon>:first-child {
+	border: none;
+    text-align: center;
+    width: 100% !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    line-height: 34px;
+    font-size: 1.6em;
+}
+footer a#btn-twitter:hover { color: #55ACEE; }
+footer a#btn-linkedin:hover { color: #0077B5; }
+footer a#btn-google-plus:hover { color: #DC4E41; }
 footer p#rights {
 	color: #2E7179;
-	font-size: 1.5vmin;	
+	font-size: 1.5vmin;
 }
