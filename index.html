@@ -40,36 +40,37 @@ redirect_from:
 	<body id="body">
 
 		<div id="loading-box">
-			<span class="helper"></span><img id="loading-head" src="/img/transparent.png" class="no-frame" alt="Loading..."/></br>
-			<p>Work under progress...</p>
-			<p>Please come back in few days!</p>
+      <img id="loading-head-bg" src="/img/loading_bg.png"/>
+      <img id="loading-head" src="/img/loading.png" alt="Loading..."/>
 		</div>
 		<script>
-			var currentFrame = 62, loadingPercent = 0, paused = true;
+			var loadingPercent = 0, d = new Date(), lastUpdate = d.getTime();
+      var bg = document.getElementById("loading-head");
+      bg.style.display = 'block';
+      var h = document.getElementById("loading-head-bg");
+      h.style.display = 'block';
+
 			function loadHead() {
-				var endFrame = 62 - Math.round(loadingPercent/100*62);
-				if(paused) { // If the previous step is reached
-					paused = false;
-					loadFrame(endFrame);
-				} else { // Else wait to reach the previous step, check again in 50ms
-					setTimeout(loadHead,50);
-				}
-			}
-			function loadFrame(endFrame) {
-				if(currentFrame>endFrame) { // If we're not up-to-date
-					setTimeout(function() {
-						// One step forward...
-						document.getElementById("loading-head").className = 'frame frame-' + currentFrame--;
-						// ...and check again in 50ms
-						loadFrame(endFrame);
-					},50);
-				} else if(currentFrame==0) { // If we're up-to-date and at the end, hide the loading page
+        d = new Date();
+        if(loadingPercent==100 && d.getTime() - lastUpdate > 5000) {
 					$('#loading-box').fadeOut(); //TODO Remove comments
 					graph.layout.play();
-				} else { // If we're just up-to-date, get ready for another target percentage
-					paused = true;
-				}
+			  } else if(loadingPercent<100 && d.getTime() - lastUpdate > 500) {
+          var angle = 158 - Math.round(loadingPercent/100 * 130);
+          var bg = document.getElementById("loading-head-bg");
+          console.log(loadingPercent);
+          bg.style.webkitTransform = 'rotate('+angle+'deg)';
+          bg.style.mozTransform    = 'rotate('+angle+'deg)';
+          bg.style.msTransform     = 'rotate('+angle+'deg)';
+          bg.style.oTransform      = 'rotate('+angle+'deg)';
+          bg.style.transform       = 'rotate('+angle+'deg)';
+          lastUpdate = d.getTime();
+        } else {
+          setTimeout(loadHead, 100);
+        }
 			}
+
+      loadingPercent = 5; loadHead();
 		</script>
 
 		<!-- ---- HEADER ---- -->
@@ -161,7 +162,7 @@ redirect_from:
 		</div>
 
 
-		<script type="text/javascript">loadingPercent = 50; loadHead();</script>
+		<script type="text/javascript">loadingPercent = 20; loadHead();</script>
 
 		<!-- ---- FOOTER ---- -->
 		<footer>
@@ -176,7 +177,7 @@ redirect_from:
 			</p>
 		</footer>
 
-		<script type="text/javascript">loadingPercent = 60; loadHead();</script>
+		<script type="text/javascript">loadingPercent = 30; loadHead();</script>
 
 		<!-- ---- SCRIPTS ---- -->
 		<script id="vertexShaderNode" type="x-shader/x-vertex">
@@ -244,7 +245,7 @@ redirect_from:
 		<script src="js/svgicons.js" type="text/javascript"></script>
 
 		<script type="text/javascript">
-			loadingPercent = 100;
+			loadingPercent = 90;
 			loadHead();
 			$('header').parallax("50%", 0.1);
 			$('#network').parallax("50%", 0.1);
@@ -285,6 +286,8 @@ redirect_from:
 				scrollTo(href);
 				return false;
 			});
+			loadingPercent = 100;
+			loadHead();
 		</script>
 	</body>
 

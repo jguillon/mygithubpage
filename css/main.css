@@ -34,11 +34,41 @@ div#loading-box {
 	z-index: 99;
 	line-height: 100vh;
 }
-div#loading-box img.no-frame {
+div#loading-box img {
+	position: absolute;
+	display: none;
+	top: 50%;
+	left: 50%;
+}
+div#loading-box img#loading-head {
+	z-index: 101;
+	margin: -45vmin -45vmin;
+	height: 90vmin;
+	width: 90vmin;
+}
+div#loading-box img#loading-head-bg {
+	z-index: 100;
+	margin: -15vmin -15vmin;
+	height: 30vmin;
+	width: 30vmin;
+	-webkit-transform-origin: 70% 60%;
+	-moz-transform-origin: 70% 60%;
+	-o-transform-origin: 70% 60%;
+	transform-origin: 70% 60%;
+	-webkit-transform: rotate(158deg);
+	-moz-transform: rotate(158deg);
+	-o-transform: rotate(158deg);
+	transform: rotate(158deg);
+  -webkit-transition: all 1.0s ease-in-out;
+  -moz-transition: all 1.0s ease-in-out;
+  -o-transition: all 1.0s ease-in-out;
+  transition: all 1.0s ease-in-out;
+}
+/*div#loading-box img.no-frame {
 	display:  inline-block;
 	vertical-align: middle;
 	opacity: 0;
-}
+}*/
 
 
 /****************************************************

@@ -56,7 +56,7 @@ var JG = {
 		});
 		return n;
 	};
-	
+
 };
 
 
@@ -70,7 +70,7 @@ var JG = {
 	var radius = 10;
 	var geometry = new THREE.SphereGeometry( radius, 32, 32 );
 	var material = new THREE.ShaderMaterial({
-		uniforms: { 
+		uniforms: {
 			"c":   { type: "f", value: 0.25 },
 			"p":   { type: "f", value: 6.0 },
 			color: { type: "c", value: new THREE.Color(JG.DEFAULT_COLOR) },
@@ -90,7 +90,7 @@ var JG = {
 	var map = THREE.ImageUtils.loadTexture( "img/education.png" );
 	map.minFilter = THREE.LinearFilter;
 	// var spriteMaterial = new THREE.SpriteMaterial( { map: map, color: 0x3D5857, fog: true } );
-	// var sprite = new THREE.Sprite( spriteMaterial ); 
+	// var sprite = new THREE.Sprite( spriteMaterial );
 	// sprite.scale.set(5,5,5);
 	// sprite.visible = false;
 	// scene.add(sprite);
@@ -257,9 +257,7 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 		repulsion_constant = this.repulsion_multiplier * forceConstant;
 	};
 	this.update = function() {
-		if(it < this.max_iterations && temperature > 1.0 && !this.pause) {
-			console.log(it);
-			console.log(temperature);
+		if(it < this.max_iterations && temperature > 0.1 && !this.pause) {
 			// calculate repulsion
 			for(var i=0; i < nodes_length; i++) {
 				var node_v = graph.nodes[i];
@@ -285,8 +283,8 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 						var delta_y = node_v.layout.tmp_pos_y - node_u.layout.tmp_pos_y;
 						var delta_z = node_v.layout.tmp_pos_z - node_u.layout.tmp_pos_z;
 
-						var delta_length = Math.max(EPSILON, Math.sqrt((delta_x * delta_x) 
-							+ (delta_y * delta_y) 
+						var delta_length = Math.max(EPSILON, Math.sqrt((delta_x * delta_x)
+							+ (delta_y * delta_y)
 							+ (delta_z * delta_z)));
 
 						var force = (repulsion_constant * repulsion_constant) / delta_length;
@@ -316,8 +314,8 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 				var delta_y = edge.source.layout.tmp_pos_y - edge.target.layout.tmp_pos_y;
 				var delta_z = edge.source.layout.tmp_pos_z - edge.target.layout.tmp_pos_z;
 
-				var delta_length = Math.max(EPSILON, Math.sqrt((delta_x * delta_x) 
-					+ (delta_y * delta_y) 
+				var delta_length = Math.max(EPSILON, Math.sqrt((delta_x * delta_x)
+					+ (delta_y * delta_y)
 					+ (delta_z * delta_z)));
 
 				var force = (delta_length * delta_length) / attraction_constant;
@@ -336,8 +334,8 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 			// calculate positions
 			for(var i=0; i < nodes_length; i++) {
 				var node = graph.nodes[i];
-				var delta_length = Math.max(EPSILON, Math.sqrt(node.layout.offset_x * node.layout.offset_x 
-					+ node.layout.offset_y * node.layout.offset_y 
+				var delta_length = Math.max(EPSILON, Math.sqrt(node.layout.offset_x * node.layout.offset_x
+					+ node.layout.offset_y * node.layout.offset_y
 					+ node.layout.offset_z * node.layout.offset_z));
 
 				node.layout.tmp_pos_x += (node.layout.offset_x / delta_length) * Math.min(delta_length, temperature);
@@ -352,7 +350,7 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 			temperature *= (1 - (it / this.max_iterations));
 			it++;
 			return true;
-		} else if(it >= this.max_iterations || temperature <= 1.0) {
+		} else if(it >= this.max_iterations || temperature <= 0.1) {
 			this.finished = true;
 			return false;
 		}
