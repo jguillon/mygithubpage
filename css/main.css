@@ -23,7 +23,7 @@ body, html {
  * LOADING PAGE										*
  ****************************************************/
 
-div#loading-box {
+div#loading-page {
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -34,19 +34,19 @@ div#loading-box {
 	z-index: 99;
 	line-height: 100vh;
 }
-div#loading-box img {
+div#loading-page img {
 	position: absolute;
 	display: none;
 	top: 50%;
 	left: 50%;
 }
-div#loading-box img#loading-head {
+div#loading-page img#loading-head {
 	z-index: 101;
 	margin: -45vmin -45vmin;
 	height: 90vmin;
 	width: 90vmin;
 }
-div#loading-box img#loading-head-bg {
+div#loading-page img#loading-head-bg {
 	z-index: 100;
 	margin: -15vmin -15vmin;
 	height: 30vmin;
@@ -64,7 +64,7 @@ div#loading-box img#loading-head-bg {
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
-/*div#loading-box img.no-frame {
+/*div#loading-page img.no-frame {
 	display:  inline-block;
 	vertical-align: middle;
 	opacity: 0;

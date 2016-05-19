@@ -83,12 +83,7 @@ function init()
 	// NETWORK
 	graph = new JG.Graph();
 	addSubTreeFrom(document.getElementById("root-node"));
-
-
-
-
 	graph.layout.init();
-
 	selectNode();
 
 	// MOUSE
@@ -138,10 +133,10 @@ function hoverNode() {
 			}
 		}
 	}
-	if(hoveredNode) {
-		hoveredNode.unhover();
-	}
-	hoveredNode = null;
+	// if(hoveredNode) {
+	// 	hoveredNode.unhover();
+	// hoveredNode = null;
+	// }
 }
 
 function onMouseClick(event) {
