@@ -128,6 +128,7 @@ var JG = {
 		JG.HOVERED_TITLE.html(this.jqueryObject.attr("title"));
 		JG.HOVERED_TITLE.attr('data-letters',this.jqueryObject.attr("title"));
 		JG.HOVERED_TITLE.addClass('kukuri-hover');
+		$("#network").addClass('hover-node');
 		if(this.selected)
 			this.material.uniforms.color.value.setHex(JG.HOVER_SELECTION_COLOR);
 		else
@@ -137,6 +138,7 @@ var JG = {
 		this.hovered = false;
 		// this.icon.visible = false;
 		JG.HOVERED_TITLE.removeClass('kukuri-hover');
+		$("#network").removeClass('hover-node');
 		if(this.selected)
 			this.material.uniforms.color.value.setHex(JG.SELECTION_COLOR);
 		else

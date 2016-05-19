@@ -133,10 +133,10 @@ function hoverNode() {
 			}
 		}
 	}
-	// if(hoveredNode) {
-	// 	hoveredNode.unhover();
-	// hoveredNode = null;
-	// }
+	if(hoveredNode) {
+		hoveredNode.unhover();
+		hoveredNode = null;
+	}
 }
 
 function onMouseClick(event) {
