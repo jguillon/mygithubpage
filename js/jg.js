@@ -159,7 +159,7 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 
 	// Constructor __________________________________________________
 	var geometry = new THREE.Geometry();
-	var nLines = 1;
+	var nLines = 5;
 	for (var i = 0; i<nLines; i++) {
 		geometry.vertices.push(new THREE.Vector3());
 		geometry.vertices.push(new THREE.Vector3());
@@ -204,9 +204,9 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 				this.material.attributes.customColor.value[i] = this.target.material.uniforms.color.value;
 				this.geometry.vertices[i] = this.target.position;
 			}
-			// this.material.attributes.displacement.value[i] = new THREE.Vector3(0.5 - Math.random(),
-			// 	0.5 - Math.random(),
-			// 	0.5 - Math.random());
+			this.material.attributes.displacement.value[i] = new THREE.Vector3(0.5 - Math.random(),
+				0.5 - Math.random(),
+				0.5 - Math.random());
 		}
 		this.geometry.verticesNeedUpdate = true;
 		this.material.attributes.customColor.needsUpdate = true;

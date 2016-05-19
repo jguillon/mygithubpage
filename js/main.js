@@ -13,9 +13,9 @@ window.onpopstate = function() {
 	selectNode();
 };
 
-function scrollTo(href) { 
+function scrollTo(href) {
 	var speed = 600;
-	$('html, body').animate( { scrollTop: $(href).offset().top }, speed ); 
+	$('html, body').animate( { scrollTop: $(href).offset().top }, speed );
 }
 
 function toggleMenu() {
@@ -43,8 +43,8 @@ function selectNode()
 	}
 }
 
-// FUNCTIONS 		
-function init() 
+// FUNCTIONS
+function init()
 {
 	// SCENE
 	scene = new THREE.Scene();
@@ -61,7 +61,7 @@ function init()
 	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 	scene.add(camera);
 	camera.position.set(0,0,500);
-	camera.lookAt(scene.position);	
+	camera.lookAt(scene.position);
 	camera.setLens(lens);
 
 	// RENDERER
@@ -91,7 +91,7 @@ function init()
 
 	selectNode();
 
-	// MOUSE 
+	// MOUSE
 	document.addEventListener( 'click', onMouseClick, false );
 	document.addEventListener( 'mousemove', onMouseMove, false );
 	window.addEventListener( 'resize', onWindowResize , false );
@@ -135,13 +135,13 @@ function hoverNode() {
 				hoveredNode = intersects[ i ].object;
 				hoveredNode.hover();
 				return;
-			}	
+			}
 		}
 	}
 	if(hoveredNode) {
 		hoveredNode.unhover();
 	}
-	hoveredNode = null;	
+	hoveredNode = null;
 }
 
 function onMouseClick(event) {
@@ -173,11 +173,11 @@ function onWindowResize(){
 	renderer.setSize( container.offsetWidth, container.offsetHeight );
 }
 
-function animate() 
+function animate()
 {
 	requestAnimationFrame( animate );
 	update();
-	render();		
+	render();
 }
 
 function update()
@@ -187,15 +187,15 @@ function update()
 	controls.update();
 
 	// CAMERA AUTO-ROTATION ANIMATION
-	// controls.constraint.rotateLeft(mouse.x/1000);
-	// controls.constraint.rotateUp(mouse.y/1000);
+	controls.constraint.rotateLeft(mouse.x/1000);
+	controls.constraint.rotateUp(mouse.y/1000);
 
 	hoverNode();
 
 	graph.update();
 }
 
-function render() 
+function render()
 {
 	renderer.render( scene, camera );
 }
