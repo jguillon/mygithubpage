@@ -87,8 +87,8 @@ var JG = {
 	var y = Math.random();
 	var z = Math.random();
 	this.position.set(x,y,z);
-	var map = THREE.ImageUtils.loadTexture( "img/education.png" );
-	map.minFilter = THREE.LinearFilter;
+	// var map = THREE.ImageUtils.loadTexture( "img/education.png" );
+	// map.minFilter = THREE.LinearFilter;
 	// var spriteMaterial = new THREE.SpriteMaterial( { map: map, color: 0x3D5857, fog: true } );
 	// var sprite = new THREE.Sprite( spriteMaterial );
 	// sprite.scale.set(5,5,5);
@@ -104,15 +104,15 @@ var JG = {
 	this.geometry = geometry;
 	this.childrenNodes = [];
 	this.parentNode = null;
-	// this.icon = sprite;
 	this.hovered = false;
+	// this.icon = sprite;
 
 	// Methods ______________________________________________________
 	this.select = function() {
 		this.selected = true;
 		this.material.uniforms.color.value.setHex(JG.SELECTION_COLOR);
 		this.jqueryObject.show();
-		$("#content").css("display","block");
+		$("#content").show();
 	};
 	this.unselect = function() {
 		this.selected = false;

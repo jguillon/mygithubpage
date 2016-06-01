@@ -35,22 +35,42 @@ div#loading-page {
 	line-height: 100vh;
 }
 div#loading-page img {
-	position: absolute;
-	display: none;
-	top: 50%;
-	left: 50%;
+	/*position: absolute;*/
+	/*display: none;*/
+	opacity:0;
+	-moz-transition: opacity 2s; /* Firefox 4 */
+	-webkit-transition: opacity 2s; /* Safari and Chrome */
+	-o-transition: opacity 2s;
+	transition: opacity 2s;
+}
+div#loading-page div#loading-animation {
+	overflow: hidden;
+	display: inline-block;
+	margin: 35vmin;
+	height: 29.9vmin;
+	width: 29.9vmin;
 }
 div#loading-page img#loading-head {
+	position: relative;
 	z-index: 101;
-	margin: -45vmin -45vmin;
-	height: 90vmin;
-	width: 90vmin;
-}
-div#loading-page img#loading-head-bg {
-	z-index: 100;
-	margin: -15vmin -15vmin;
 	height: 30vmin;
 	width: 30vmin;
+}
+div#loading-page img#loading-head-bg {
+	-moz-transition: opacity 2s; /* Firefox 4 */
+	-webkit-transition: opacity 2s; /* Safari and Chrome */
+	-o-transition: opacity 2s;
+	transition: opacity 2s;
+	-moz-transition-delay: opacity 2s; /* Firefox 4 */
+	-webkit-transition-delay: opacity 2s; /* Safari and Chrome */
+	-o-transition-delay: opacity 2s;
+	transition-delay: opacity 2s;
+	z-index: 100;
+	top: -45vmin;
+	left: -15vmin;
+	height: 60vmin;
+	width: 60vmin;
+	position: relative;
 	-webkit-transform-origin: 70% 60%;
 	-moz-transform-origin: 70% 60%;
 	-o-transform-origin: 70% 60%;
@@ -59,10 +79,10 @@ div#loading-page img#loading-head-bg {
 	-moz-transform: rotate(158deg);
 	-o-transform: rotate(158deg);
 	transform: rotate(158deg);
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+  -webkit-transition: -webkit-transform 3.0s ease-in-out;
+  -moz-transition: -moz-transform 3.0s ease-in-out;
+  -o-transition: -o-transform 3.0s ease-in-out;
+  transition: transform 3.0s ease-in-out;
 }
 /*div#loading-page img.no-frame {
 	display:  inline-block;
@@ -82,10 +102,10 @@ header {
 	left: 0;
 	width:100%;
 	height:100%;
-	background-image: url('/img/stars.png');
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-image: url('/img/stars.png');
 }
 header.large {
 	height: 100%;
@@ -101,10 +121,10 @@ header.small {
 	height: 15%;
 	position: fixed;
 	font-size: 100%;
+	background-color: #081313;
 }
 header img#logo {
 	position: fixed;
-	top: 0;
 	left: 0;
 	transform: rotate(0.001deg); /* Firefox bad png rendering hack */
 	margin: 5vmin;
@@ -112,6 +132,24 @@ header img#logo {
 	min-height: 45px;
 	padding: 5px 0;
 	z-index: 99; /* Always on top */
+	top: 7.5vh;
+	margin-top: -22.5px;
+}
+header div#filled-bg {
+	position: absolute;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	background-color: #081313;
+	-webkit-transition: opacity 0.3s;
+	-moz-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+}
+header.large div#filled-bg {
+	opacity: 0;
+}
+header.small div#filled-bg {
+	opacity: 1;
 }
 header div#menu {
 	font-family: 'Poiret One', monospace;
@@ -215,6 +253,8 @@ header div#menu-button {
 	top: 0;
 	right: 0;
 	z-index: 99; /* Always on top */
+	top: 7.5vh;
+	margin-top: -22.5px;
 }
 header div#menu-button span {
 	display: block;
@@ -333,14 +373,13 @@ div#content {
 }
 div#content section.node,
 div#content div.node {
-	padding: 5vh 15vw;
+	margin: 0 15vw;
+	padding-top: 5vh;
 }
 div#content div#map .mapboxgl-control-container{
 	display: none;
 }
 div#content div#map {
-	box-shadow: 0 5px 10px 5px;
-	width: 100%;
 	height: 40vh;
 	width: 100vw;
 	left: -15vw;
@@ -387,7 +426,7 @@ footer a.btn-social-icon>:first-child {
 }
 footer a#btn-twitter:hover { color: #55ACEE; }
 footer a#btn-linkedin:hover { color: #0077B5; }
-footer a#btn-google-plus:hover { color: #DC4E41; }
+footer a#btn-github:hover { color: #777777; }
 footer p#rights {
 	color: #2E7179;
 	font-size: 1.5vmin;

@@ -15,7 +15,7 @@ window.onpopstate = function() {
 
 function scrollTo(href) {
 	var speed = 600;
-	$('html, body').animate( { scrollTop: $(href).offset().top }, speed );
+	$('html, body').animate( { scrollTop: $(href).offset().top - window.innerHeight*15/100 }, speed );
 }
 
 function toggleMenu() {
@@ -71,14 +71,11 @@ function init()
 	container.appendChild( renderer.domElement );
 
 	// CONTROLS
-	controls = new THREE.OrbitControls( camera, renderer.domElement );
-	controls.enableDamping = true;
-	controls.enableZoom = false;
-	controls.enableKeys = false;
-	controls.minPolarAngle = - Infinity;
-	controls.maxPolarAngle = Infinity;
-	controls.minDistance = 100;
-	controls.maxDistance = 500;
+	controls = new THREE.TrackballControls( camera, renderer.domElement );
+	controls.rotateSpeed = 2.0;;
+	controls.noZoom = true;
+	controls.staticMoving = false;
+	controls.dynamicDampingFactor = 0.2;
 
 	// NETWORK
 	graph = new JG.Graph();
@@ -178,12 +175,9 @@ function animate()
 function update()
 {
 
-	// VIEW
-	controls.update();
-
 	// CAMERA AUTO-ROTATION ANIMATION
-	controls.constraint.rotateLeft(mouse.x/1000);
-	controls.constraint.rotateUp(mouse.y/1000);
+	// controls.constraint.rotateLeft(mouse.x/1000);
+	// controls.constraint.rotateUp(mouse.y/1000);
 
 	hoverNode();
 
@@ -192,5 +186,8 @@ function update()
 
 function render()
 {
+
+	// VIEW
+	controls.update();
 	renderer.render( scene, camera );
 }

@@ -37,8 +37,9 @@ redirect_from:
   <link rel="stylesheet" type="text/css" href="css/normalize.css" />
   <!-- <link rel="stylesheet" href="/css/bootstrap-social.css"> -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/sprite-loading.css">
   <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.css' />
+
+  <script src="js/jquery.min.js" type="text/javascript"></script>
 
 </head>
 
@@ -46,12 +47,14 @@ redirect_from:
 <body id="body">
 
   <div id="loading-page">
-    <img id="loading-head-bg" src="/img/loading_bg.png" style="display:none; z-index: 1;"/>
-    <img id="loading-head" src="/img/loading.png" alt="Loading..." style="display:none; z-index: 2;"/>
+    <div id="loading-animation">
+      <img id="loading-head" onload="this.style.opacity='1'; console.log(this);" src="/img/loading.png" alt="Loading..." />
+      <img id="loading-head-bg" onload="this.style.opacity='1'; console.log(this);" src="/img/loading_bg.png" />
+    </div>
   </div>
   <script>
+
   var loadingPercent = 0, displayedPercent = 0, running = false;
-  document.getElementById("loading-head").style.display = 'block';
   document.getElementById("loading-head-bg").addEventListener("transitionend", function(){
     console.log('transitionend');
     running = false;
@@ -60,8 +63,6 @@ redirect_from:
     console.log('transitionend');
     running = false;
   });
-
-  document.getElementById("loading-head-bg").style.display = 'block';
 
   function updateLoadingHead() {
     if(running == false) {
@@ -92,12 +93,15 @@ redirect_from:
 
   loadingPercent = 5;
   setTimeout(showLoadingState, 100);
-
+  $(window).load(function () {
+    loadingPercent = 100;
+  });
   </script>
 
   <!-- ---- HEADER ---- -->
-  <header>
+  <header class="large">
     <div id="network"></div>
+    <div id="filled-bg"></div>
     <div id="node-title-box"><h1 class="kukuri" id="node-title" data-letters="">Title</h1></div>
     <img id="logo" src="/svg/logoText_invert.svg" />
     <div id="menu-button">
@@ -138,16 +142,9 @@ redirect_from:
           As preliminary results we were able to show that, in some cases, differences in populations could only be seen when considering all the subject’s brain networks at once in a multiplex topology.
           For that we built a multiplex for each subject where each layer corresponded to a frequency-band-specific brain network and compared groups using very simple indices describing the multiplexes topology.
         </p>
-        <div id="location">
-            <h2>Location</h2>
-            <p>
-                Brain and Spine Institute (ICM)<br />
-                47 bd de l'Hôpital<br />
-                75013 Paris<br />
-                FRANCE
-            </p>
-            <div id='map'></div>
-        </div>
+
+        <div id='map'></div>
+
       </section>
 
       <section class="node" id="cv" title="Curriculum Vitae">
@@ -216,9 +213,15 @@ redirect_from:
   <footer>
     <img id="logo-footer" src="/img/logo_invert.png" /><br/>
     <p id="social-buttons">
-      <a id="btn-twitter" class="btn btn-social-icon"><i class="fa fa-twitter"></i></a>
-      <a id="btn-linkedin" class="btn btn-social-icon"><i class="fa fa-linkedin"></i></a>
-      <a id="btn-google-plus" class="btn btn-social-icon"><i class="fa fa-google-plus"></i></a><br/>
+      <a id="btn-twitter" class="btn btn-social-icon" href="https://twitter.com/j3r3mg">
+        <i class="fa fa-twitter"></i>
+      </a>
+      <a id="btn-linkedin" class="btn btn-social-icon" href="https://www.linkedin.com/in/jeremyguillon">
+        <i class="fa fa-linkedin"></i>
+      </a>
+      <a id="btn-github" class="btn btn-social-icon" href="https://github.com/jguillon">
+        <i class="fa fa-github"></i>
+      </a><br/>
     </p>
     <p id="rights">
       All rights reserved &copy; 2015 GUILLON Jeremy - Designed from scratch with &hearts;
@@ -272,7 +275,6 @@ redirect_from:
   </script>
 
   <script type="text/javascript">loadingPercent = 40;</script>
-  <script src="js/jquery.min.js" type="text/javascript"></script>
   <script src="js/jquery.history.js" type="text/javascript"></script>
   <script src="js/jquery.easing.js" type="text/javascript"></script>
   <script src="js/jquery.parallax.js" type="text/javascript"></script>
@@ -280,6 +282,7 @@ redirect_from:
 
   <script src="js/three.min.js" type="text/javascript"></script>
   <script src="js/three.orbitcontrols.js" type="text/javascript"></script>
+  <script src="js/three.trackballcontrols.js" type="text/javascript"></script>
 
   <script src="js/modernizr.custom.js"></script>
 
@@ -386,8 +389,8 @@ redirect_from:
     return false;
   });
 
+  // Map =======================================================================
   map.resize();
-  loadingPercent = 100;
 
   </script>
 </body>
