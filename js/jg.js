@@ -1,12 +1,15 @@
 // scene, camera, container and clock have to be global variables;
 
+var checkFoldTimeout;
+
 var JG = {
 	REVISION: "2",
 	DEFAULT_COLOR: 0x55777f,
 	HOVER_COLOR: 0x3e8291,
 	SELECTION_COLOR: 0xFFAE75,
 	HOVER_SELECTION_COLOR: 0xFF7C1D,
-	HOVERED_TITLE: $("div#node-title-box h1")
+	LABEL: $("div#node-title-box h1"),
+	LABEL_BOX: $("div#node-title-box")
 };
 
 
@@ -33,8 +36,6 @@ var JG = {
 	};
 	this.addNode = function(scene, htmlObject) {
 		var node = new JG.Node($(htmlObject));
-		node.jqueryObject.appendTo("#content");
-		node.jqueryObject.hide();
 		scene.add(node);
 		this.nodes.push(node);
 		return node;
@@ -71,8 +72,8 @@ var JG = {
 	var geometry = new THREE.SphereGeometry( radius, 32, 32 );
 	var material = new THREE.ShaderMaterial({
 		uniforms: {
-			"c":   { type: "f", value: 0.25 },
-			"p":   { type: "f", value: 6.0 },
+			c:   { type: "f", value: 0.25 },
+			p:   { type: "f", value: 6.0 },
 			color: { type: "c", value: new THREE.Color(JG.DEFAULT_COLOR) },
 			viewVector: { type: "v3", value: camera.position }
 		},
@@ -99,20 +100,26 @@ var JG = {
 	this.htmlId = jqueryObject.attr('id');
 	this.selected = false;
 	this.animationDelay = Math.PI*Math.random();
-	this.jqueryObject = jqueryObject;
+	this.jqueryObject = jqueryObject.remove('.node');
 	this.material = material;
 	this.geometry = geometry;
 	this.childrenNodes = [];
 	this.parentNode = null;
 	this.hovered = false;
+	this.checkFoldDelay = 500;
 	// this.icon = sprite;
 
 	// Methods ______________________________________________________
 	this.select = function() {
+		if(this.parentNode != null) {
+			this.parentNode.select();
+		}
 		this.selected = true;
 		this.material.uniforms.color.value.setHex(JG.SELECTION_COLOR);
-		this.jqueryObject.show();
-		$("#content").show();
+		// this.jqueryObject.show();
+		$("#content").empty();
+		$("#content").append(this.jqueryObject);
+		this.unfold();
 	};
 	this.unselect = function() {
 		this.selected = false;
@@ -120,33 +127,107 @@ var JG = {
 		this.scale.setX(1.0);
 		this.scale.setY(1.0);
 		this.scale.setZ(1.0);
-		this.jqueryObject.hide();
+		this.fold();
+		if(this.parentNode != null) {
+			this.parentNode.unselect();
+		}
 	};
+	this.fold = function() {
+		if(!this.selected) {
+			for(var i=0; i<this.childrenNodes.length; i++) {
+				this.childrenNodes[i].fold();
+				this.childrenNodes[i].visible = false;
+				this.childrenNodes[i].position = this.position;
+			}
+			this.hideEdges();
+			// this.scale.setX(Math.max(this.childrenNodes.length, 1.0));
+			// this.scale.setY(Math.max(this.childrenNodes.length, 1.0));
+			// this.scale.setZ(Math.max(this.childrenNodes.length, 1.0));
+			graph.layout.init();
+		}
+	}
+	this.hideEdges = function() {
+		var that = this;
+		graph.edges.forEach(function(edge, i) {
+			if(edge.source === that)
+				edge.visible = false;
+		});
+	}
+	this.unfold = function() {
+		for(var i=0; i<this.childrenNodes.length; i++) {
+			this.childrenNodes[i].visible = true;
+		}
+		this.showEdges();
+		// this.scale.setX(1.0);
+		// this.scale.setY(1.0);
+		// this.scale.setZ(1.0);
+		graph.layout.init();
+	}
+	this.showEdges = function() {
+		var that = this;
+		graph.edges.forEach(function(edge, i) {
+			if(edge.source === that)
+				edge.visible = true;
+		});
+	}
 	this.hover = function() {
-		this.hovered = true;
-		// this.icon.visible = true;
-		JG.HOVERED_TITLE.html(this.jqueryObject.attr("title"));
-		JG.HOVERED_TITLE.attr('data-letters',this.jqueryObject.attr("title"));
-		JG.HOVERED_TITLE.addClass('kukuri-hover');
-		$("#network").addClass('hover-node');
-		if(this.selected)
-			this.material.uniforms.color.value.setHex(JG.HOVER_SELECTION_COLOR);
-		else
-			this.material.uniforms.color.value.setHex(JG.HOVER_COLOR);
+		console.log('hover');
+		if(!this.hovered) {
+			this.hovered = true;
+			if(this.parentNode != null) {
+				this.parentNode.hover();
+			}
+			// this.icon.visible = true;
+			v = toXYCoords(this.position);
+			JG.LABEL_BOX.css('left', v.x);
+			JG.LABEL_BOX.css('top', v.y - 36);
+			JG.LABEL.html(this.jqueryObject.attr("title"));
+			JG.LABEL.attr('data-letters',this.jqueryObject.attr("title"));
+			JG.LABEL.addClass('kukuri-hover');
+			$("#network").addClass('hover-node');
+			if(this.selected)
+				this.material.uniforms.color.value.setHex(JG.HOVER_SELECTION_COLOR);
+			else {
+				this.material.uniforms.color.value.setHex(JG.HOVER_COLOR);
+				this.unfold();
+			}
+		}
 	};
 	this.unhover = function() {
-		this.hovered = false;
-		// this.icon.visible = false;
-		JG.HOVERED_TITLE.removeClass('kukuri-hover');
-		$("#network").removeClass('hover-node');
-		if(this.selected)
-			this.material.uniforms.color.value.setHex(JG.SELECTION_COLOR);
-		else
-			this.material.uniforms.color.value.setHex(JG.DEFAULT_COLOR);
+		console.log('unhover');
+		if(this.hovered) {
+			this.hovered = false;
+			if(this.parentNode != null) {
+				this.parentNode.unhover();
+			}
+			// this.icon.visible = false;
+			JG.LABEL.removeClass('kukuri-hover');
+			$("#network").removeClass('hover-node');
+			if(this.selected)
+				this.material.uniforms.color.value.setHex(JG.SELECTION_COLOR);
+			else {
+				this.material.uniforms.color.value.setHex(JG.DEFAULT_COLOR);
+				this.checkFoldDelay = 1000;
+			}
+		}
 	};
 	this.update = function() {
 		// this.icon.position.set(this.position.x,this.position.y,this.position.z);
 		this.material.uniforms.viewVector.value = new THREE.Vector3().subVectors( camera.position, this.position );
+		this.checkFold();
+	};
+	this.checkFold = function() {
+		this.checkFoldDelay = this.checkFoldDelay - 1;
+		if(this.checkFoldDelay <= 0) {
+			if(this.hovered) { return; }
+			for(var i=0; i<this.childrenNodes.length; i++) {
+				if(this.childrenNodes[i].hovered) { return; }
+			}
+			this.fold();
+			if(this.parentNode != null) {
+				this.parentNode.checkFold();
+			}
+		}
 	};
 
 };
@@ -161,7 +242,7 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 
 	// Constructor __________________________________________________
 	var geometry = new THREE.Geometry();
-	var nLines = 5;
+	var nLines = 4;
 	for (var i = 0; i<nLines; i++) {
 		geometry.vertices.push(new THREE.Vector3());
 		geometry.vertices.push(new THREE.Vector3());
@@ -184,7 +265,7 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 		blending:       THREE.AdditiveBlending,
 		depthTest:      false,
 		transparent:    true,
-		linewidth: 		2
+		linewidth: 		1
 	});
 	THREE.Line.call(this,geometry,material,THREE.LineStrip);
 
@@ -206,7 +287,8 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 				this.material.attributes.customColor.value[i] = this.target.material.uniforms.color.value;
 				this.geometry.vertices[i] = this.target.position;
 			}
-			this.material.attributes.displacement.value[i] = new THREE.Vector3(0.5 - Math.random(),
+			this.material.attributes.displacement.value[i] = new THREE.Vector3(
+				0.5 - Math.random(),
 				0.5 - Math.random(),
 				0.5 - Math.random());
 		}
@@ -227,7 +309,7 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 
 	// Constructor __________________________________________________
 	var options = options || {};
-	var EPSILON = 0.0000001;
+	var EPSILON = 0.001;
 	var attraction_constant;
 	var repulsion_constant;
 	var forceConstant;
@@ -239,7 +321,7 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 	// Attributes ___________________________________________________
 	this.attraction_multiplier = options.attraction || 5;
 	this.repulsion_multiplier = options.repulsion || 0.75;
-	this.max_iterations = options.iterations || 2000;
+	this.max_iterations = options.iterations || 1000;
 	this.graph = graph;
 	this.width = options.width || 50;
 	this.height = options.height || 50;
@@ -262,50 +344,54 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 		if(it < this.max_iterations && temperature > 0.1 && !this.pause) {
 			// calculate repulsion
 			for(var i=0; i < nodes_length; i++) {
-				var node_v = graph.nodes[i];
-				node_v.layout = node_v.layout || {};
-				if(i==0) {
-					node_v.layout.offset_x = 0;
-					node_v.layout.offset_y = 0;
-					node_v.layout.offset_z = 0;
-				}
-				node_v.layout.force = 0;
-				node_v.layout.tmp_pos_x = node_v.layout.tmp_pos_x || node_v.position.x;
-				node_v.layout.tmp_pos_y = node_v.layout.tmp_pos_y || node_v.position.y;
-				node_v.layout.tmp_pos_z = node_v.layout.tmp_pos_z || node_v.position.z;
-				for(var j=i+1; j < nodes_length; j++) {
-					var node_u = graph.nodes[j];
-					if(i != j) {
-						node_u.layout = node_u.layout || {};
-						node_u.layout.tmp_pos_x = node_u.layout.tmp_pos_x || node_u.position.x;
-						node_u.layout.tmp_pos_y = node_u.layout.tmp_pos_y || node_u.position.y;
-						node_u.layout.tmp_pos_z = node_u.layout.tmp_pos_z || node_u.position.z;
+				if(graph.nodes[i].visible) {
+					var node_v = graph.nodes[i];
+					node_v.layout = node_v.layout || {};
+					if(i==0) {
+						node_v.layout.offset_x = 0;
+						node_v.layout.offset_y = 0;
+						node_v.layout.offset_z = 0;
+					}
+					node_v.layout.force = 0;
+					node_v.layout.tmp_pos_x = node_v.layout.tmp_pos_x || node_v.position.x;
+					node_v.layout.tmp_pos_y = node_v.layout.tmp_pos_y || node_v.position.y;
+					node_v.layout.tmp_pos_z = node_v.layout.tmp_pos_z || node_v.position.z;
+					for(var j=i+1; j < nodes_length; j++) {
+						if(graph.nodes[j].visible) {
+							var node_u = graph.nodes[j];
+							if(i != j) {
+								node_u.layout = node_u.layout || {};
+								node_u.layout.tmp_pos_x = node_u.layout.tmp_pos_x || node_u.position.x;
+								node_u.layout.tmp_pos_y = node_u.layout.tmp_pos_y || node_u.position.y;
+								node_u.layout.tmp_pos_z = node_u.layout.tmp_pos_z || node_u.position.z;
 
-						var delta_x = node_v.layout.tmp_pos_x - node_u.layout.tmp_pos_x;
-						var delta_y = node_v.layout.tmp_pos_y - node_u.layout.tmp_pos_y;
-						var delta_z = node_v.layout.tmp_pos_z - node_u.layout.tmp_pos_z;
+								var delta_x = node_v.layout.tmp_pos_x - node_u.layout.tmp_pos_x;
+								var delta_y = node_v.layout.tmp_pos_y - node_u.layout.tmp_pos_y;
+								var delta_z = node_v.layout.tmp_pos_z - node_u.layout.tmp_pos_z;
 
-						var delta_length = Math.max(EPSILON, Math.sqrt((delta_x * delta_x)
-							+ (delta_y * delta_y)
-							+ (delta_z * delta_z)));
+								var delta_length = Math.max(EPSILON, Math.sqrt((delta_x * delta_x)
+									+ (delta_y * delta_y)
+									+ (delta_z * delta_z)));
 
-						var force = (repulsion_constant * repulsion_constant) / delta_length;
+								var force = (repulsion_constant * repulsion_constant) / delta_length;
 
-						node_v.layout.force += force;
-						node_u.layout.force += force;
+								node_v.layout.force += force;
+								node_u.layout.force += force;
 
-						node_v.layout.offset_x += (delta_x / delta_length) * force;
-						node_v.layout.offset_y += (delta_y / delta_length) * force;
-						node_v.layout.offset_z += (delta_z / delta_length) * force;
+								node_v.layout.offset_x += (delta_x / delta_length) * force;
+								node_v.layout.offset_y += (delta_y / delta_length) * force;
+								node_v.layout.offset_z += (delta_z / delta_length) * force;
 
-						if(i==0) {
-							node_u.layout.offset_x = 0;
-							node_u.layout.offset_y = 0;
-							node_u.layout.offset_z = 0;
+								if(i==0) {
+									node_u.layout.offset_x = 0;
+									node_u.layout.offset_y = 0;
+									node_u.layout.offset_z = 0;
+								}
+								node_u.layout.offset_x -= (delta_x / delta_length) * force;
+								node_u.layout.offset_y -= (delta_y / delta_length) * force;
+								node_u.layout.offset_z -= (delta_z / delta_length) * force;
+							}
 						}
-						node_u.layout.offset_x -= (delta_x / delta_length) * force;
-						node_u.layout.offset_y -= (delta_y / delta_length) * force;
-						node_u.layout.offset_z -= (delta_z / delta_length) * force;
 					}
 				}
 			}

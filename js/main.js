@@ -34,8 +34,10 @@ function toggleMenu() {
 
 function selectNode()
 {
-	oldSelectedNode = selectedNode;
-	selectedNode = graph.getNode(window.location.hash.substring(1));
+	var oldSelectedNode = selectedNode;
+	var nodeId = window.location.hash.substring(1);
+	if(nodeId === "") nodeId = "root-node";
+	var selectedNode = graph.getNode(nodeId);
 	if(selectedNode != null && selectedNode !== oldSelectedNode) {
 		if(oldSelectedNode)
 			oldSelectedNode.unselect();
@@ -121,12 +123,16 @@ function hoverNode() {
 	var intersects = ray.intersectObjects( scene.children );
 	if(intersects.length>0) {
 		for(i=0; i<intersects.length; i++) {
-			if(intersects[i].object instanceof JG.Node) {
-				if(hoveredNode)
-					hoveredNode.unhover();
-				hoveredNode = intersects[ i ].object;
-				hoveredNode.hover();
-				return;
+			if(intersects[i].object instanceof JG.Node && intersects[i].object.visible) {
+				if(intersects[i].object == hoveredNode) {
+				 	return;
+				} else {
+					if(hoveredNode)
+						hoveredNode.unhover();
+					hoveredNode = intersects[i].object;
+					hoveredNode.hover();
+					return;
+				}
 			}
 		}
 	}
@@ -151,12 +157,21 @@ function onMouseClick(event) {
 					selectedNode.unselect();
 				selectedNode = intersects[i].object;
 				selectedNode.select();
+				graph.layout.init();
 				History.pushState({},selectedNode.htmlId,'#'+selectedNode.htmlId);
 				scrollTo('#'+selectedNode.htmlId);
 				return;
 			}
 		}
 	}
+}
+
+function toXYCoords(pos) {
+	var vector = pos.clone();
+	vector.project(camera);
+	vector.x = (vector.x + 1)/2 * window.innerWidth;
+	vector.y = -(vector.y - 1)/2 * window.innerHeight;
+	return vector;
 }
 
 function onWindowResize(){
@@ -178,9 +193,7 @@ function update()
 	// CAMERA AUTO-ROTATION ANIMATION
 	// controls.constraint.rotateLeft(mouse.x/1000);
 	// controls.constraint.rotateUp(mouse.y/1000);
-
-	hoverNode();
-
+	controls.update();
 	graph.update();
 }
 
@@ -188,6 +201,5 @@ function render()
 {
 
 	// VIEW
-	controls.update();
 	renderer.render( scene, camera );
 }

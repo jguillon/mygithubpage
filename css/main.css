@@ -300,14 +300,17 @@ header div#node-title-box {
 	position: absolute;
 	display: block;
 	text-align: center;
-	width: 100%;
-	margin-top: 90vh;
+	/*width: 100%;*/
+	/*margin-top: 90vh;*/
 }
 header div#node-title-box h1 {
 	font-size: 3vh;
-	margin: 5vmin;
+	margin: 0;
+	white-space: nowrap;
 	display: inline-block;
 	position: relative;
+	padding: 3px 5px;
+	text-align: left;
 }
 /* Kukuri, Source: http://tympanus.net/Development/TextStylesHoverEffects/ */
 header div#node-title-box .kukuri {
@@ -317,6 +320,7 @@ header div#node-title-box .kukuri {
 }
 header div#node-title-box .kukuri-hover {
 	color: transparent;
+	width: 100%;
 }
 header div#node-title-box .kukuri::after {
 	content: '';
@@ -342,15 +346,25 @@ header div#node-title-box .kukuri::before {
 	content: attr(data-letters);
 	position: absolute;
 	z-index: 2;
+	top: 0;
+	left: 0;
 	overflow: hidden;
 	color: #fff;
+	border-radius: 3px;
+	padding: 3px 5px;
+	background-color: rgba(0, 140, 160, 0.5);
 	white-space: nowrap;
 	width: 0%;
-	-webkit-transition: width 0.4s 0.3s;
-	transition: width 0.4s 0.3s;
+	opacity: 0;
+	-webkit-transition: all 0.4s 0.3s;
+	transition: all 0.4s 0.3s;
+	text-align: center;
+	/*-webkit-transition: opacity 0.4s 0.3s;
+	transition: opacity 0.4s 0.3s;*/
 }
 header div#node-title-box .kukuri-hover::before {
 	width: 100%;
+	opacity: 1;
 }
 
 
