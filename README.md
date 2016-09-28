@@ -1,4 +1,4 @@
-# ![GUILLON J e r e m y](img/logo_512.png)
+# ![GUILLON J e r e m y](img/logo_256.png)
 
 ## Installation
 
@@ -8,7 +8,7 @@ First, you need to install **Jekyll** by following their [installation guide](ht
 git clone https://github.com/jguillon/mygithubpage.git
 ```
 
-After changing current directory to `mygithubpage/`, just run:
+After changing the current directory to `mygithubpage` folder, just run:
 
 ```bash
 jekyll serve
