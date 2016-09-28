@@ -32,11 +32,13 @@ redirect_from:
   <meta name="theme-color" content="#ffffff">
 
   <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.css' />
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/css/syntax.css">
+  <link rel="stylesheet" type="text/css" href="/css/component.css" />
+  <link rel='stylesheet' type="text/css" href='https://api.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.css' />
 
   <script src="js/jquery.min.js" type="text/javascript"></script>
 
@@ -47,54 +49,54 @@ redirect_from:
 
   <div id="loading-page">
     <div id="loading-animation">
-      <img id="loading-head" onload="this.style.opacity='1'; console.log(this);" src="/img/loading.png" alt="Loading..." />
-      <img id="loading-head-bg" onload="this.style.opacity='1'; console.log(this);" src="/img/loading_bg.png" />
+      <img id="loading-head" src="/img/loading.png" alt="Loading..." onload="document.getElementById('loading-head-bg').style.opacity = 1;"/>
+      <img id="loading-head-bg" src="/img/loading_bg.png" style="opacity: 0;"/>
     </div>
   </div>
   <script>
 
-  var loadingPercent = 0, displayedPercent = 0, running = false;
-  document.getElementById("loading-head-bg").addEventListener("transitionend", function(){
-    console.log('transitionend');
-    running = false;
-  });
-  document.getElementById("loading-head-bg").addEventListener("webkitTransitionEnd", function(){
-    console.log('transitionend');
-    running = false;
-  });
+    var running = false;
+    document.getElementById("loading-head-bg").addEventListener("transitionend", function(){
+      console.log('transitionend');
+      running = false;
+    });
+    document.getElementById("loading-head-bg").addEventListener("webkitTransitionEnd", function(){
+      console.log('transitionend');
+      running = false;
+    });
 
-  function updateLoadingHead() {
-    if(running == false) {
-      running = true;
-      displayedPercent = loadingPercent;
-      var angle = 158 - Math.round(displayedPercent/100 * 130);
-      var bg = document.getElementById("loading-head-bg");
-      bg.style.webkitTransform = 'rotate('+angle+'deg)';
-      bg.style.mozTransform    = 'rotate('+angle+'deg)';
-      bg.style.msTransform     = 'rotate('+angle+'deg)';
-      bg.style.oTransform      = 'rotate('+angle+'deg)';
-      bg.style.transform       = 'rotate('+angle+'deg)';
+    function updateLoadingHead() {
+      if(running == false) {
+        running = true;
+        displayedPercent = loadingPercent;
+        var angle = 158 - Math.round(displayedPercent/100 * 130);
+        var bg = document.getElementById("loading-head-bg");
+        bg.style.webkitTransform = 'rotate('+angle+'deg)';
+        bg.style.mozTransform    = 'rotate('+angle+'deg)';
+        bg.style.msTransform     = 'rotate('+angle+'deg)';
+        bg.style.oTransform      = 'rotate('+angle+'deg)';
+        bg.style.transform       = 'rotate('+angle+'deg)';
+      }
     }
-  }
 
-  function showLoadingState() {
-    console.log('showLoadingState');
-    console.log(loadingPercent);
-    console.log(running);
-    if(loadingPercent == 100 && displayedPercent == loadingPercent && running == false) {
-      $('#loading-page').fadeOut();
-      graph.layout.play();
-    } else {
-      updateLoadingHead();
-      setTimeout(showLoadingState, 500);
+    function showLoadingState() {
+      console.log('showLoadingState');
+      console.log(loadingPercent);
+      console.log(running);
+      if(loadingPercent == 100 && displayedPercent == loadingPercent && running == false) {
+        $('#loading-page').fadeOut();
+        graph.layout.play();
+      } else {
+        updateLoadingHead();
+        setTimeout(showLoadingState, 500);
+      }
     }
-  }
 
-  loadingPercent = 5;
-  setTimeout(showLoadingState, 100);
-  $(window).load(function () {
-    loadingPercent = 100;
-  });
+    var loadingPercent = 5;
+    setTimeout(showLoadingState, 100);
+    $(window).load(function () {
+      loadingPercent = 100;
+    });
   </script>
 
   <!-- ---- HEADER ---- -->
@@ -135,20 +137,67 @@ redirect_from:
       <p>
         Until now, I’ve been mainly working on building multilayer brain networks where both the nodes, that correspond to brain regions, and the edges, that link them, can be estimated in many different ways.
         <!-- Meaning going from brain electromagnetic signals or images to graphs. But since the brain is well known to expose various types of communication I would like go further in the analysis and apply the multilayer framework to better understand interactions between those types of communication. -->
+        {% highlight javascript %}
+        var material = new THREE.ShaderMaterial( {
+          uniforms:       uniforms,
+          attributes:     attributes,
+          vertexShader:   document.getElementById( 'vertexShaderEdge' ).textContent,
+          fragmentShader: document.getElementById( 'fragmentShaderEdge' ).textContent,
+          blending:       THREE.AdditiveBlending,
+          depthTest:      false,
+          transparent:    true,
+          linewidth: 		1
+        });
+        THREE.Line.call(this,geometry,material,THREE.LineStrip);
+        {% endhighlight %}
       </p>
 
       <h2>Where you could have seen me</h2> <!-- TODO: link to my other pages-->
-      <ul>
-        <li>OHBM 2016</li>
-        <li>MATLABEXPO 2016, Paris edition</li>
-        <li>Workshop on Complex Networks 2016 in Luchon</li>
-        <li>CompleNet 2016 in Dijon</li>
-      </ul>
+      <ul class="grid cs-style-1">
+				<li>
+					<figure>
+						<img src="img/geneva.png" alt="geneva">
+						<figcaption>
+							<h3>OHBM 2016</h3>
+							<span>Geneva, Switzerland</span>
+							<a href="http://dribbble.com/shots/1115632-Camera">See my poster</a>
+						</figcaption>
+					</figure>
+				</li>
+				<li>
+					<figure>
+						<img src="img/paris.jpg" alt="paris">
+						<figcaption>
+							<h3>MATLAB Expo 2016</h3>
+							<span>Paris, France</span>
+							<a href="http://www.matlabexpo.com/fr/">Know more</a>
+						</figcaption>
+					</figure>
+				</li>
+				<li>
+					<figure>
+						<img src="img/dijon.png" alt="dijon">
+						<figcaption>
+							<h3>CompleNet 2016</h3>
+							<span>Dijon, France</span>
+							<a href="http://complenet.org/CompleNet_2017/Home.html">Know more</a>
+						</figcaption>
+					</figure>
+				</li>
+				<li>
+					<figure>
+						<img src="img/luchon.png" alt="luchon">
+						<figcaption>
+							<h3>Workshop on Complex Networks 2016</h3>
+							<span>Luchon, France</span>
+							<a href="http://dribbble.com/shots/1116775-Safari">See my slides</a>
+						</figcaption>
+					</figure>
+				</li>
+			</ul>
 
       <h2>Where I work</h2>
-      <div id='map'>
-        Loading...
-      </div>
+      <div id='map'></div>
 
       <!-- </section> -->
 
@@ -371,8 +420,8 @@ redirect_from:
     loadingPercent = 90;
 
     // Parallax ==================================================================
-    $('header').parallax("50%", 0.5);
-    $('#network').parallax("50%", 0.5);
+    $('header').parallax("50%", 0.1);
+    $('#network').parallax("50%", 0.1);
     new Waypoint({
       element: document.getElementById('content'),
       handler: function(direction) {

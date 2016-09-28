@@ -35,13 +35,7 @@ div#loading-page {
 	line-height: 100vh;
 }
 div#loading-page img {
-	/*position: absolute;*/
-	/*display: none;*/
-	opacity:0;
-	-moz-transition: opacity 2s; /* Firefox 4 */
-	-webkit-transition: opacity 2s; /* Safari and Chrome */
-	-o-transition: opacity 2s;
-	transition: opacity 2s;
+	/*opacity:0;*/
 }
 div#loading-page div#loading-animation {
 	overflow: hidden;
@@ -57,14 +51,6 @@ div#loading-page img#loading-head {
 	width: 30vmin;
 }
 div#loading-page img#loading-head-bg {
-	-moz-transition: opacity 2s; /* Firefox 4 */
-	-webkit-transition: opacity 2s; /* Safari and Chrome */
-	-o-transition: opacity 2s;
-	transition: opacity 2s;
-	-moz-transition-delay: opacity 2s; /* Firefox 4 */
-	-webkit-transition-delay: opacity 2s; /* Safari and Chrome */
-	-o-transition-delay: opacity 2s;
-	transition-delay: opacity 2s;
 	z-index: 100;
 	top: -45vmin;
 	left: -15vmin;
@@ -84,11 +70,6 @@ div#loading-page img#loading-head-bg {
   -o-transition: -o-transform 3.0s ease-in-out;
   transition: transform 3.0s ease-in-out;
 }
-/*div#loading-page img.no-frame {
-	display:  inline-block;
-	vertical-align: middle;
-	opacity: 0;
-}*/
 
 
 /****************************************************
@@ -387,7 +368,7 @@ div#content {
 }
 div#content section.node,
 div#content div.node {
-	margin: 0 15vw;
+	margin: 0 10vw;
 	padding-top: 5vh;
 }
 div#content div#map .mapboxgl-control-container{
@@ -396,7 +377,7 @@ div#content div#map .mapboxgl-control-container{
 div#content div#map {
 	height: 40vh;
 	width: 100vw;
-	left: -15vw;
+	left: -10vw;
 	text-align: left;
 }
 
