@@ -4,7 +4,7 @@ redirect_from:
 - /academic
 ---
 
-<html>
+<html lang="en">
 
 <head>
   <title>GUILLON  J e r e m y</title>
@@ -38,12 +38,12 @@ redirect_from:
   <link rel="stylesheet" type="text/css" href="/css/main.css">
   <link rel="stylesheet" type="text/css" href="/css/syntax.css">
   <link rel="stylesheet" type="text/css" href="/css/component.css" />
+  <link rel="stylesheet" type="text/css" href="/css/timeline.css" />
   <link rel='stylesheet' type="text/css" href='https://api.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.css' />
 
   <script src="js/jquery.min.js" type="text/javascript"></script>
 
 </head>
-
 
 <body id="body">
 
@@ -53,8 +53,8 @@ redirect_from:
       <img id="loading-head-bg" src="/img/loading_bg.png" style="opacity: 0;"/>
     </div>
   </div>
-  <script>
 
+  <script type="text/javascript">
     var running = false;
     document.getElementById("loading-head-bg").addEventListener("transitionend", function(){
       console.log('transitionend');
@@ -114,7 +114,9 @@ redirect_from:
       </nav>
     </div>
   </header>
+
   <script type="text/javascript">loadingPercent = 10;</script>
+
   <!-- ---- CONTENT ---- -->
   <div id="content" class="waypoint">
     -
@@ -133,175 +135,196 @@ redirect_from:
       <em>Brain connectivity</em> aims at studing...
     </p>
 
-    <h2>What I do</h2
-      <p>
-        Until now, I’ve been mainly working on building multilayer brain networks where both the nodes, that correspond to brain regions, and the edges, that link them, can be estimated in many different ways.
-        <!-- Meaning going from brain electromagnetic signals or images to graphs. But since the brain is well known to expose various types of communication I would like go further in the analysis and apply the multilayer framework to better understand interactions between those types of communication. -->
-        {% highlight javascript %}
-        var material = new THREE.ShaderMaterial( {
-          uniforms:       uniforms,
-          attributes:     attributes,
-          vertexShader:   document.getElementById( 'vertexShaderEdge' ).textContent,
-          fragmentShader: document.getElementById( 'fragmentShaderEdge' ).textContent,
-          blending:       THREE.AdditiveBlending,
-          depthTest:      false,
-          transparent:    true,
-          linewidth: 		1
-        });
-        THREE.Line.call(this,geometry,material,THREE.LineStrip);
-        {% endhighlight %}
-      </p>
+    <h2>What I do</h2>
+    <p>
+      Until now, I’ve been mainly working on building multilayer brain networks where both the nodes, that correspond to brain regions, and the edges, that link them, can be estimated in many different ways.
+      <!-- Meaning going from brain electromagnetic signals or images to graphs. But since the brain is well known to expose various types of communication I would like go further in the analysis and apply the multilayer framework to better understand interactions between those types of communication. -->
+    </p>
 
-      <h2>Where you could have seen me</h2> <!-- TODO: link to my other pages-->
-      <ul class="grid cs-style-1">
-				<li>
-					<figure>
-						<img src="img/geneva.png" alt="geneva">
-						<figcaption>
-							<h3>OHBM 2016</h3>
-							<span>Geneva, Switzerland</span>
-							<a href="http://dribbble.com/shots/1115632-Camera">See my poster</a>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure>
-						<img src="img/paris.jpg" alt="paris">
-						<figcaption>
-							<h3>MATLAB Expo 2016</h3>
-							<span>Paris, France</span>
-							<a href="http://www.matlabexpo.com/fr/">Know more</a>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure>
-						<img src="img/dijon.png" alt="dijon">
-						<figcaption>
-							<h3>CompleNet 2016</h3>
-							<span>Dijon, France</span>
-							<a href="http://complenet.org/CompleNet_2017/Home.html">Know more</a>
-						</figcaption>
-					</figure>
-				</li>
-				<li>
-					<figure>
-						<img src="img/luchon.png" alt="luchon">
-						<figcaption>
-							<h3>Workshop on Complex Networks 2016</h3>
-							<span>Luchon, France</span>
-							<a href="http://dribbble.com/shots/1116775-Safari">See my slides</a>
-						</figcaption>
-					</figure>
-				</li>
-			</ul>
+    <h2>Where you could have seen me</h2> <!-- TODO: link to my other pages-->
+    <ul class="grid cs-style-1">
+      <li>
+        <figure>
+          <img src="img/geneva.png" alt="geneva">
+          <figcaption>
+            <h3>OHBM 2016</h3>
+            <span>Geneva, Switzerland</span>
+            <a href="http://dribbble.com/shots/1115632-Camera">See my poster</a>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="img/paris.jpg" alt="paris">
+          <figcaption>
+            <h3>MATLAB Expo 2016</h3>
+            <span>Paris, France</span>
+            <a href="http://www.matlabexpo.com/fr/">Know more</a>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="img/dijon.png" alt="dijon">
+          <figcaption>
+            <h3>CompleNet 2016</h3>
+            <span>Dijon, France</span>
+            <a href="http://complenet.org/CompleNet_2017/Home.html">Know more</a>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="img/luchon.png" alt="luchon">
+          <figcaption>
+            <h3>Workshop on Complex Networks 2016</h3>
+            <span>Luchon, France</span>
+            <a href="http://dribbble.com/shots/1116775-Safari">See my slides</a>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="img/luchon.png" alt="luchon">
+          <figcaption>
+            <h3>IBERSINC 2016</h3>
+            <span>Tarragona, Spain</span>
+            <a href="http://dribbble.com/shots/1116775-Safari">See my slides</a>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
 
-      <h2>Where I work</h2>
-      <div id='map'></div>
+    <h2>Where I work</h2>
+    <div id='map'></div>
 
-      <!-- </section> -->
+    <section class="node" id="cv" title="Curriculum Vitae">
 
-      <section class="node" id="cv" title="Curriculum Vitae">
+      <h1>Curriculum Vitae</h1>
 
-        <h1>Curriculum Vitae</h1>
-
-        <section class="node" id="professional" title="Professional Experience">
-          <h1>Tutorial fdhjfjks</h1>
-          <h2>First part</h2>
-        </section>
-
-        <section class="node" id="academic" title="Academic Experience">
-          Node academic
-          Node INSA
-          Node PIC
-          Node Université de Rouen
-          Node Université de Montréal
-        </section>
-
-        <section class="node" id="distinctions" title="Distinctions">
-          <div class="node" id="hackathon-opendata" title="Hackathon Open-Data">
-
-          </div>
-          <div class="node" id="hackathon-hackandfly" title="Hackathon Hack&Fly">
-
-          </div>
-        </section>
-
+      <section class="node" id="professional" title="Professional Experience">
+        <h1>Tutorial fdhjfjks</h1>
+        <h2>First part</h2>
       </section>
 
-      <section class="node" id="personal-projects" title="Personal Projects">
-        <div class="node" id="eye-gaze-tracker" title="Eye-Gaze Tracker">
-        </div>
-        <div class="node" id="force-directed-brain-networks" title="Force-Directed Brain Networks">
-        </div>
-        <div class="node" id="connectivx-toolbox" title="ConnectivX Toolbox">
-        </div>
-        <div class="node" id="generalized-hough-transform" title="Generalized Hough Transform">
+      <section class="node" id="academic" title="Academic Experience">
+        <div id="cd-timeline" class="cd-container">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-picture">
+              <img src="img/cd-icon-picture.svg" alt="Picture">
+            </div> <!-- cd-timeline-img -->
+
+            <div class="cd-timeline-content">
+              <h2>Title of div 1</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus veritatis qui ut.</p>
+              <a href="#0" class="cd-read-more">Read more</a>
+              <span class="cd-date">Jan 14</span>
+            </div> <!-- cd-timeline-content -->
+          </div> <!-- cd-timeline-block -->
+
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-study">
+              <img src="img/icon-book.svg" class="svg" alt="Book">
+            </div> <!-- cd-timeline-img -->
+
+            <div class="cd-timeline-content">
+              <h2>Title of div 2</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde?</p>
+              <a href="#0" class="cd-read-more">Read more</a>
+              <span class="cd-date">Jan 18</span>
+            </div> <!-- cd-timeline-content -->
+          </div> <!-- cd-timeline-block -->
         </div>
       </section>
 
-      <section class="node" id="tutorials" title="Tutorials">
-        <div class="node" id="xnat-on-osx" title="[TUTO] XNAT on Docker">
-        </div>
-        <div class="node" id="slacktex" title="[TUTO] The 'SlackTeX' Plugin">
-        </div>
-        <div class="node" id="matlab-with-nipype" title="[TUTO] Nipype + MATLAB">
-        </div>
-      </section>
+      <section class="node" id="distinctions" title="Distinctions">
+        <div class="node" id="hackathon-opendata" title="Hackathon Open-Data">
 
-      <section class="node" id="snippets" title="Snippets">
-        MATLAB
-        - [ ] newfuncfile (with varargin option)
-        - [ ] jgcolormap
-        - [ ] args2opt
-        - [ ] threepointlighting
-        - [ ] paperprev
-        C++ and Qt
-        - [ ] Qt Image Zoom
-        - [ ] Qt Image Provider ou je sais plus quoi…
-      </section>
+        </div>
+        <div class="node" id="hackathon-hackandfly" title="Hackathon Hack&Fly">
 
-      <section class="node" id="scientific-activities" title="Scientific Activities">
-        <div class="node" id="journal-publications" title="Journal Publications">
-          - [ ] See you soon…
-        </div>
-        <div class="node" id="posters" title="Posters">
-          - [ ] OHBM 2016
-        </div>
-        <div class="node" id="talks" title="Talks">
-          - [ ] Team meeting
-          - [ ] Short talks at Luchon
         </div>
       </section>
 
     </section>
 
+    <section class="node" id="personal-projects" title="Personal Projects">
+      <div class="node" id="eye-gaze-tracker" title="Eye-Gaze Tracker">
+      </div>
+      <div class="node" id="force-directed-brain-networks" title="Force-Directed Brain Networks">
+      </div>
+      <div class="node" id="connectivx-toolbox" title="ConnectivX Toolbox">
+        {% highlight matlab %}
+        study.subjects.loadConnectivityNetworks(FILENAME_REGEX);
+        ADs = study.getSubjectsWhere('strcmp(subject.population,''MA'')');
+        HCs = study.getSubjectsWhere('strcmp(subject.population,''NC'')');
+        {% endhighlight %}
+      </div>
+      <div class="node" id="generalized-hough-transform" title="Generalized Hough Transform">
+      </div>
+    </section>
 
-    <script type="text/javascript">loadingPercent = 20;</script>
+    <section class="node" id="tutorials" title="Tutorials">
+      <div class="node" id="xnat-on-osx" title="[TUTO] XNAT on Docker">
+      </div>
+      <div class="node" id="slacktex" title="[TUTO] The 'SlackTeX' Plugin">
+      </div>
+      <div class="node" id="matlab-with-nipype" title="[TUTO] Nipype + MATLAB">
+      </div>
+    </section>
 
-    <!-- ---- FOOTER ---- -->
-    <footer>
-      <img id="logo-footer" src="/img/logo_invert.png" /><br/>
-      <p id="social-buttons">
-        <a id="btn-twitter" class="btn btn-social-icon" href="https://twitter.com/j3r3mg">
-          <i class="fa fa-twitter"></i>
-        </a>
-        <a id="btn-linkedin" class="btn btn-social-icon" href="https://www.linkedin.com/in/jeremyguillon">
-          <i class="fa fa-linkedin"></i>
-        </a>
-        <a id="btn-github" class="btn btn-social-icon" href="https://github.com/jguillon">
-          <i class="fa fa-github"></i>
-        </a><br/>
-      </p>
-      <p id="rights">
-        All rights reserved &copy; 2015 GUILLON Jeremy - Designed from scratch with &hearts;
-      </p>
-    </footer>
+    <section class="node" id="snippets" title="Snippets">
+      MATLAB
+      - [ ] newfuncfile (with varargin option)
+      - [ ] jgcolormap
+      - [ ] args2opt
+      - [ ] threepointlighting
+      - [ ] paperprev
+      C++ and Qt
+      - [ ] Qt Image Zoom
+      - [ ] Qt Image Provider ou je sais plus quoi…
+    </section>
 
-    <script type="text/javascript">loadingPercent = 30;</script>
+    <section class="node" id="scientific-activities" title="Scientific Activities">
+      <div class="node" id="journal-publications" title="Journal Publications">
+        - [ ] See you soon…
+      </div>
+      <div class="node" id="posters" title="Posters">
+        - [ ] OHBM 2016
+      </div>
+      <div class="node" id="talks" title="Talks">
+        - [ ] Team meeting
+        - [ ] Short talks at Luchon
+      </div>
+    </section>
 
-    <!-- ---- SCRIPTS ---- -->
-    <script id="vertexShaderNode" type="x-shader/x-vertex">
+  </section>
+
+  <script type="text/javascript">loadingPercent = 20;</script>
+
+  <!-- ---- FOOTER ---- -->
+  <footer>
+    <img id="logo-footer" src="/img/logo_invert.png" /><br/>
+    <p id="social-buttons">
+      <a id="btn-twitter" class="btn btn-social-icon" href="https://twitter.com/j3r3mg">
+        <i class="fa fa-twitter"></i>
+      </a>
+      <a id="btn-linkedin" class="btn btn-social-icon" href="https://www.linkedin.com/in/jeremyguillon">
+        <i class="fa fa-linkedin"></i>
+      </a>
+      <a id="btn-github" class="btn btn-social-icon" href="https://github.com/jguillon">
+        <i class="fa fa-github"></i>
+      </a><br/>
+    </p>
+    <p id="rights">
+      All rights reserved &copy; 2015 GUILLON Jeremy - Designed from scratch with &hearts;
+    </p>
+  </footer>
+
+  <script type="text/javascript">loadingPercent = 30;</script>
+
+  <!-- ---- SCRIPTS ---- -->
+  <script id="vertexShaderNode" type="x-shader/x-vertex">
     uniform vec3 viewVector;
     uniform float c;
     uniform float p;
@@ -314,8 +337,8 @@ redirect_from:
 
       gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
     }
-    </script>
-    <script id="fragmentShaderNode" type="x-shader/x-vertex">
+  </script>
+  <script id="fragmentShaderNode" type="x-shader/x-vertex">
     uniform vec3 color;
     varying float intensity;
     void main()
@@ -323,8 +346,8 @@ redirect_from:
       vec3 glow = color * intensity;
       gl_FragColor = vec4( glow, intensity );
     }
-    </script>
-    <script id="vertexShaderEdge" type="x-shader/x-vertex">
+  </script>
+  <script id="vertexShaderEdge" type="x-shader/x-vertex">
     uniform float amplitude;
     attribute vec3 displacement;
     attribute vec3 customColor;
@@ -342,130 +365,161 @@ redirect_from:
     void main() {
       gl_FragColor = vec4( vColor * color, opacity );
     }
-    </script>
+  </script>
 
-    <script type="text/javascript">loadingPercent = 40;</script>
-    <script src="js/jquery.history.js" type="text/javascript"></script>
-    <script src="js/jquery.easing.js" type="text/javascript"></script>
-    <script src="js/jquery.parallax.js" type="text/javascript"></script>
-    <script src="js/jquery.waypoint.js" type="text/javascript"></script>
+  <script type="text/javascript">loadingPercent = 40;</script>
+  <script src="js/jquery.history.js" type="text/javascript"></script>
+  <script src="js/jquery.easing.js" type="text/javascript"></script>
+  <script src="js/jquery.parallax.js" type="text/javascript"></script>
+  <script src="js/jquery.waypoint.js" type="text/javascript"></script>
 
-    <script src="js/three.min.js" type="text/javascript"></script>
-    <script src="js/three.orbitcontrols.js" type="text/javascript"></script>
-    <script src="js/three.trackballcontrols.js" type="text/javascript"></script>
+  <script src="js/three.min.js" type="text/javascript"></script>
+  <script src="js/three.orbitcontrols.js" type="text/javascript"></script>
+  <script src="js/three.trackballcontrols.js" type="text/javascript"></script>
 
-    <script src="js/modernizr.custom.js"></script>
+  <script src="js/modernizr.custom.js"></script>
 
-    <script src="js/ResizeSensor.js"></script>
-    <script src="js/ElementQueries.js"></script>
+  <script src="js/ResizeSensor.js"></script>
+  <script src="js/ElementQueries.js"></script>
 
-    <script src="js/jg.js" type="text/javascript"></script>
-    <script src="js/main.js" type="text/javascript"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="js/jg.js" type="text/javascript"></script>
+  <script src="js/main.js" type="text/javascript"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.js'></script>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.js'></script>
 
-    <script src="js/snap.svg-min.js" type="text/javascript"></script>
-    <script src="js/svgicons-config.js" type="text/javascript"></script>
-    <script src="js/svgicons.js" type="text/javascript"></script>
+  <script src="js/snap.svg-min.js" type="text/javascript"></script>
+  <script src="js/svgicons-config.js" type="text/javascript"></script>
+  <script src="js/svgicons.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
+  <script type="text/javascript">
+    $(document).ready(function() {
 
-    // Mapbox ====================================================================
-    mapboxgl.accessToken = 'pk.eyJ1Ijoiamd1aWxsb24iLCJhIjoiY2lvZWJsaW00MDAyYXc4ajd2dWJybHlpNiJ9.F5Vrt_A41WRe8K_2eE0OTw';
-    var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/jguillon/cioedp7if002dczma0glvhsg2',
-      center: [2.364220, 48.835305],
-      zoom: 10
-    });
-    map.on('load', function () {
-      map.addSource("markers", {
-        "type": "geojson",
-        "data": {
-          "type": "Feature",
-          "geometry": {
-            "type": "Point",
-            "coordinates": [2.364220, 48.835305]
-          },
-          "properties": {
-            "title": "ARAMISLAB",
-            "description": "Brain and Spine Institute (ICM), 47 bd de l'Hôpital, 75013 Paris",
-            "marker-color": "#ff8888",
-            "marker-symbol": "suitcase"
+      // SVGs ======================================================================
+      $('img.svg').each(function(){
+        var $img = jQuery(this);
+        var imgID = $img.attr('id');
+        var imgClass = $img.attr('class');
+        var imgURL = $img.attr('src');
+
+        jQuery.get(imgURL, function(data) {
+          // Get the SVG tag, ignore the rest
+          var $svg = jQuery(data).find('svg');
+
+          // Add replaced image's ID to the new SVG
+          if(typeof imgID !== 'undefined') {
+            $svg = $svg.attr('id', imgID);
           }
-        }
+          // Add replaced image's classes to the new SVG
+          if(typeof imgClass !== 'undefined') {
+            $svg = $svg.attr('class', imgClass+' replaced-svg');
+          }
+
+          // Remove any invalid XML tags as per http://validator.w3.org
+          $svg = $svg.removeAttr('xmlns:a');
+
+          // Replace image with new SVG
+          $img.replaceWith($svg);
+
+        }, 'xml');
+
       });
 
-      map.addLayer({
-        "id": "markers",
-        "type": "symbol",
-        "source": "markers",
-        "layout": {
-          "icon-image": "{marker-symbol}-15",
-          "text-field": "{title}",
-          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-          "text-offset": [0, 0.6],
-          "text-anchor": "top",
-        },
-        "paint": {
-          "text-color": "#ff8888"
-        },
+      // Mapbox ====================================================================
+      mapboxgl.accessToken = 'pk.eyJ1Ijoiamd1aWxsb24iLCJhIjoiY2lvZWJsaW00MDAyYXc4ajd2dWJybHlpNiJ9.F5Vrt_A41WRe8K_2eE0OTw';
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/jguillon/cioedp7if002dczma0glvhsg2',
+        center: [2.364220, 48.835305],
+        zoom: 10
+      });
+      map.on('load', function () {
+        map.addSource("markers", {
+          "type": "geojson",
+          "data": {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [2.364220, 48.835305]
+            },
+            "properties": {
+              "title": "ARAMISLAB",
+              "description": "Brain and Spine Institute (ICM), 47 bd de l'Hôpital, 75013 Paris",
+              "marker-color": "#ff8888",
+              "marker-symbol": "suitcase"
+            }
+          }
+        });
+
+        map.addLayer({
+          "id": "markers",
+          "type": "symbol",
+          "source": "markers",
+          "layout": {
+            "icon-image": "{marker-symbol}-15",
+            "text-field": "{title}",
+            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+            "text-offset": [0, 0.6],
+            "text-anchor": "top",
+          },
+          "paint": {
+            "text-color": "#ff8888"
+          },
+        });
+
+        map.scrollZoom.disable();
+
       });
 
-      map.scrollZoom.disable();
+      // Parallax ==================================================================
+      $('header').parallax("50%", 0.1);
+      $('#network').parallax("50%", 0.1);
+      new Waypoint({
+        element: document.getElementById('content'),
+        handler: function(direction) {
+          if(direction=="down" && $('#content').css('display')!='none')
+          $('#network').attr('class','small');
+          else
+          $('#network').attr('class','large');
+        },
+        offset: '75%'
+      });
+      new Waypoint({
+        element: document.getElementById('content'),
+        handler: function(direction) {
+          if(direction=="down" && $('#content').css('display')!='none')
+          $('header').attr('class','small');
+          else
+          $('header').attr('class','large');
+        },
+        offset: '15%'
+      });
+
+      // Menu & SVG ================================================================
+      var svgicon = new svgIcon( document.querySelector( '.si-icon-hamburger-cross' ), svgIconConfig,
+      { easing : mina.elastic,
+        speed: 600,
+        size : { w : 45, h : 45 },
+        onToggle : toggleMenu }
+      );
+      $('#menu a').click(function(){
+        toggleMenu();
+        var href = $(this).attr('href');
+        if(selectedNode)
+        selectedNode.unselect();
+        selectedNode = graph.getNode(href.substring(1,href.length));
+        selectedNode.select();
+        History.pushState({},selectedNode.htmlId,'#'+selectedNode.htmlId);
+        scrollTo(href);
+        return false;
+      });
+
+      // Map =======================================================================
+      map.resize();
 
     });
+  </script>
 
-    loadingPercent = 90;
+</body>
 
-    // Parallax ==================================================================
-    $('header').parallax("50%", 0.1);
-    $('#network').parallax("50%", 0.1);
-    new Waypoint({
-      element: document.getElementById('content'),
-      handler: function(direction) {
-        if(direction=="down" && $('#content').css('display')!='none')
-        $('#network').attr('class','small');
-        else
-        $('#network').attr('class','large');
-      },
-      offset: '75%'
-    });
-    new Waypoint({
-      element: document.getElementById('content'),
-      handler: function(direction) {
-        if(direction=="down" && $('#content').css('display')!='none')
-        $('header').attr('class','small');
-        else
-        $('header').attr('class','large');
-      },
-      offset: '15%'
-    });
-
-    // Menu & SVG ================================================================
-    var svgicon = new svgIcon( document.querySelector( '.si-icon-hamburger-cross' ), svgIconConfig,
-    { easing : mina.elastic,
-      speed: 600,
-      size : { w : 45, h : 45 },
-      onToggle : toggleMenu }
-    );
-    $('#menu a').click(function(){
-      toggleMenu();
-      var href = $(this).attr('href');
-      if(selectedNode)
-      selectedNode.unselect();
-      selectedNode = graph.getNode(href.substring(1,href.length));
-      selectedNode.select();
-      History.pushState({},selectedNode.htmlId,'#'+selectedNode.htmlId);
-      scrollTo(href);
-      return false;
-    });
-
-    // Map =======================================================================
-    map.resize();
-
-    </script>
-  </body>
-
-  </html>
+</html>

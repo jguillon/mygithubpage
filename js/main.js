@@ -37,7 +37,7 @@ function selectNode()
 	var oldSelectedNode = selectedNode;
 	var nodeId = window.location.hash.substring(1);
 	if(nodeId === "") nodeId = "root-node";
-	var selectedNode = graph.getNode(nodeId);
+	selectedNode = graph.getNode(nodeId);
 	if(selectedNode != null && selectedNode !== oldSelectedNode) {
 		if(oldSelectedNode)
 			oldSelectedNode.unselect();
@@ -72,18 +72,19 @@ function init()
 	renderer.setClearColor( 0x001D0D, 0);
 	container.appendChild( renderer.domElement );
 
+	// NETWORK
+	graph = new JG.Graph();
+	addSubTreeFrom(document.getElementById("root-node"));
+	graph.layout.init();
+	selectNode();
+
 	// CONTROLS
 	controls = new THREE.TrackballControls( camera, renderer.domElement );
 	controls.rotateSpeed = 2.0;;
 	controls.noZoom = true;
 	controls.staticMoving = false;
 	controls.dynamicDampingFactor = 0.2;
-
-	// NETWORK
-	graph = new JG.Graph();
-	addSubTreeFrom(document.getElementById("root-node"));
-	graph.layout.init();
-	selectNode();
+	controls.target = graph.nodes[0].position;
 
 	// MOUSE
 	document.addEventListener( 'click', onMouseClick, false );
@@ -143,6 +144,7 @@ function hoverNode() {
 }
 
 function onMouseClick(event) {
+	console.log('onMouseClick');
 	mouse.x = ( (event.clientX - $(container).position().left) / $(container).width() ) * 2 - 1;
 	mouse.y = -( ( event.clientY - ($(container).offset().top - $(window).scrollTop())) / $(container).height() ) * 2 + 1;
 	// MOUSE
@@ -159,7 +161,7 @@ function onMouseClick(event) {
 				selectedNode.select();
 				graph.layout.init();
 				History.pushState({},selectedNode.htmlId,'#'+selectedNode.htmlId);
-				scrollTo('#'+selectedNode.htmlId);
+				// scrollTo('#'+selectedNode.htmlId);
 				return;
 			}
 		}
@@ -193,8 +195,8 @@ function update()
 	// CAMERA AUTO-ROTATION ANIMATION
 	// controls.constraint.rotateLeft(mouse.x/1000);
 	// controls.constraint.rotateUp(mouse.y/1000);
-	controls.update();
 	graph.update();
+	controls.update();
 }
 
 function render()
