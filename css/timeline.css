@@ -207,6 +207,12 @@ Modules - reusable parts of our design
   margin: 1em 0;
   /*line-height: 1.6;*/
 }
+.cd-timeline-content img {
+  max-width: 40%;
+  max-height: 100px;
+  float: left;
+  margin: 20px 20px 20px 0px;
+}
 .cd-timeline-content .cd-read-more {
   float: right;
   padding: .8em 1em;

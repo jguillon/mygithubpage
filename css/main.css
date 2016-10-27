@@ -95,7 +95,7 @@ header.large {
 header.small div#node-title-box {
 	display: none;
 }
-header.small ~ div#content {
+header.small ~ div#container {
 	margin-top: 100vh;
 }
 header.small {
@@ -358,7 +358,7 @@ h1, h2, h3{
 	color: #9B7269;
 	font-family: 'Poiret One', monospace;
 }
-div#content {
+div#container {
 	display: block;
 	font-family: 'Poiret One', sans-serif;
 	font-size: larger;
@@ -366,15 +366,15 @@ div#content {
 	background-color: white;
 	text-align: center;
 }
-div#content section.node,
-div#content div.node {
+div#container section.node,
+div#container div.node {
 	margin: 0 10vw;
 	padding-top: 5vh;
 }
-div#content div#map .mapboxgl-control-container{
+div#container div#map .mapboxgl-control-container{
 	display: none;
 }
-div#content div#map {
+div#container div#map {
 	height: 40vh;
 	width: 100vw;
 	left: -10vw;

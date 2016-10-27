@@ -1,0 +1,80 @@
+---
+layout: base
+title: Curriculum Vitae
+slug: curriculum-vitae
+permalink: /curriculum-vitae
+---
+
+<section class="node">
+
+  <h1>Curriculum Vitae</h1>
+
+  <div id="cd-timeline" class="cd-container">
+
+    {% for exp in site.data.curriculum-vitae %}
+
+    <div class="cd-timeline-block">
+      <div class="cd-timeline-img cd-picture">
+        <img src="/img/icon-book.svg" alt="Picture">
+      </div> <!-- cd-timeline-img -->
+
+      <div class="cd-timeline-content">
+        <h2>{{ exp.title }}</h2>
+        <img src="{{ exp.picture }}" alt="{{ exp.title }} Illustration">
+        <p>{{ exp.description }}</p>
+        <a href="#0" class="cd-read-more">Read more</a>
+        <span class="cd-date">{{ exp.date }} - {{ exp.length }}</span>
+      </div> <!-- cd-timeline-content -->
+    </div> <!-- cd-timeline-block -->
+
+    {% endfor %}
+
+  </div>
+
+</section>
+
+<script type="text/javascript">
+
+  // Timeline Blocks Animation Settings
+  // =========================================================================
+  function hideBlocks(blocks, offset) {
+    blocks.each(function(){
+      if( $(this).offset().top > $(window).scrollTop() + window.innerHeight * offset ) {
+        $(this).find('.cd-timeline-img, .cd-timeline-content').addClass('is-hidden');
+      }
+    });
+  }
+
+  function showBlocks(blocks, offset) {
+    blocks.each(function(){
+      if($(this).offset().top <= $(window).scrollTop() + window.innerHeight * offset
+      && $(this).find('.cd-timeline-img').hasClass('is-hidden')) {
+          $(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
+      }
+    });
+  }
+
+  var timelineBlocks = null;
+  var timelineAnimOffset = 0.8;
+
+  jQuery(document).ready(function() {
+
+  	timelineBlocks = $('.cd-timeline-block');
+  	//hide timeline blocks which are outside the viewport
+  	hideBlocks(timelineBlocks, timelineAnimOffset);
+  	//on scolling, show/animate timeline blocks when enter the viewport
+  	$(window).on('scroll', function(){
+      console.log("SCROLLL");
+  		if(!window.requestAnimationFrame) {
+  			setTimeout(function(){ showBlocks(timelineBlocks, timelineAnimOffset); }, 100);
+      } else {
+  			window.requestAnimationFrame(function(){ showBlocks(timelineBlocks, timelineAnimOffset); });
+      }
+  	});
+
+    // SVG Convertion
+    // =========================================================================
+    $('img.svg').convert2svg();
+
+  });
+</script>
