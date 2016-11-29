@@ -7,7 +7,7 @@
   <div id="menu-button">
     <span class="si-icon si-icon-hamburger-cross" data-icon-name="hamburgerCross"></span>
   </div>
-  <div id="menu" class="closed" style="right: -70vmin;">
+  <div id="menu" class="col-xs-12 col-sm-6 col-md-4 col-xs-offset-12 col-sm-offset-12 col-md-offset-12 closed">
     <nav class="cl-effect-10">
       <ul id="about-me-menu"></ul>
     </nav>
@@ -48,23 +48,25 @@
       // Menu Toggling Function
       // =========================================================================
       function toggleMenu() {
-        var div = $('#menu');
-        div.toggleClass('closed');
-        if(div.hasClass('closed')) { // Closing menu
-          if(svgicon.toggled)
-          svgicon.toggle(true)
-          div.animate({ right: '-70vmin' }, 600, 'easeOutElastic');
-        } else { // Opened menu
-          if(!svgicon.toggled)
-          svgicon.toggle(true)
-          div.animate({ right: '-20vmin' }, 600, 'easeOutElastic');
+          var div = $('#menu');
+          div.toggleClass('col-xs-offset-0 col-sm-offset-6 col-md-offset-8');
+          div.toggleClass('col-xs-offset-12 col-sm-offset-12 col-md-offset-12');
+          div.toggleClass('closed');
+          if(!svgicon.toggled) svgicon.toggle(true);
+          if(div.hasClass('closed')) { // Closing menu
+            if(svgicon.toggled)
+            svgicon.toggle(true);
+        }else{
+            if(!svgicon.toggled)
+            svgicon.toggle(true);
+
         }
       }
 
       // Parallax
       // =========================================================================
-      $('header').parallax("50%", 0.5);
-      $('#network').parallax("50%", 0.5);
+    //   $('header').parallax("50%", 0.5);
+    //   $('#network').parallax("50%", 0.5);
 
       // Loading
       // =========================================================================

@@ -1,5 +1,4 @@
 body, html {
-	background-color: #081313;
 }
 .helper {
 	display: inline-block;
@@ -16,6 +15,46 @@ body, html {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+}
+.container-fluid {
+	padding: 0;
+}
+.container-fluid .row {
+	margin-right: auto;
+	margin-left: auto;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.container-fluid .row-fluid {
+	padding-left: 0;
+	padding-right: 0;
+    width:100%
+}
+@media (min-width: 768px) {
+    .container-fluid .row {
+        width:750px;
+    }
+    .container-fluid .row-fluid {
+        width:100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .container-fluid .row {
+        width:970px;
+    }
+    .container-fluid .row-fluid {
+        width:100%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container-fluid .row {
+        width:1170px;
+    }
+    .container-fluid .row-fluid {
+        width:100%;
+    }
 }
 
 
@@ -86,7 +125,7 @@ header {
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-image: url('/img/stars.png');
+	background-image: url('/img/stars.jpg');
 }
 header.large {
 	height: 100%;
@@ -102,7 +141,7 @@ header.small {
 	height: 15%;
 	position: fixed;
 	font-size: 100%;
-	background-color: #081313;
+	/*background-color: #081313;*/
 }
 header img#logo {
 	position: fixed;
@@ -122,9 +161,9 @@ header div#filled-bg {
 	width: 100%;
 	height: 100%;
 	background-color: #081313;
-	-webkit-transition: opacity 0.3s;
-	-moz-transition: opacity 0.3s;
-	transition: opacity 0.3s;
+	-webkit-transition: opacity 0.6s;
+	-moz-transition: opacity 0.6s;
+	transition: opacity 0.6s;
 }
 header.large div#filled-bg {
 	opacity: 0;
@@ -136,10 +175,14 @@ header div#menu {
 	font-family: 'Poiret One', monospace;
 	background-color: white;
 	position: fixed;
-	width: 70vmin;
-	height: 100vh;
-	right: 0;
+	height: 100%;
+	/*right: 0;*/
 	top: 0;
+	padding: 0;
+	-webkit-transition: margin-left 0.4s ease-in-out;
+	-moz-transition: margin-left 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+	-o-transition: margin-left 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+	transition: margin-left 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 header div#menu nav a {
 	position: relative;
@@ -218,7 +261,7 @@ header div#menu nav {
 	overflow: scroll;
 	margin-top: 15vh;
 	height: 85vh;
-	width: 50vmin;
+	width: 100%;
 }
 header div#menu nav ul {
 	list-style-type: none;
@@ -252,9 +295,9 @@ header div#menu-button span {
 header div#network {
 	width: 100%;
 	height: 100%;
-	-webkit-transition:  height 0.6s;
+	/*-webkit-transition:  height 0.6s;
 	-moz-transition: height 0.6s;
-	transition: height 0.6s;
+	transition: height 0.6s;*/
 	position: fixed;
 	cursor: -webkit-grab;
   cursor: -moz-grab;
@@ -354,7 +397,6 @@ header div#node-title-box .kukuri-hover::before {
  ****************************************************/
 
 h1, h2, h3{
-	text-align: center;
 	color: #9B7269;
 	font-family: 'Poiret One', monospace;
 }
@@ -364,20 +406,13 @@ div#container {
 	font-size: larger;
 	color: gray;
 	background-color: white;
-	text-align: center;
-}
-div#container section.node,
-div#container div.node {
-	margin: 0 10vw;
-	padding-top: 5vh;
 }
 div#container div#map .mapboxgl-control-container{
 	display: none;
 }
 div#container div#map {
 	height: 40vh;
-	width: 100vw;
-	left: -10vw;
+	width: 100%;
 	text-align: left;
 }
 
@@ -424,5 +459,4 @@ footer a#btn-linkedin:hover { color: #0077B5; }
 footer a#btn-github:hover { color: #777777; }
 footer p#rights {
 	color: #2E7179;
-	font-size: 1.5vmin;
 }

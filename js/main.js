@@ -74,6 +74,10 @@ function init()
 	document.addEventListener( 'click', onMouseClick, false );
 	document.addEventListener( 'mousemove', onMouseMove, false );
 	window.addEventListener( 'resize', onWindowResize , false );
+
+	// STATS
+	stats = new Stats();
+	container.appendChild( stats.dom );
 }
 
 function growTree(url) {
@@ -106,7 +110,7 @@ function addMenuEntry(parent,child) {
 	if($('#'+parent.id+'-menu').length == 0) {
 		$('#'+parent.id+'-menu-entry').append('<ul id="'+parent.id+'-menu"></ul>');
 	}
-	$('#'+parent.id+'-menu').append('<li id="'+child.id+'-menu-entry'+'"><a href="#'+child.id+'" data-hover="'+child.title+'"><span>'+child.title+'</span></a></li>');
+	$('#'+parent.id+'-menu').append('<li id="'+child.id+'-menu-entry'+'"><a href="/'+child.id+'" data-hover="'+child.title+'"><span>'+child.title+'</span></a></li>');
 }
 
 function onMouseMove(event) {
@@ -191,4 +195,7 @@ function animate()
 
 	// Render
 	renderer.render( scene, camera );
+
+	// Stats
+	stats.update();
 }

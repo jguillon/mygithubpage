@@ -241,7 +241,7 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 
 	// Constructor __________________________________________________
 	var geometry = new THREE.Geometry();
-	var nLines = 10;
+	var nLines = 5;
 	for (var i = 0; i<nLines; i++) {
 		geometry.vertices.push(new THREE.Vector3());
 		geometry.vertices.push(new THREE.Vector3());
@@ -264,7 +264,7 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 		blending:       THREE.AdditiveBlending,
 		depthTest:      false,
 		transparent:    true,
-		linewidth: 			1
+		linewidth: 			2
 	});
 	THREE.Line.call(this,geometry,material,THREE.LineStrip);
 
