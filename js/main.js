@@ -10,6 +10,7 @@ init();
 animate();
 
 window.onpopstate = function() {
+	console.log("onpopstate");
 	selectNode();
 };
 
@@ -18,26 +19,12 @@ function scrollTo(href) {
 	$('html, body').animate( { scrollTop: $(href).offset().top - window.innerHeight*15/100 }, speed );
 }
 
-function toggleMenu() {
-	var div = $('#menu');
-	div.toggleClass('closed');
-	if(div.hasClass('closed')) { // Closing menu
-		if(svgicon.toggled)
-			svgicon.toggle(true)
-		div.animate({ right: '-70vmin' }, 600, 'easeOutElastic');
-	} else { // Opened menu
-		if(!svgicon.toggled)
-			svgicon.toggle(true)
-		div.animate({ right: '-20vmin' }, 600, 'easeOutElastic');
-	}
-}
-
 function selectNode()
 {
 	var oldSelectedNode = selectedNode;
-	var nodeId = window.location.hash.substring(1);
-	if(nodeId === "") nodeId = "root-node";
-	var selectedNode = graph.getNode(nodeId);
+	var url = window.location.pathname;
+	if(url === "") url = "/about-me";
+	selectedNode = graph.getNodeBy("url", url);
 	if(selectedNode != null && selectedNode !== oldSelectedNode) {
 		if(oldSelectedNode)
 			oldSelectedNode.unselect();
@@ -72,6 +59,10 @@ function init()
 	renderer.setClearColor( 0x001D0D, 0);
 	container.appendChild( renderer.domElement );
 
+	// NETWORK
+	graph = new JG.Graph();
+	growTree("/graph.json");
+
 	// CONTROLS
 	controls = new THREE.TrackballControls( camera, renderer.domElement );
 	controls.rotateSpeed = 2.0;;
@@ -79,43 +70,54 @@ function init()
 	controls.staticMoving = false;
 	controls.dynamicDampingFactor = 0.2;
 
-	// NETWORK
-	graph = new JG.Graph();
-	addSubTreeFrom(document.getElementById("root-node"));
-	graph.layout.init();
-	selectNode();
-
 	// MOUSE
 	document.addEventListener( 'click', onMouseClick, false );
 	document.addEventListener( 'mousemove', onMouseMove, false );
 	window.addEventListener( 'resize', onWindowResize , false );
+
+	// STATS
+	stats = new Stats();
+	container.appendChild( stats.dom );
 }
 
-function addSubTreeFrom(parentNode) {
+function growTree(url) {
+	$.getJSON(url, function(data) {
+	  growBranchFrom(data.nodes[0]);
+		graph.layout.init();
+		selectNode();
+		controls.target = graph.nodes[0].position;
+	});
+}
+
+function growBranchFrom(parentNodeJSON) {
+	var parentNode = new JG.Node(parentNodeJSON.id);
+	parentNode.title = parentNodeJSON.title
+	parentNode.url = parentNodeJSON.url;
 	graph.addNode(scene, parentNode);
-	var childrenNodes = $(parentNode).children('.node');
-	for(var i=0; i<childrenNodes.length; i++) {
-		addMenuEntry(parentNode, childrenNodes[i]);
-		addSubTreeFrom(childrenNodes[i]);
-		graph.addEdge(scene, graph.getNode(parentNode.id), graph.getNode(childrenNodes[i].id));
+	var childrenNodesJSON = parentNodeJSON.nodes;
+	if(typeof childrenNodesJSON != 'undefined') {
+		for(var i = 0; i < childrenNodesJSON.length; i++) {
+			addMenuEntry(parentNodeJSON, childrenNodesJSON[i]);
+			growBranchFrom(childrenNodesJSON[i]);
+			graph.addEdge(scene,
+				graph.getNodeBy("htmlId", parentNodeJSON.id),
+				graph.getNodeBy("htmlId", childrenNodesJSON[i].id));
+		}
 	}
 }
 
 function addMenuEntry(parent,child) {
-	if($('#'+$(parent).attr('id')+'-menu').length == 0) {
-		$('#'+$(parent).attr('id')+'-menu-entry').append('<ul id="'+$(parent).attr('id')+'-menu"></ul>');
+	if($('#'+parent.id+'-menu').length == 0) {
+		$('#'+parent.id+'-menu-entry').append('<ul id="'+parent.id+'-menu"></ul>');
 	}
-	$('#'+$(parent).attr('id')+'-menu').append('<li id="'+$(child).attr('id')+'-menu-entry'+'"><a href="#'+$(child).attr('id')+'" data-hover="'+$(child).attr('title')+'"><span>'+$(child).attr('title')+'</span></a></li>');
+	$('#'+parent.id+'-menu').append('<li id="'+child.id+'-menu-entry'+'"><a href="/'+child.id+'" data-hover="'+child.title+'"><span>'+child.title+'</span></a></li>');
 }
 
 function onMouseMove(event) {
 	oldMouse = mouse;
 	mouse.x = ( (event.clientX - $(container).position().left) / $(container).width() ) * 2 - 1;
 	mouse.y = -( ( event.clientY - ($(container).offset().top - $(window).scrollTop())) / $(container).height() ) * 2 + 1;
-	hoverNode();
-}
 
-function hoverNode() {
 	// MOUSE HOVERING
 	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 	vector.unproject(camera);
@@ -143,6 +145,7 @@ function hoverNode() {
 }
 
 function onMouseClick(event) {
+	console.log('onMouseClick');
 	mouse.x = ( (event.clientX - $(container).position().left) / $(container).width() ) * 2 - 1;
 	mouse.y = -( ( event.clientY - ($(container).offset().top - $(window).scrollTop())) / $(container).height() ) * 2 + 1;
 	// MOUSE
@@ -158,8 +161,10 @@ function onMouseClick(event) {
 				selectedNode = intersects[i].object;
 				selectedNode.select();
 				graph.layout.init();
-				History.pushState({},selectedNode.htmlId,'#'+selectedNode.htmlId);
-				scrollTo('#'+selectedNode.htmlId);
+				console.log("pushState");
+				console.log(selectedNode);
+				History.pushState({}, selectedNode.htmlId, selectedNode.url);
+				// scrollTo('#'+selectedNode.htmlId);
 				return;
 			}
 		}
@@ -183,23 +188,14 @@ function onWindowResize(){
 function animate()
 {
 	requestAnimationFrame( animate );
-	update();
-	render();
-}
 
-function update()
-{
-
-	// CAMERA AUTO-ROTATION ANIMATION
-	// controls.constraint.rotateLeft(mouse.x/1000);
-	// controls.constraint.rotateUp(mouse.y/1000);
-	controls.update();
+	// Update
 	graph.update();
-}
+	controls.update();
 
-function render()
-{
-
-	// VIEW
+	// Render
 	renderer.render( scene, camera );
+
+	// Stats
+	stats.update();
 }

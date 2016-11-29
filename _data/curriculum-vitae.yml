@@ -1,0 +1,23 @@
+- date: 2015
+  length: 5 years
+  category: diploma
+  place: INSA (National Institute of Applied Sciences) Rouen, FR
+  picture: /img/logo_insa.png
+  title: Engineer's Degree
+  description: Engineer's Degree in information systems' architecture.
+
+- date: 2015
+  length: 1 year
+  category: diploma
+  company: University of Rouen, FR
+  picture: /img/logo_univ.png
+  title: Master's Degree
+  description: Master's Degree in multimedia information processing systems.
+
+- date: 2013
+  length: 1 year
+  category: studies
+  company: UdeM (University of Montreal), Québec, CA
+  picture: /img/logo_udem.png
+  title: Master's Degree
+  description: Master's Degree in multimedia information processing systems.

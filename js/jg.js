@@ -1,7 +1,5 @@
 // scene, camera, container and clock have to be global variables;
 
-var checkFoldTimeout;
-
 var JG = {
 	REVISION: "2",
 	DEFAULT_COLOR: 0x55777f,
@@ -14,7 +12,7 @@ var JG = {
 
 
 /********************************************************************
- * Graph Class														*
+ * Graph Class																											*
  ********************************************************************/
 
  JG.Graph = function() {
@@ -34,8 +32,7 @@ var JG = {
 		scene.add(edge);
 		this.edges.push(edge);
 	};
-	this.addNode = function(scene, htmlObject) {
-		var node = new JG.Node($(htmlObject));
+	this.addNode = function(scene, node) {
 		scene.add(node);
 		this.nodes.push(node);
 		return node;
@@ -49,10 +46,10 @@ var JG = {
 			edge.update();
 		});
 	};
-	this.getNode = function(id) {
+	this.getNodeBy = function(key, val) {
 		var n = null;
 		this.nodes.forEach(function(node, i) {
-			if(node.htmlId === id)
+			if(node[key] === val)
 				n = node;
 		});
 		return n;
@@ -65,7 +62,7 @@ var JG = {
  * Node Class														*
  ********************************************************************/
 
- JG.Node = function(jqueryObject) {
+ JG.Node = function(id) {
 
 	// Constructor __________________________________________________
 	var radius = 10;
@@ -97,16 +94,18 @@ var JG = {
 	// scene.add(sprite);
 
 	// Attributes ___________________________________________________
-	this.htmlId = jqueryObject.attr('id');
+	this.htmlId = id;
 	this.selected = false;
-	this.animationDelay = Math.PI*Math.random();
-	this.jqueryObject = jqueryObject.remove('.node');
+	this.title = null;
+	this.url = null;
 	this.material = material;
 	this.geometry = geometry;
 	this.childrenNodes = [];
 	this.parentNode = null;
 	this.hovered = false;
-	this.checkFoldDelay = 500;
+	this.folded = false;
+	this.checkFoldDelay = 20.0; // In seconds
+	this.checkFoldStart = clock.getElapsedTime();
 	// this.icon = sprite;
 
 	// Methods ______________________________________________________
@@ -116,17 +115,14 @@ var JG = {
 		}
 		this.selected = true;
 		this.material.uniforms.color.value.setHex(JG.SELECTION_COLOR);
-		// this.jqueryObject.show();
-		$("#content").empty();
-		$("#content").append(this.jqueryObject);
 		this.unfold();
 	};
 	this.unselect = function() {
 		this.selected = false;
 		this.material.uniforms.color.value.setHex(JG.DEFAULT_COLOR);
-		this.scale.setX(1.0);
-		this.scale.setY(1.0);
-		this.scale.setZ(1.0);
+		// this.scale.setX(1.0);
+		// this.scale.setY(1.0);
+		// this.scale.setZ(1.0);
 		this.fold();
 		if(this.parentNode != null) {
 			this.parentNode.unselect();
@@ -134,16 +130,19 @@ var JG = {
 	};
 	this.fold = function() {
 		if(!this.selected) {
-			for(var i=0; i<this.childrenNodes.length; i++) {
-				this.childrenNodes[i].fold();
-				this.childrenNodes[i].visible = false;
-				this.childrenNodes[i].position = this.position;
+			if(this.childrenNodes.length > 0) {
+				for(var i=0; i<this.childrenNodes.length; i++) {
+					this.childrenNodes[i].fold();
+					this.childrenNodes[i].visible = false;
+					this.childrenNodes[i].position = this.position;
+				}
+				this.hideEdges();
+				// this.scale.setX(Math.max(this.childrenNodes.length, 1.0));
+				// this.scale.setY(Math.max(this.childrenNodes.length, 1.0));
+				// this.scale.setZ(Math.max(this.childrenNodes.length, 1.0));
+				graph.layout.init();
 			}
-			this.hideEdges();
-			// this.scale.setX(Math.max(this.childrenNodes.length, 1.0));
-			// this.scale.setY(Math.max(this.childrenNodes.length, 1.0));
-			// this.scale.setZ(Math.max(this.childrenNodes.length, 1.0));
-			graph.layout.init();
+			this.folded = true;
 		}
 	}
 	this.hideEdges = function() {
@@ -154,14 +153,16 @@ var JG = {
 		});
 	}
 	this.unfold = function() {
-		for(var i=0; i<this.childrenNodes.length; i++) {
-			this.childrenNodes[i].visible = true;
+		if(this.folded) {
+			if(this.childrenNodes.length > 0) {
+				for(var i=0; i<this.childrenNodes.length; i++) {
+					this.childrenNodes[i].visible = true;
+				}
+				this.showEdges();
+				graph.layout.init();
+			}
+			this.folded = false;
 		}
-		this.showEdges();
-		// this.scale.setX(1.0);
-		// this.scale.setY(1.0);
-		// this.scale.setZ(1.0);
-		graph.layout.init();
 	}
 	this.showEdges = function() {
 		var that = this;
@@ -171,7 +172,6 @@ var JG = {
 		});
 	}
 	this.hover = function() {
-		console.log('hover');
 		if(!this.hovered) {
 			this.hovered = true;
 			if(this.parentNode != null) {
@@ -181,8 +181,8 @@ var JG = {
 			v = toXYCoords(this.position);
 			JG.LABEL_BOX.css('left', v.x);
 			JG.LABEL_BOX.css('top', v.y - 36);
-			JG.LABEL.html(this.jqueryObject.attr("title"));
-			JG.LABEL.attr('data-letters',this.jqueryObject.attr("title"));
+			JG.LABEL.html(this.title);
+			JG.LABEL.attr('data-letters',this.title);
 			JG.LABEL.addClass('kukuri-hover');
 			$("#network").addClass('hover-node');
 			if(this.selected)
@@ -194,7 +194,6 @@ var JG = {
 		}
 	};
 	this.unhover = function() {
-		console.log('unhover');
 		if(this.hovered) {
 			this.hovered = false;
 			if(this.parentNode != null) {
@@ -207,7 +206,8 @@ var JG = {
 				this.material.uniforms.color.value.setHex(JG.SELECTION_COLOR);
 			else {
 				this.material.uniforms.color.value.setHex(JG.DEFAULT_COLOR);
-				this.checkFoldDelay = 1000;
+				this.checkFoldStart = clock.getElapsedTime();
+				this.checkFoldDelay = 10.0;
 			}
 		}
 	};
@@ -217,9 +217,8 @@ var JG = {
 		this.checkFold();
 	};
 	this.checkFold = function() {
-		this.checkFoldDelay = this.checkFoldDelay - 1;
-		if(this.checkFoldDelay <= 0) {
-			if(this.hovered) { return; }
+		if(clock.getElapsedTime() - this.checkFoldStart > this.checkFoldDelay) {
+			if(this.hovered || this.selected || this.folded) { return; }
 			for(var i=0; i<this.childrenNodes.length; i++) {
 				if(this.childrenNodes[i].hovered) { return; }
 			}
@@ -242,7 +241,7 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 
 	// Constructor __________________________________________________
 	var geometry = new THREE.Geometry();
-	var nLines = 4;
+	var nLines = 5;
 	for (var i = 0; i<nLines; i++) {
 		geometry.vertices.push(new THREE.Vector3());
 		geometry.vertices.push(new THREE.Vector3());
@@ -254,7 +253,7 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 	};
 	var uniforms = {
 		amplitude: { type: "f", value: 5.0 },
-		opacity:   { type: "f", value: 0.3 },
+		opacity:   { type: "f", value: 0.2 },
 		color:     { type: "c", value: new THREE.Color(0xffffff) }
 	};
 	var material = new THREE.ShaderMaterial( {
@@ -265,7 +264,7 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 		blending:       THREE.AdditiveBlending,
 		depthTest:      false,
 		transparent:    true,
-		linewidth: 		1
+		linewidth: 			2
 	});
 	THREE.Line.call(this,geometry,material,THREE.LineStrip);
 
@@ -277,9 +276,10 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 
 	// Methods ______________________________________________________
 	this.update = function() {
-		this.material.uniforms.amplitude.value = 5 * Math.sin( 0.5 * clock.getElapsedTime() );
-		this.material.needsUpdate = true;
+		// Displacement amplitude
+		this.material.uniforms.amplitude.value = 5 * Math.sin( Math.random() * 0.5 * clock.getElapsedTime() );
 		for( var i = 0; i < this.geometry.vertices.length; i ++ ) {
+			// Target or source color and position
 			if(i%2 == 0) {
 				this.material.attributes.customColor.value[i] = this.source.material.uniforms.color.value;
 				this.geometry.vertices[i] = this.source.position;
@@ -292,6 +292,7 @@ JG.Node.prototype = Object.create(THREE.Mesh.prototype);
 				0.5 - Math.random(),
 				0.5 - Math.random());
 		}
+		this.material.needsUpdate = true;
 		this.geometry.verticesNeedUpdate = true;
 		this.material.attributes.customColor.needsUpdate = true;
 		this.material.attributes.displacement.needsUpdate = true;
@@ -309,7 +310,8 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 
 	// Constructor __________________________________________________
 	var options = options || {};
-	var EPSILON = 0.001;
+	var EPSILON = 0.01;
+	var MIN_TEMPERATURE = 0.0000001;
 	var attraction_constant;
 	var repulsion_constant;
 	var forceConstant;
@@ -319,21 +321,22 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 	var edges_length;
 
 	// Attributes ___________________________________________________
-	this.attraction_multiplier = options.attraction || 5;
-	this.repulsion_multiplier = options.repulsion || 0.75;
+	this.attraction_multiplier = options.attraction || 0.1;
+	this.repulsion_multiplier = options.repulsion || 5;
 	this.max_iterations = options.iterations || 1000;
 	this.graph = graph;
 	this.width = options.width || 50;
 	this.height = options.height || 50;
 	this.finished = false;
 	this.pause = true;
+	this.temperature = this.width / 2.0;
 
 
 	// Methods ______________________________________________________
 	this.init = function() {
+		this.temperature = this.width / 10.0;
 		this.finished = false;
 		it = 0;
-		temperature = this.width / 10.0;
 		nodes_length = this.graph.nodes.length;
 		edges_length = this.graph.edges.length;
 		forceConstant = Math.sqrt(this.height * this.width / nodes_length);
@@ -341,7 +344,7 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 		repulsion_constant = this.repulsion_multiplier * forceConstant;
 	};
 	this.update = function() {
-		if(it < this.max_iterations && temperature > 0.1 && !this.pause) {
+		if(!this.pause && !this.finished && it < this.max_iterations && this.temperature > MIN_TEMPERATURE) {
 			// calculate repulsion
 			for(var i=0; i < nodes_length; i++) {
 				if(graph.nodes[i].visible) {
@@ -426,19 +429,19 @@ JG.Edge.prototype = Object.create(THREE.Line.prototype);
 					+ node.layout.offset_y * node.layout.offset_y
 					+ node.layout.offset_z * node.layout.offset_z));
 
-				node.layout.tmp_pos_x += (node.layout.offset_x / delta_length) * Math.min(delta_length, temperature);
-				node.layout.tmp_pos_y += (node.layout.offset_y / delta_length) * Math.min(delta_length, temperature);
-				node.layout.tmp_pos_z += (node.layout.offset_z / delta_length) * Math.min(delta_length, temperature);
+				node.layout.tmp_pos_x += (node.layout.offset_x / delta_length) * Math.min(delta_length, this.temperature);
+				node.layout.tmp_pos_y += (node.layout.offset_y / delta_length) * Math.min(delta_length, this.temperature);
+				node.layout.tmp_pos_z += (node.layout.offset_z / delta_length) * Math.min(delta_length, this.temperature);
 
 				var updated = true;
 				node.position.x -=  (node.position.x-node.layout.tmp_pos_x)/10;
 				node.position.y -=  (node.position.y-node.layout.tmp_pos_y)/10;
 				node.position.z -=  (node.position.z-node.layout.tmp_pos_z)/10;
 			}
-			temperature *= (1 - (it / this.max_iterations));
+			this.temperature *= (1 - (it / this.max_iterations));
 			it++;
 			return true;
-		} else if(it >= this.max_iterations || temperature <= 0.1) {
+		} else if(it >= this.max_iterations || this.temperature <= MIN_TEMPERATURE) {
 			this.finished = true;
 			return false;
 		}

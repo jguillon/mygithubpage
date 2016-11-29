@@ -1,0 +1,61 @@
+{
+  "nodes": [
+    {
+      "id": "about-me",
+      "title": "About Me",
+      "url": "/about-me",
+      "nodes": [
+        {
+          "id": "curriculum-vitae",
+          "title": "Curriculum Vitae",
+          "url": "/curriculum-vitae",
+          "nodes": [
+            { "id": "professional", "title": "Professional Experience", "url": "/curriculum-vitae/professional" },
+            { "id": "academic",     "title": "Academic Experience",     "url": "/curriculum-vitae/academic" },
+            { "id": "distinctions", "title": "Distinctions",            "url": "/curriculum-vitae/distinctions" }
+          ]
+        },
+        {
+          "id": "personal-projects",
+          "title": "Personal Projects",
+          "url": "/personal-projects",
+          "nodes": [
+            { "id": "eye-gaze-tracker",               "title": "Eye-Gaze Tracker with OpenCV Library",            "url": "/personal-projects/eye-gaze-tracker"},
+            { "id": "force-directed-brain-networks",  "title": "Force-Directed Brain Networks in with D3.js",     "url": "/personal-projects/force-directed-brain-networks"},
+            { "id": "connectivx-toolbox",             "title": "ConnectivX MATLAB(r) Toolbox",                    "url": "/personal-projects/connectivx-toolbox"},
+            { "id": "generalized-hough-transform",    "title": "Generalized Hough Transform with OpenCV Library", "url": "/personal-projects/generalized-hough-transform"}
+          ]
+        },
+        {
+          "id": "tutorials",
+          "title": "Tutorials",
+          "url": "/tutorials",
+          "nodes": [
+            { "id": "xnat-on-osx",        "title": "XNAT on OS X",                       "url": "/tutorials/xnat-on-osx"},
+            { "id": "slacktex",           "title": "SlackTeX: A LaTeX Plugin for Slack", "url": "/tutorials/slacktex"},
+            { "id": "matlab-with-nipype", "title": "MATLAB(r) with Nipype",              "url": "/tutorials/matlab-with-nipype"}
+          ]
+        },
+        {
+          "id": "scientific-activities",
+          "title": "Scientific Activities",
+          "url": "/scientific-activities",
+          "nodes": [
+            { "id": "publications", "title": "Publications",  "url": "/scientific-activities/publications"},
+            { "id": "posters",      "title": "Posters",       "url": "/scientific-activities/posters"},
+            { "id": "talks",        "title": "Talks",         "url": "/scientific-activities/talks"}
+          ]
+        },
+        {
+          "id": "snippets",
+          "title": "Snippets",
+          "url": "/snippets",
+          "nodes": [
+            { "id": "matlab-snippets", "title": "MATLAB(r) Snippets",  "url": "/snippets/matlab-snippets"},
+            { "id": "cpp-qt-snippets", "title": "C++ and Qt Snippets", "url": "/snippets/cpp-qt-snippets"}
+          ]
+        }
+      ]
+    }
+  ]
+}
