@@ -1,18 +1,18 @@
 {
   "nodes": [
     {
-      "id": "about-me",
-      "title": "About Me",
-      "url": "/about-me",
+      "id": "home",
+      "title": "Home",
+      "url": "/",
       "nodes": [
         {
           "id": "curriculum-vitae",
           "title": "Curriculum Vitae",
           "url": "/curriculum-vitae",
           "nodes": [
-            { "id": "professional", "title": "Professional Experience", "url": "/curriculum-vitae/professional" },
-            { "id": "academic",     "title": "Academic Experience",     "url": "/curriculum-vitae/academic" },
-            { "id": "distinctions", "title": "Distinctions",            "url": "/curriculum-vitae/distinctions" }
+            { "id": "professional", "title": "Professional Experience", "url": "/curriculum-vitae#professional" },
+            { "id": "academic",     "title": "Academic Experience",     "url": "/curriculum-vitae#academic" },
+            { "id": "distinctions", "title": "Distinctions",            "url": "/curriculum-vitae#distinctions" }
           ]
         },
         {
