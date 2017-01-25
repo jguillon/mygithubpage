@@ -1,89 +1,107 @@
 ---
 layout: base
-title: About Me
-slug: about-me
-permalink: /about-me
+title: Home
+slug: home
 ---
 
 <div class="row">
-    <h1>About Me</h1>
 
-    <h2>Who I am</h2>
-    <p>
-        I’m a PhD student at the <a href="http://icm-institute.org/en/">Brain and Spine Institute (ICM)</a>, inside the Pitié-Salpêtrière Hospital in Paris. I’m working under the supervision of <a href="https://sites.google.com/site/devicofallanifabrizio/">Fabrizio De Vico Fallani</a> on <b>brain connectivity</b> which lays at the intersect between three main fields: neuroscience, signal processing and complex systems science. My main topics of interest include <em>connectomics</em>, <em>graph theory</em> and <em>data visualization</em>.
-    </p>
+    <div class="col-md-12">
+        <h1>About Me</h1>
+    </div>
 
-    <blockquote class="blockquote-reverse">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-        <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
-    </blockquote>
+    <div class="col-sm-12 col-md-6">
+        <h2>Who I am</h2>
+        <img id="avatar" src="/img/avatar.jpg" alt="Avatar" />
+        <p>
+            I’m a PhD student at the <a target="_blank" href="http://icm-institute.org/en/">Brain and Spine Institute (ICM)</a>, inside the Pitié-Salpêtrière Hospital in Paris. I’m working under the supervision of <a target="_blank" href="https://sites.google.com/site/devicofallanifabrizio/">Fabrizio De Vico Fallani</a> on <b>brain connectivity</b> which lays at the intersect between three main fields: neuroscience, signal processing and complex systems science. My main topics of interest include <em>connectomics</em>, <em>graph theory</em> and <em>data visualization</em>.
+        </p>
+    </div>
 
-    <h2>What I do</h2>
-    <p>
-        Until now, I’ve been mainly working on building multilayer brain networks where both the nodes, that correspond to brain regions, and the edges, that link them, can be estimated in many different ways.
-        <!-- Meaning going from brain electromagnetic signals or images to graphs. But since the brain is well known to expose various types of communication I would like go further in the analysis and apply the multilayer framework to better understand interactions between those types of communication. -->
-    </p>
+    <div class="col-md-6">
+        <blockquote class="blockquote-reverse">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+            <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+        </blockquote>
+    </div>
 
-    <h2>Where you could have seen me</h2>
-    <!-- TODO: link to my other pages-->
-    <ul class="grid cs-style-1">
-        <li>
-            <figure>
-                <img src="img/geneva.png" alt="geneva">
-                <figcaption>
-                    <h3>OHBM 2016</h3>
-                    <span>Geneva, Switzerland</span>
-                    <a href="http://dribbble.com/shots/1115632-Camera">See my poster</a>
-                </figcaption>
-            </figure>
-        </li>
-        <li>
-            <figure>
-                <img src="img/paris.jpg" alt="paris">
-                <figcaption>
-                    <h3>MATLAB Expo 2016</h3>
-                    <span>Paris, France</span>
-                    <a href="http://www.matlabexpo.com/fr/">Know more</a>
-                </figcaption>
-            </figure>
-        </li>
-        <li>
-            <figure>
-                <img src="img/dijon.png" alt="dijon">
-                <figcaption>
-                    <h3>CompleNet 2016</h3>
-                    <span>Dijon, France</span>
-                    <a href="http://complenet.org/CompleNet_2017/Home.html">Know more</a>
-                </figcaption>
-            </figure>
-        </li>
-        <li>
-            <figure>
-                <img src="img/luchon.png" alt="luchon">
-                <figcaption>
-                    <h3>Workshop on Complex Networks 2016</h3>
-                    <span>Luchon, France</span>
-                    <a href="http://dribbble.com/shots/1116775-Safari">See my slides</a>
-                </figcaption>
-            </figure>
-        </li>
-        <li>
-            <figure>
-                <img src="img/luchon.png" alt="luchon">
-                <figcaption>
-                    <h3>IBERSINC 2016</h3>
-                    <span>Tarragona, Spain</span>
-                    <a href="http://dribbble.com/shots/1116775-Safari">See my slides</a>
-                </figcaption>
-            </figure>
-        </li>
-    </ul>
+    <div class="col-sm-12 col-md-6">
+        <h2>What I do</h2>
+        <p>
+            Until now, I’ve been mainly working on building multilayer brain networks where both the nodes, that correspond to brain regions, and the edges, that link them, can be estimated in many different ways.
+            <!-- Meaning going from brain electromagnetic signals or images to graphs. But since the brain is well known to expose various types of communication I would like go further in the analysis and apply the multilayer framework to better understand interactions between those types of communication. -->
+        </p>
+    </div>
+
+
+    <div class="col-sm-12 col-md-6">
+        <h2>Tweets</h2>
+        <div id="twitter-timeline-container">
+            <a class="twitter-timeline" data-chrome="noheader nofooter noborders" data-theme="light" href="https://twitter.com/j3r3mg">Tweets by Jeremy</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <h2>Where you could have seen me</h2>
+        <!-- TODO: link to my other pages-->
+        <ul class="grid cs-style-1">
+            <li>
+                <figure>
+                    <img src="img/geneva.png" alt="geneva">
+                    <figcaption>
+                        <h3>OHBM 2016</h3>
+                        <span>Geneva, Switzerland</span>
+                        <a href="/scientific-activities#posters">See my poster</a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li>
+                <figure>
+                    <img src="img/paris.jpg" alt="paris">
+                    <figcaption>
+                        <h3>MATLAB Expo 2016</h3>
+                        <span>Paris, France</span>
+                        <a target="_blank" href="http://www.matlabexpo.com/fr/">Know more</a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li>
+                <figure>
+                    <img src="img/dijon.png" alt="dijon">
+                    <figcaption>
+                        <h3>CompleNet 2016</h3>
+                        <span>Dijon, France</span>
+                        <a target="_blank" href="http://complenet.org/CompleNet_2017/Home.html">Know more</a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li>
+                <figure>
+                    <img src="img/luchon.png" alt="luchon">
+                    <figcaption>
+                        <h3>XSYS Toulouse 2016</h3>
+                        <span>Luchon, France</span>
+                        <a href="/scientific-activities#talks">See my slides</a>
+                    </figcaption>
+                </figure>
+            </li>
+            <li>
+                <figure>
+                    <img src="img/tarragona.jpg" alt="luchon">
+                    <figcaption>
+                        <h3>IBERSINC 2016</h3>
+                        <span>Tarragona, Spain</span>
+                        <a href="/scientific-activities#talks">See my slides</a>
+                    </figcaption>
+                </figure>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <div class="row row-fluid">
     <div id='map'></div>
 </div>
-
 
 <script type="text/javascript">
     // Load Mapbox dynamically

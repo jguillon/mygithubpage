@@ -1,4 +1,5 @@
 gems:
   - jekyll-redirect-from
 
+url: http://guillonjeremy.co
 permalink: pretty

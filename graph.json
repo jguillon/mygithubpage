@@ -41,9 +41,9 @@
           "title": "Scientific Activities",
           "url": "/scientific-activities",
           "nodes": [
-            { "id": "publications", "title": "Publications",  "url": "/scientific-activities/publications"},
-            { "id": "posters",      "title": "Posters",       "url": "/scientific-activities/posters"},
-            { "id": "talks",        "title": "Talks",         "url": "/scientific-activities/talks"}
+            { "id": "publications", "title": "Publications",  "url": "/scientific-activities#publications"},
+            { "id": "posters",      "title": "Posters",       "url": "/scientific-activities#posters"},
+            { "id": "talks",        "title": "Talks",         "url": "/scientific-activities#talks"}
           ]
         },
         {

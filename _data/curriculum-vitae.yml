@@ -1,23 +1,67 @@
-- date: 2015
+- date: 2015 - 2018
+  length: 3 years
+  category: book
+  place: ARAMIS LAB, Paris, FR
+  picture: /img/logo_ARAMISLAB_blanc_rvb.png
+  title: PhD Thesis
+  description: Engineer's Degree in information systems' architecture.
+  read-more-external: http://www.aramislab.fr
+
+- date: 2010 - 2015
   length: 5 years
-  category: diploma
+  category: education
   place: INSA (National Institute of Applied Sciences) Rouen, FR
   picture: /img/logo_insa.png
   title: Engineer's Degree
   description: Engineer's Degree in information systems' architecture.
 
-- date: 2015
+- date: 2014 - 2015
   length: 1 year
-  category: diploma
+  category: education
   company: University of Rouen, FR
-  picture: /img/logo_univ.png
+  picture: /img/logo_univ_rouen.png
   title: Master's Degree
   description: Master's Degree in multimedia information processing systems.
 
-- date: 2013
+- date: June 2015
+  length: 2 days
+  category: console
+  company: Aéroports de Paris & Shipol Amsterdam Airport
+  title: Hack & Fly Hackathon
+  picture: /img/followair.jpeg
+  description: <em><b>Follow'Air</b>, follow your loved ones in the air.</em> On-site tracking system to be alerted by text messages at each step of your be-loved one's trip.</br>Jury's special price.
+  read-more-external: http://www.hackandfly.com/
+
+- date: January 2014 - January 2015
   length: 1 year
-  category: studies
+  category: console
+  company: INSA (National Institute of Applied Sciences) Rouen, FR
+  title: PIC (INSA Certified Project)
+  description: A two semesters long project, in full-time, developed in a team of 8 students in partial autonomy, under the guidance of the teaching staff.
+  read-more-external: http://asi.insa-rouen.fr/fr/pages/les-pic?language=fr
+
+- date: 2012 - 2013
+  length: 1 year
+  category: book
   company: UdeM (University of Montreal), Québec, CA
-  picture: /img/logo_udem.png
-  title: Master's Degree
-  description: Master's Degree in multimedia information processing systems.
+  picture: /img/logo_udem.gif
+  title: Exchange Year
+  description: An exchange year with the University of Montreal in Canada, thanks to the CREPUQ scholarship program.
+  read-more-external: http://www.etudionsaletranger.fr/etudier-a-l-etranger/le-crepuq-programme-de-mobilite-des-etudiants-vers-le-quebec
+
+- date: March 2014
+  length: 2 days
+  category: console
+  company: Valeo
+  title: Open Data Hackathon
+  picture: /img/hackathon_opendata.jpg
+  description: <em><b>Hitchhik'R</b>, hitch hicking 2.0.</em> Androïd app powered by the OpenStreet map API.</br>2nd price.
+  read-more-external: http://www.josselin-lecocq.fr/articles-hackhours-od76
+
+- date: September 2013 - February 2014
+  length: 6 months
+  category: blackboard
+  company: Valeo
+  title: Valeo Innovation Challenge
+  description: Valeo Inovation Challenge is an international student contest which aims to build the product or system that will make the cars of 2030 smarter and more intuitive.</br>Top 250/1000.
+  read-more-external: https://valeoinnovationchallenge.valeo.com

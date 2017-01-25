@@ -172,7 +172,7 @@ header.small div#filled-bg {
 	opacity: 1;
 }
 header div#menu {
-	font-family: 'Poiret One', monospace;
+	font-family: 'Nixie One', monospace;
 	background-color: white;
 	position: fixed;
 	height: 100%;
@@ -396,13 +396,13 @@ header div#node-title-box .kukuri-hover::before {
  * MAIN CONTENT										*
  ****************************************************/
 
-h1, h2, h3{
+h1, h2, h3 {
 	color: #9B7269;
-	font-family: 'Poiret One', monospace;
+	font-family: 'Nixie One', monospace;
 }
 div#container {
 	display: block;
-	font-family: 'Poiret One', sans-serif;
+	font-family: 'Quicksand', sans-serif;
 	font-size: larger;
 	color: gray;
 	background-color: white;
@@ -414,6 +414,17 @@ div#container div#map {
 	height: 40vh;
 	width: 100%;
 	text-align: left;
+}
+div#container div#twitter-timeline-container {
+	height: 500px;
+	overflow-y: scroll;
+}
+img#avatar {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	margin: 30px;
+	float: left;
 }
 
 /****************************************************

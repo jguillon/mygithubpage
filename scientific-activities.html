@@ -1,0 +1,56 @@
+---
+layout: base
+title: Scientific Activities
+slug: scientific-activities
+permalink: /scientific-activities
+comments: true
+---
+
+<div class="row">
+
+    <h1 id="publications">Publications</h1>
+    <a class="media" href="/assets/Guillon2016_ArXiV_Paper.pdf">Loss of inter-frequency brain hubs in Alzheimer's disease</a>
+
+    <h1 id="talks">Talks</h1>
+
+    <h2>PhD Thesis</h2>
+    <a class="media" href="/assets/Guillon2016_ISCToulouse_Slides.pdf">ICT Toulouse, Luchon Workshop</a>
+
+    <h2>Clinica</h2>
+    <a class="media" href="/assets/Guillon2016_ISCToulouse_Slides.pdf">Team meeting</a>
+
+    <h1 id="posters">Posters</h1>
+    <a class="media" href="/assets/Guillon2016_OHBM_Poster.pdf">OHBM 2016, Geneva</a>
+
+
+</div>
+
+{% if page.comments %}
+
+<div class="row">
+    <div id="disqus_thread"></div>
+</div>
+
+<script>
+    var disqus_config = function() {
+        this.page.url = "{{ site.url }}{{ page.url }}"; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "{{ page.slug }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() {
+        var d = document,
+            s = d.createElement('script');
+        s.src = '//guillonjeremy.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> {% endif %}
+
+<script type="text/javascript">
+    console.log("media set");
+    $('a.media').media({
+        width: $(window).width() * 64 / 100,
+        height: $(window).width() * 36 / 100 + 60
+    });
+</script>
