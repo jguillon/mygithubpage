@@ -135,17 +135,17 @@
             });
 
             // Parallax
-            // =========================================================================
+            // =================================================================
             $('header').parallax("50%", 0.5);
             $('#network').parallax("50%", 0.5);
 
             // Loading
-            // =========================================================================
+            // =================================================================
             loadingPercent = 100;
 
             $('#network').on('graphloaded', function(){
                 // Menu Animation
-                // =========================================================================
+                // =============================================================
                 var svgicon = new svgIcon(
                     document.querySelector('.si-icon-hamburger-cross'),
                     svgIconConfig, {
@@ -159,12 +159,13 @@
                     }
                 );
                 // Menu Toggling Function
-                // =========================================================================
+                // =============================================================
                 function toggleMenu() {
                     var div = $('#menu');
                     div.toggleClass('col-xs-offset-0 col-sm-offset-6 col-md-offset-8');
                     div.toggleClass('col-xs-offset-12 col-sm-offset-12 col-md-offset-12');
                     div.toggleClass('closed');
+                    $('body').toggleClass('noscroll');
                     if (!svgicon.toggled) svgicon.toggle(true);
                     if (div.hasClass('closed')) { // Closing menu
                         if (svgicon.toggled)

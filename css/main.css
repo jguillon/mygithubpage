@@ -1,5 +1,8 @@
 body, html {
 }
+.noscroll {
+	overflow: hidden;
+}
 .helper {
 	display: inline-block;
 	height: 100%;
