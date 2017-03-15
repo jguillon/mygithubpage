@@ -166,6 +166,7 @@ function onMouseClick(event) {
 				console.log(selectedNode);
 				History.pushState({}, selectedNode.htmlId, selectedNode.url);
 				// scrollTo('#'+selectedNode.htmlId);
+				scrollTo('#container');
 				return;
 			}
 		}
