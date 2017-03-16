@@ -496,7 +496,7 @@ div#container div#map {
 }
 
 div#container div#twitter-timeline-container {
-    height: 100%;
+    height: calc(100% - 60px);
     overflow-y: scroll;
 }
 
