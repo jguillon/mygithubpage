@@ -5,44 +5,44 @@ slug: home
 ---
 
 <div class="row">
-
     <div class="col-md-12">
         <h1>About Me</h1>
     </div>
-
-    <div class="col-sm-12 col-md-6">
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
         <h2>Who I am</h2>
         <img id="avatar" src="/img/avatar.jpg" alt="Avatar" />
         <p>
-            I’m a PhD student at the <a target="_blank" href="http://icm-institute.org/en/">Brain and Spine Institute (ICM)</a>, inside the Pitié-Salpêtrière Hospital in Paris. I’m working under the supervision of <a target="_blank" href="https://sites.google.com/site/devicofallanifabrizio/">Fabrizio De Vico Fallani</a> on <b>brain connectivity</b> which lays at the intersect between three main fields: neuroscience, signal processing and complex systems science. My main topics of interest include <em>connectomics</em>, <em>graph theory</em> and <em>data visualization</em>.
+            I’m a PhD student at the <a target="_blank" href="http://icm-institute.org/en/">Brain and Spine Institute (ICM)</a>, inside the Pitié-Salpêtrière Hospital in Paris. I’m working under the supervision of <a target="_blank" href="https://sites.google.com/site/devicofallanifabrizio/">Fabrizio De Vico Fallani</a>            on <b>brain connectivity</b> which lays at the intersect between three main fields: neuroscience, signal processing and complex systems science. My main topics of interest include <em>connectomics</em>, <em>graph theory</em> and <em>data visualization</em>.
         </p>
-    </div>
-
-    <div class="col-md-6">
         <blockquote class="blockquote-reverse">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
             <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
         </blockquote>
-    </div>
-
-    <div class="col-sm-12 col-md-6">
         <h2>What I do</h2>
         <p>
             Until now, I’ve been mainly working on building multilayer brain networks where both the nodes, that correspond to brain regions, and the edges, that link them, can be estimated in many different ways.
             <!-- Meaning going from brain electromagnetic signals or images to graphs. But since the brain is well known to expose various types of communication I would like go further in the analysis and apply the multilayer framework to better understand interactions between those types of communication. -->
         </p>
     </div>
-
-
-    <div class="col-sm-12 col-md-6">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-row-height">
         <h2>Tweets</h2>
         <div id="twitter-timeline-container">
-            <a class="twitter-timeline" data-chrome="noheader nofooter noborders" data-theme="light" href="https://twitter.com/j3r3mg">Tweets by Jeremy</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <a class="twitter-timeline" data-chrome="noheader nofooter noborders" data-theme="light" href="https://twitter.com/j3r3mg">Tweets by Jeremy</a>
+            <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
     </div>
+</div>
 
+<div class="row">
     <div class="col-md-12">
         <h2>Where you could have seen me</h2>
+    </div>
+</div>
+
+<div class="row row-fluid">
+    <div class="col-md-12">
         <!-- TODO: link to my other pages-->
         <ul class="grid cs-style-1">
             <li>
@@ -104,7 +104,20 @@ slug: home
 </div>
 
 <script type="text/javascript">
+
+    // Style
+    // =========================================================================
+    $('.col-row-height').each(function(){
+        var maxHeight = 0;
+        var cols = $(this).siblings();
+        cols.each(function(i,e){
+            maxHeight = $(e).height() > maxHeight ? $(e).height() : maxHeight;
+        });
+        $(this).css('height', maxHeight);
+    });
+
     // Load Mapbox dynamically
+    // =========================================================================
     $.getScript('https://api.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.js', function() {
         mapboxgl.accessToken = 'pk.eyJ1Ijoiamd1aWxsb24iLCJhIjoiY2lvZWJsaW00MDAyYXc4ajd2dWJybHlpNiJ9.F5Vrt_A41WRe8K_2eE0OTw';
         var map = new mapboxgl.Map({
