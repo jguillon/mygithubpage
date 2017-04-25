@@ -23,7 +23,7 @@ function selectNode()
 {
 	var oldSelectedNode = selectedNode;
 	var url = window.location.pathname;
-	if(url === "") url = "/about-me";
+	if(url === "") url = "/";
 	selectedNode = graph.getNodeBy("url", url);
 	if(selectedNode != null && selectedNode !== oldSelectedNode) {
 		if(oldSelectedNode)

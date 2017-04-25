@@ -495,6 +495,10 @@ div#container div#map {
     text-align: left;
 }
 
+div#container div#disqus-row {
+    margin-bottom: 5vmin;
+}
+
 div#container div#twitter-timeline-container {
     height: calc(100% - 60px);
     overflow-y: scroll;
@@ -518,7 +522,6 @@ footer {
     text-align: center;
     z-index: 5;
     padding: 3vmin;
-    margin-top: 5vmin;
     background-color: #081313;
 }
 
