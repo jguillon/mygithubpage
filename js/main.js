@@ -111,7 +111,7 @@ function addMenuEntry(parent,child) {
 	if($('#'+parent.id+'-menu').length == 0) {
 		$('#'+parent.id+'-menu-entry').append('<ul id="'+parent.id+'-menu"></ul>');
 	}
-	$('#'+parent.id+'-menu').append('<li id="'+child.id+'-menu-entry'+'"><a href="/'+child.id+'" data-hover="'+child.title+'"><span>'+child.title+'</span></a></li>');
+	$('#'+parent.id+'-menu').append('<li id="'+child.id+'-menu-entry'+'"><a href="'+child.url+'" data-hover="'+child.title+'"><span>'+child.title+'</span></a></li>');
 }
 
 function onMouseMove(event) {

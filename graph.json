@@ -1,40 +1,66 @@
 {
-  "nodes": [
-    {
-      "id": "home",
-      "title": "Home",
-      "url": "/",
-      "nodes": [
-        {
-          "id": "curriculum-vitae",
-          "title": "Curriculum Vitae",
-          "url": "/curriculum-vitae",
-          "nodes": [
-            { "id": "professional", "title": "Professional Experience", "url": "/curriculum-vitae#professional" },
-            { "id": "academic",     "title": "Academic Experience",     "url": "/curriculum-vitae#academic" },
-            { "id": "distinctions", "title": "Distinctions",            "url": "/curriculum-vitae#distinctions" }
-          ]
-        },
-        {
-          "id": "tutorials",
-          "title": "Tutorials",
-          "url": "/tutorials",
-          "nodes": [
-            { "id": "slacktex",           "title": "SlackTeX: A LaTeX Plugin for Slack", "url": "/tutorials/slacktex"},
-            { "id": "matlab-with-nipype", "title": "MATLAB(r) with Nipype",              "url": "/tutorials/matlab-with-nipype"}
-          ]
-        },
-        {
-          "id": "scientific-activities",
-          "title": "Scientific Activities",
-          "url": "/scientific-activities",
-          "nodes": [
-            { "id": "publications", "title": "Publications",  "url": "/scientific-activities#publications"},
-            { "id": "posters",      "title": "Posters",       "url": "/scientific-activities#posters"},
-            { "id": "talks",        "title": "Talks",         "url": "/scientific-activities#talks"}
-          ]
-        }
-      ]
-    }
-  ]
+    "nodes": [{
+        "id": "home",
+        "title": "Home",
+        "url": "/",
+        "nodes": [{
+                "id": "curriculum-vitae",
+                "title": "Curriculum Vitae",
+                "url": "/curriculum-vitae",
+                "nodes": [{
+                        "id": "professional",
+                        "title": "Professional Experience",
+                        "url": "/curriculum-vitae#professional"
+                    },
+                    {
+                        "id": "academic",
+                        "title": "Academic Experience",
+                        "url": "/curriculum-vitae#academic"
+                    },
+                    {
+                        "id": "distinctions",
+                        "title": "Distinctions",
+                        "url": "/curriculum-vitae#distinctions"
+                    }
+                ]
+            },
+            {
+                "id": "tutorials",
+                "title": "Tutorials",
+                "url": "/tutorials",
+                "nodes": [{
+                        "id": "slacktex",
+                        "title": "SlackTeX: A LaTeX Plugin for Slack",
+                        "url": "/tutorials#slacktex"
+                    },
+                    {
+                        "id": "matlab-with-nipype",
+                        "title": "MATLAB(r) with Nipype",
+                        "url": "/tutorials#matlab-with-nipype"
+                    }
+                ]
+            },
+            {
+                "id": "scientific-activities",
+                "title": "Scientific Activities",
+                "url": "/scientific-activities",
+                "nodes": [{
+                        "id": "publications",
+                        "title": "Publications",
+                        "url": "/scientific-activities#publications"
+                    },
+                    {
+                        "id": "posters",
+                        "title": "Posters",
+                        "url": "/scientific-activities#posters"
+                    },
+                    {
+                        "id": "talks",
+                        "title": "Talks",
+                        "url": "/scientific-activities#talks"
+                    }
+                ]
+            }
+        ]
+    }]
 }

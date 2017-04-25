@@ -518,6 +518,7 @@ footer {
     text-align: center;
     z-index: 5;
     padding: 3vmin;
+    margin-top: 5vmin;
     background-color: #081313;
 }
 
