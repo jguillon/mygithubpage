@@ -1,6 +1,8 @@
-# ![GUILLON J e r e m y](img/logo_256.png)
+<p align="center">
+  <img src="https://github.com/jguillon/mygithubpage/blob/master/img/logo_256.png?raw=true" alt="GUILLON J e r e m y"/>
+</p>
 
-## Installation
+# Installation
 
 First, you need to install **Jekyll** by following their [installation guide](https://jekyllrb.com/docs/installation/). Then clone this repository using the following command:
 
@@ -16,7 +18,7 @@ jekyll serve
 
 You can now access a local version of my website on your [localhost through port 4000](http://127.0.0.1:4000) by default.
 
-## References
+# References
 
 - [three.js](http://threejs.org/): JavaScript 3D library;
 - [Codrops](http://tympanus.net/codrops/): Useful resources and inspiration for creative minds;
