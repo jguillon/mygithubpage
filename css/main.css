@@ -401,7 +401,7 @@ header div#network:active {
 }
 
 header div#network.large {
-    height: 100%;
+    /*padding: 0*/
 }
 
 
