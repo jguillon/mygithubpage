@@ -76,8 +76,8 @@ function init()
 	window.addEventListener( 'resize', onWindowResize , false );
 
 	// STATS
-	// stats = new Stats();
-	// container.appendChild( stats.dom );
+	stats = new Stats();
+	container.appendChild( stats.dom );
 }
 
 function growTree(url) {
@@ -176,8 +176,8 @@ function onMouseClick(event) {
 function toXYCoords(pos) {
 	var vector = pos.clone();
 	vector.project(camera);
-	vector.x = (vector.x + 1)/2 * window.innerWidth;
-	vector.y = -(vector.y - 1)/2 * window.innerHeight;
+	vector.x = (vector.x + 1)/2 * document.getElementById('network').offsetWidth;
+	vector.y = -(vector.y - 1)/2 * document.getElementById('network').offsetHeight;
 	return vector;
 }
 
@@ -199,5 +199,5 @@ function animate()
 	renderer.render( scene, camera );
 
 	// Stats
-	// stats.update();
+	stats.update();
 }

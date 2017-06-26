@@ -136,18 +136,9 @@
                 handler: function(direction) {
                     if (direction == "down" && $('#container').css('display') != 'none') {
                         $('#network').attr('class', 'small');
-                    } else {
-                        $('#network').attr('class', 'large');
-                    }
-                },
-                offset: '15%'
-            });
-            new Waypoint({
-                element: document.getElementById('container'),
-                handler: function(direction) {
-                    if (direction == "down" && $('#container').css('display') != 'none') {
                         $('header').attr('class', 'small');
                     } else {
+                        $('#network').attr('class', 'large');
                         $('header').attr('class', 'large');
                     }
                 },
