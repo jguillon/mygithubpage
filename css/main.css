@@ -173,7 +173,7 @@ header.small~div#container {
 }
 
 header.small {
-    height: 15%;
+    height: 15vmin;
     position: fixed;
     font-size: 100%;
     /*background-color: #081313;*/
@@ -186,12 +186,11 @@ header img#logo {
     /* Firefox bad png rendering hack */
     margin: 5vmin;
     height: 5vmin;
-    min-height: 45px;
     padding: 5px 0;
     z-index: 99;
     /* Always on top */
-    top: 7.5vh;
-    margin-top: -22.5px;
+    /*top: 7.5vh;
+    margin-top: -22.5px;*/
 }
 
 header div#filled-bg {
@@ -239,7 +238,7 @@ header div#menu nav a {
     letter-spacing: 1px;
     font-weight: 400;
     text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
-    font-size: 2vh;
+    font-size: 2vmin;
 }
 
 header div#menu nav a:hover, header div#menu nav a:focus {
@@ -354,8 +353,8 @@ header div#menu-button {
     right: 0;
     z-index: 99;
     /* Always on top */
-    top: 7.5vh;
-    margin-top: -22.5px;
+    /*top: 7.5vh;
+    margin-top: -22.5px;*/
 }
 
 header div#menu-button span {
@@ -363,6 +362,10 @@ header div#menu-button span {
     cursor: pointer;
     background-repeat: no-repeat;
     background-position: center center;
+}
+
+header div#menu-button span svg {
+    height: 5vmin;
 }
 
 
@@ -379,12 +382,13 @@ header div#network {
     cursor: -webkit-grab;
     cursor: -moz-grab;
     cursor: grab;
+    position: absolute;
 }
 
 @media (min-height: 600px) {
     header div#network.large {
         height: 600px;
-        padding: calc((100vh - 600px)/2) 0;
+        margin: calc((100vh - 600px)/2) 0;
     }
 }
 
@@ -425,7 +429,7 @@ header div#node-title-box {
 }
 
 header div#node-title-box h1 {
-    font-size: 2vh;
+    font-size: 2vmin;
     margin: 0;
     white-space: nowrap;
     display: inline-block;

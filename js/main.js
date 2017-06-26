@@ -116,8 +116,10 @@ function addMenuEntry(parent,child) {
 
 function onMouseMove(event) {
 	oldMouse = mouse;
-	mouse.x = ( (event.clientX - $(container).position().left) / $(container).width() ) * 2 - 1;
-	mouse.y = -( ( event.clientY - ($(container).offset().top - $(window).scrollTop())) / $(container).height() ) * 2 + 1;
+	mouse.x =  ( ( event.clientX - $(container).position().left )
+		/ $(container).width()  ) * 2 - 1;
+	mouse.y = -( ( event.clientY - $(container).position().top + $(window).scrollTop() - parseInt($(container).css('margin-top')) )
+		/ $(container).height() ) * 2 + 1;
 
 	// MOUSE HOVERING
 	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
@@ -146,11 +148,14 @@ function onMouseMove(event) {
 }
 
 function onMouseClick(event) {
+	console.log(event.clientY);
 	console.log('onMouseClick');
-	mouse.x = ( (event.clientX - $(container).position().left) / $(container).width() ) * 2 - 1;
-	mouse.y = -( ( event.clientY - ($(container).offset().top - $(window).scrollTop())) / $(container).height() ) * 2 + 1;
+	mouse.x =  ( ( event.clientX - $(container).position().left )
+		/ $(container).width()  ) * 2 - 1;
+	mouse.y = -( ( event.clientY - $(container).position().top + $(window).scrollTop() - parseInt($(container).css('margin-top')) )
+		/ $(container).height() ) * 2 + 1;
 	// MOUSE
-	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+	var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
 	vector.unproject(camera);
 	var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 	var intersects = ray.intersectObjects( scene.children );
@@ -176,8 +181,8 @@ function onMouseClick(event) {
 function toXYCoords(pos) {
 	var vector = pos.clone();
 	vector.project(camera);
-	vector.x = (vector.x + 1)/2 * document.getElementById('network').offsetWidth;
-	vector.y = -(vector.y - 1)/2 * document.getElementById('network').offsetHeight;
+	vector.x = (vector.x + 1)/2 * $(container).width();
+	vector.y = -(vector.y - 1)/2 * $(container).height() + parseInt($(container).css('margin-top'));
 	return vector;
 }
 
