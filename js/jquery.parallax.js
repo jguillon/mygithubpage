@@ -47,27 +47,28 @@ http://www.gnu.org/licenses/gpl.html
 
 		// function to be called whenever the window is scrolled or resized
 		function update(){
-			var pos = $window.scrollTop();
 
 			$this.each(function(){
 				var $element = $(this);
 				var top = $element.offset().top;
 				var height = getHeight($element);
+				var pos = $window.scrollTop();
 
 				// Check if totally above or totally below viewport
 				if (top + height < pos || top > pos + windowHeight) {
 					return;
+				} else {
+					var yshift = (firstTop - pos) * speedFactor;
+					$element.css('backgroundPosition', xpos + " calc(100% + " + yshift.toFixed(0) + "px)");
 				}
 			});
 
-			var yshift = (firstTop - pos) * speedFactor;
-			$this.css('backgroundPosition', xpos + " calc(100% + " + yshift.toFixed(0) + "px)");
+			// window.requestAnimationFrame(update);
 		}
 
 		$window.on('scroll', function(){
 			window.requestAnimationFrame(update);
 		}).resize(update);
-		// update();
-		// setInterval(update, 10);
+		update();
 	};
 })(jQuery);

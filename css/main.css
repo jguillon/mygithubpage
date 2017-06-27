@@ -95,6 +95,7 @@ div#loading-page div#loading-animation {
 }
 
 div#loading-page img#loading-head {
+    display: block;
     position: relative;
     z-index: 101;
     height: 30vmin;
@@ -102,12 +103,13 @@ div#loading-page img#loading-head {
 }
 
 div#loading-page img#loading-head-bg {
+    display: block;
     z-index: 100;
+    position: relative;
     top: -45vmin;
     left: -15vmin;
     height: 60vmin;
     width: 60vmin;
-    position: relative;
     -webkit-transform-origin: 70% 60%;
     -moz-transform-origin: 70% 60%;
     -o-transform-origin: 70% 60%;
@@ -134,6 +136,7 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
+    box-shadow: 0px -5vh 10vh -5vh black inset;
     background-attachment: fixed;
     background-position: bottom;
     background-repeat: no-repeat;
@@ -160,7 +163,7 @@ header {
 }
 
 header.large {
-    height: 100%;
+    height: 100vh;
     position: relative;
 }
 
@@ -214,7 +217,7 @@ header.small div#filled-bg {
 }
 
 header div#menu {
-    font-family: 'Nixie One', monospace;
+    font-family: 'Poiret One', monospace;
     background-color: white;
     position: fixed;
     height: 100%;
@@ -507,12 +510,13 @@ header div#node-title-box .kukuri-hover::before {
 
 h1, h2, h3 {
     color: #9B7269;
-    font-family: 'Nixie One', monospace;
+    /*font-family: 'Nixie One', monospace;*/
+    font-family: 'Poiret One', sans-serif;
 }
 
 div#container {
     display: block;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Raleway', sans-serif;
     font-size: larger;
     color: gray;
     background-color: white;
@@ -520,6 +524,17 @@ div#container {
 
 div#container div#map .mapboxgl-control-container {
     display: none;
+}
+
+div#container div#banner {
+    background-image: url(/img/backgrounds/neurons.jpg);
+    background-attachment: fixed;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 100vmax 100vmax;
+    margin-top: 5vmin;
+    height: 50vmin;
+    box-shadow: 0px -5vh 10vh -5vh black inset, 0px 5vh 10vh -5vh black inset;
 }
 
 div#container div#map {

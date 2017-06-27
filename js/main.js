@@ -76,8 +76,8 @@ function init()
 	window.addEventListener( 'resize', onWindowResize , false );
 
 	// STATS
-	stats = new Stats();
-	container.appendChild( stats.dom );
+	// stats = new Stats();
+	// container.appendChild( stats.dom );
 }
 
 function growTree(url) {
@@ -204,5 +204,5 @@ function animate()
 	renderer.render( scene, camera );
 
 	// Stats
-	stats.update();
+	// stats.update();
 }
