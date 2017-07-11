@@ -132,6 +132,10 @@ slug: home
         $(this).css('height', maxHeight);
     });
 
+    // Parallax
+    // =========================================================================
+    $('.parallax').parallax("50%", 0.5);
+
     // Load Mapbox dynamically
     // =========================================================================
     $.getScript('https://api.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.js', function() {

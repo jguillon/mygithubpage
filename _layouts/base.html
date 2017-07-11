@@ -151,14 +151,17 @@
             });
 
             $(window).resize(function(){
-                waypoint.options.offset = 15 * Math.min(document.documentElement.clientWidth, document.documentElement.clientHeight)/100 + "px";
-                console.log(waypoint);
+                if (document.documentElement.clientWidth < 500 || document.documentElement.clientWidth < 500) {
+                    waypoint.options.offset = "75px";
+                } else {
+                    waypoint.options.offset = 15 * Math.min(document.documentElement.clientWidth, document.documentElement.clientHeight)/100 + "px";
+                }
+                // console.log(waypoint);
             })
 
             // Parallax
             // =================================================================
             $('header').parallax("50%", 0.5);
-            $('.parallax').parallax("50%", 0.5);
 
             // Loading
             // =================================================================

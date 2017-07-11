@@ -144,19 +144,19 @@ header {
     background-image: url(/img/backgrounds/bg-1_768.jpg);
 }
 
-@media (max-height: 768px) {
+@media screen and (max-width: 768px) {
   header {
     background-image: url(/img/backgrounds/bg-1_768.jpg);
   }
 }
 
-@media (max-height: 1080px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
   header {
-    background-image: url(/img/backgrounds/bg-1_1080.jpg);
+    background-image: url(/img/backgrounds/bg-1_1024.jpg);
   }
 }
 
-@media (max-height: 1920px) {
+@media screen and (min-width: 1024px) and (max-width: 1920px) {
   header {
     background-image: url(/img/backgrounds/bg-1_1920.jpg);
   }
@@ -177,6 +177,7 @@ header.small~div#container {
 
 header.small {
     height: 15vmin;
+    min-height: 75px;
     position: fixed;
     font-size: 100%;
     /*background-color: #081313;*/
@@ -189,11 +190,53 @@ header img#logo {
     /* Firefox bad png rendering hack */
     margin: 5vmin;
     height: 5vmin;
+    min-height: 25px;
     padding: 5px 0;
     z-index: 99;
     /* Always on top */
     /*top: 7.5vh;
     margin-top: -22.5px;*/
+}
+
+header div#menu nav ul li {
+    width: 100%;
+}
+
+header div#menu-button {
+    position: fixed;
+    margin: 5vmin;
+    top: 0;
+    right: 0;
+    z-index: 99;
+    /* Always on top */
+    /*top: 7.5vh;
+    margin-top: -22.5px;*/
+}
+
+header div#menu-button span {
+    display: block;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+header div#menu-button span svg {
+    height: 5vmin;
+    min-height: 25px;
+}
+
+
+/*div#menu-button svg.si-icon {
+height: 10vmin;
+width: 10vmin;
+min-height: 45px;
+min-width: 45px;
+}*/
+
+@media screen and ( max-width: 500px ), screen and ( max-height: 500px ) {
+    header img#logo, header div#menu-button {
+        margin: 25px;
+    }
 }
 
 header div#filled-bg {
@@ -344,40 +387,6 @@ header div#menu nav ul {
     margin: 0;
     padding-left: 0;
 }
-
-header div#menu nav ul li {
-    width: 100%;
-}
-
-header div#menu-button {
-    position: fixed;
-    margin: 5vmin;
-    top: 0;
-    right: 0;
-    z-index: 99;
-    /* Always on top */
-    /*top: 7.5vh;
-    margin-top: -22.5px;*/
-}
-
-header div#menu-button span {
-    display: block;
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center center;
-}
-
-header div#menu-button span svg {
-    height: 5vmin;
-}
-
-
-/*div#menu-button svg.si-icon {
-	height: 10vmin;
-    width: 10vmin;
-    min-height: 45px;
-    min-width: 45px;
-}*/
 
 header div#network {
     width: 100%;
