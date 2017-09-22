@@ -29,7 +29,7 @@
   company: Aéroports de Paris & Shipol Amsterdam Airport
   title: Hack & Fly Hackathon
   picture: /img/followair.jpeg
-  description: <em><b>Follow'Air</b>, follow your loved ones in the air.</em> On-site tracking system to be alerted by text messages at each step of your be-loved one's trip.</br>Jury's special price.
+  description: <em><b>Follow'Air</b>, follow your loved ones in the air.</em> On-site tracking system to be alerted by text messages at each step of your be-loved one's trip.</br>Jury's special price. # https://www.youtube.com/watch?v=yjrcAX3uZ8k
   read-more-external: http://www.hackandfly.com/
 
 - date: January 2014 - January 2015
