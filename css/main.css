@@ -624,6 +624,14 @@ footer a#btn-github:hover {
     color: #777777;
 }
 
+footer a#btn-researchgate svg {
+  height: 28px;
+}
+
+footer a#btn-researchgate:hover svg .cls-2, footer a#btn-researchgate:hover svg .cls-3 {
+    fill: #01cfaf;
+}
+
 footer p#rights {
     color: #2E7179;
 }
