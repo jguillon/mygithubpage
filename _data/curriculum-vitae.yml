@@ -1,10 +1,28 @@
+- date: October 2015 - November 2018
+  length: 3 years
+  category: education
+  place: Sorbonne University, Paris, FR
+  picture: /img/logo_sorbonne_univ.png
+  title: PhD Degree
+  description: PhD Degree in computer science.
+  read-more-external: http://www.aramislab.fr
+
+- date: May 2018
+  length: 2 hours
+  category: console
+  place: Station F, Paris, FR
+  picture: /img/mdsf2018.jpg
+  title: Meilleur Data-Scientist de France
+  description: 8th position over ~400 participants.
+  read-more-external: https://www.meilleurdatascientistdefrance.com/
+
 - date: 2015 - 2018
   length: 3 years
   category: book
   place: ARAMIS LAB, Paris, FR
   picture: /img/logo_ARAMISLAB_blanc_rvb.png
   title: PhD Thesis
-  description: Engineer's Degree in information systems' architecture.
+  description: Multilayer approach to brain connectivity in Alzheimer's disease.
   read-more-external: http://www.aramislab.fr
 
 - date: 2010 - 2015
